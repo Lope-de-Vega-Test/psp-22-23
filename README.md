@@ -49,6 +49,8 @@ Creado por [Daniel Pérez Rodríguez](https://twitter.com/daniteleco) e inspirad
 
 ## Contacto
 - Email: [dperez@ceslopedevega.com](mailto:dperez@ceslopedevega.com)
+- LinkedIn: https://www.linkedin.com/in/danielperezrodriguez/
+- GitHub: https://github.com/daniteleco/
 
 ## Referencias
 
