@@ -2,14 +2,14 @@
 
 # UA1 - Programación Multiproceso
 
-- Temporalización: 1T
-- Duración: 12 horas
-- Ponderación: 20%
+- Temporalización: **1T**
+- Duración: **12 horas**
+- Ponderación respecto a la asignatura: **20%**
 ## Resultados de Aprendizaje
 
 En esta unidad de aprendizaje se desarrollan los siguientes resultados de aprendizaje:
 
-- **RA1:** Desarrolla aplicaciones compuestas por varios procesos reconociendo y aplicando principios de programación paralela.
+- **RA1:** *Desarrolla aplicaciones compuestas por varios procesos reconociendo y aplicando principios de programación paralela.*
 
 ### Criterios de Evaluación
 
@@ -22,8 +22,27 @@ f) Se han utilizado mecanismos para sincronizar y obtener el valor devuelto por 
 g) Se han desarrollado aplicaciones que gestionen y utilicen procesos para la ejecución de varias tareas en paralelo.  
 h) Se han depurado y documentado las aplicaciones desarrolladas.
 
+## Contenidos
+
+// TODO
+
+
 
 ## Evaluación
+
+La evaluación de esta unidad didáctica estará basada en la entrega de las tareas, corregidas automáticamente por los tests necesarios a superar y examen teórico y práctico de la materia, acorde a la siguiente tabla
+
+| CRITERIO de EVALUACIÓN | PONDERACIÓN | INSTRUMENTOS de EVALUACIÓN|
+|------------------------|-------------|-------------|
+| a)                     |12,5 %       | Tareas 1,2 y 3      |
+| b)                     |12,5 %       | Examen      |
+| c)                     |12,5 %       | Examen      |
+| d)                     |12,5 %       | Examen      |
+| e)                     |12,5 %       | Tareas 1,2 y 3     |
+| f)                     |12,5 %       | Tareas 1,2 y 3      |
+| g)                     |12,5 %       | Tareas 1,2 y 3      |
+| h)                     |12,5 %       | Tareas 1,2 y 3      |
+|                        |**100 %**    |             |
 
 
 ### Tarea 1 - Criterios a), f), g), h)
@@ -40,6 +59,7 @@ h) Se han depurado y documentado las aplicaciones desarrolladas.
 - [Repositorio Asignatura](https://github.com/daniteleco/psp-22-23)
 - Apuntes del Profesorado
 - Bibliografía Recomendada
+  - **Programación de servicios y procesos - Técnico Superior en DAM.** *Mª Jesús Ramos Martín. Editorial Garceta. 2ª Edición. 2018. ISBN: 978-84-1728-931-7.*
 - Entornos de Desarrollo: Java, JDK, Eclipse, C++, CodeBlocks 
 - Moodle
 

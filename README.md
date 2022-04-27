@@ -21,6 +21,10 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 - Programación Didáctica
 - [Real Decreto 450-2010 de 16 de abril](https://www.boe.es/buscar/doc.php?id=BOE-A-2010-8067)
 - [BOJA. Orden 16 junio de 2011](https://www.juntadeandalucia.es/boja/2011/142/20)
+- Bibliografía Recomendada: 
+  - **Programación de servicios y procesos - Técnico Superior en DAM.** *Mª Jesús Ramos Martín. Editorial Garceta. 2ª Edición. 2018. ISBN: 978-84-1728-931-7.*
+
+
 
 ## Autor
 
