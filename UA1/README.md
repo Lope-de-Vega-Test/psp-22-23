@@ -54,13 +54,13 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 ### Examen 
 
 
+
 ## Recursos
 
 - [Repositorio Asignatura](https://github.com/daniteleco/psp-22-23)
 - Apuntes del Profesorado
 - Bibliografía Recomendada
   - **Programación de servicios y procesos - Técnico Superior en DAM.** *Mª Jesús Ramos Martín. Editorial Garceta. 2ª Edición. 2018. ISBN: 978-84-1728-931-7.*
-- Entornos de Desarrollo: Java, JDK, Eclipse, C++, CodeBlocks 
 - Moodle
 
 

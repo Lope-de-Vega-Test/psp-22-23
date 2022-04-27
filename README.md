@@ -14,7 +14,16 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 4. [UA4 - Desarrollo de Servicios en Red](https://github.com/daniteleco/psp-22-23/tree/main/UA4)
 5. [UA5 - Técnicas de Programación segura](https://github.com/daniteleco/psp-22-23/tree/main/UA5)
 
+## Requerimientos Básicos
 
+El desarrollo del módulo profesional se basará en el uso de tecnologías actuales de desarrollo tales como Git
+- Git
+- Unit Testing
+- Entornos de Desarrollo: Eclipse, VSCode, CodeBlocks 
+- Lenguajes de Programación: 
+  - C++
+  - Java
+  - 
 ## Recursos
 - Moodle
 - [Presentación Asignatura](https://docs.google.com/presentation/d/e/2PACX-1vThgrhL3Xa-ikJbOLEhtFyXF719GTm6M4rSH0FiDisNHK13id7bxeD7FpccvOkjnZFIjf_GfmKF3CFd/pub?start=true&loop=false&delayms=10000&slide=id.gedc4121aa8_0_925)
