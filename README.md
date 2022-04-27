@@ -5,7 +5,7 @@
 Repositorio para el seguimiento y evaluación de la asignatura Programación de Servicios y Procesos.  
 [CFGS Desarrollo de Aplicaciones Multiplaforma.](https://www.ceslopedevega.com/grado-superior-desarrollo-de-aplicaciones-multiplataforma/)  
 [CES Lope de Vega](https://www.ceslopedevega.com/) en Córdoba (Andalucía, Spain).  
-![internet](https://cdn0.iconfinder.com/data/icons/azure-illustrations/1000/web_development___maintenance_construction_teamwork_website_webpage_browser-256.png)
+![internet](https://upload.wikimedia.org/wikipedia/en/3/33/Silicon_valley_title.png)
 
 ## Contenidos
 - [UA1 - Programación Multiproceso](https://github.com/daniteleco/psp-22-23/tree/main/UA1)
