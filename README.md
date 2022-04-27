@@ -10,21 +10,17 @@ CES Lope de Vega en Córdoba (Andalucía, Spain)
 ## Contenidos
 1. [Programación Multiproceso](https://github.com/daniteleco/psp-22-23)
 2. [Programación Multihilo](https://github.com/daniteleco/psp-22-23)
-3. [Programación de comunicaciones en red](https://github.com/daniteleco/psp-22-23
+3. [Programación de comunicaciones en red](https://github.com/daniteleco/psp-22-23)
 4. [Técnicas de Programación segura](https://github.com/daniteleco/psp-22-23)
 5. [Desarrollo de Servicios en Red](https://github.com/daniteleco/psp-22-23)
 
 
 ## Recursos
-- Twitter: https://twitter.com/daniteleco
-- GitHub: https://github.com/daniteleco
-- Web: https://daniteleco.netlify.app/
-- Moodle: https://aulavirtual33.educa.madrid.org/ies.luisvives.leganes/course/view.php?id=248
+- Moodle: 
 
 
 ## Autor
 
-[Daniel Pérez Rodríguez](https://twitter.com/daniteleco)
-
+Creado por [Daniel Pérez Rodríguez](https://twitter.com/daniteleco) e inspirado en el trabajo de [José Luis González Sánchez](https://github.com/joseluisgs/ProgServiciosProcesos-00-2021-2022)
 
 ### Contacto
