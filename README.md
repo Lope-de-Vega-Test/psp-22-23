@@ -8,25 +8,31 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 ![internet](https://cdn0.iconfinder.com/data/icons/azure-illustrations/1000/web_development___maintenance_construction_teamwork_website_webpage_browser-256.png)
 
 ## Contenidos
-1. [UA1 - Programación Multiproceso](https://github.com/daniteleco/psp-22-23/tree/main/UA1)
-2. [UA2 - Programación Multihilo](https://github.com/daniteleco/psp-22-23/tree/main/UA2)
-3. [UA3 - Programación de comunicaciones en red](https://github.com/daniteleco/psp-22-23/tree/main/UA3)
-4. [UA4 - Desarrollo de Servicios en Red](https://github.com/daniteleco/psp-22-23/tree/main/UA4)
-5. [UA5 - Técnicas de Programación segura](https://github.com/daniteleco/psp-22-23/tree/main/UA5)
+- [UA1 - Programación Multiproceso](https://github.com/daniteleco/psp-22-23/tree/main/UA1)
+- [UA2 - Programación Multihilo](https://github.com/daniteleco/psp-22-23/tree/main/UA2)
+- [UA3 - Programación de comunicaciones en red](https://github.com/daniteleco/psp-22-23/tree/main/UA3)
+- [UA4 - Desarrollo de Servicios en Red](https://github.com/daniteleco/psp-22-23/tree/main/UA4)
+- [UA5 - Técnicas de Programación segura](https://github.com/daniteleco/psp-22-23/tree/main/UA5)
 
 ## Requerimientos Básicos
 
-El desarrollo del módulo profesional se basará en el uso de tecnologías actuales de desarrollo tales como Git
-- Git
-- Unit Testing
-- Entornos de Desarrollo: Eclipse, VSCode, CodeBlocks 
+El desarrollo del módulo profesional se basará en el uso de tecnologías actuales de desarrollo tales como Git, realización de tests unitarios, etc.
+
 - Lenguajes de Programación: 
-  - C++
-  - Java
-  - 
+  - [C++](https://isocpp.org/)
+  - [Java](https://docs.oracle.com/en/java/javase/18/docs/api/index.html)
+- Entornos de Desarrollo:
+  - Eclipse
+  - VSCode
+  - CodeBlocks 
+- [Git](https://git-scm.com/)
+- Unit Testing - [Junit](https://junit.org/junit5/)
+  
 ## Recursos
-- Moodle
-- [Presentación Asignatura](https://docs.google.com/presentation/d/e/2PACX-1vThgrhL3Xa-ikJbOLEhtFyXF719GTm6M4rSH0FiDisNHK13id7bxeD7FpccvOkjnZFIjf_GfmKF3CFd/pub?start=true&loop=false&delayms=10000&slide=id.gedc4121aa8_0_925)
+
+- Canal Slack del Módulo Profesional //TODO
+-  [Repositorio Asignatura](https://github.com/daniteleco/psp-22-23)
+- [Presentación Asignatura](https://docs.google.com/presentation/d/e/2PACX-1vThgrhL3Xa-ikJbOLEhtFyXF719GTm6M4rSH0FiDisNHK13id7bxeD7FpccvOkjnZFIjf_GfmKF3CFd/pub?start=true&loop=false&delayms=10000&slide=id.gedc4121aa8_0_925) //TODO
 - Programación Didáctica
 - [Real Decreto 450-2010 de 16 de abril](https://www.boe.es/buscar/doc.php?id=BOE-A-2010-8067)
 - [BOJA. Orden 16 junio de 2011](https://www.juntadeandalucia.es/boja/2011/142/20)

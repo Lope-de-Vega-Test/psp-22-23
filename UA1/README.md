@@ -5,6 +5,7 @@
 - Temporalización: **1T**
 - Duración: **12 horas**
 - Ponderación respecto a la asignatura: **20%**
+  
 ## Resultados de Aprendizaje
 
 En esta unidad de aprendizaje se desarrollan los siguientes resultados de aprendizaje:
@@ -24,7 +25,7 @@ h) Se han depurado y documentado las aplicaciones desarrolladas.
 
 ## Contenidos
 
-// TODO
+//TODO
 
 
 
@@ -58,12 +59,10 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 ## Recursos
 
 - [Repositorio Asignatura](https://github.com/daniteleco/psp-22-23)
-- Apuntes del Profesorado
+- Apuntes del Profesorado //TODO
 - Bibliografía Recomendada
   - **Programación de servicios y procesos - Técnico Superior en DAM.** *Mª Jesús Ramos Martín. Editorial Garceta. 2ª Edición. 2018. ISBN: 978-84-1728-931-7.*
 - Moodle
-
-
 
 ## Autor
 
