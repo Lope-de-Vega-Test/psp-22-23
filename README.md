@@ -8,11 +8,11 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 ![internet](https://cdn0.iconfinder.com/data/icons/azure-illustrations/1000/web_development___maintenance_construction_teamwork_website_webpage_browser-256.png)
 
 ## Contenidos
-1. [UA1 - Programación Multiproceso](https://github.com/daniteleco/psp-22-23/UA1)
-2. [UA2 - Programación Multihilo](https://github.com/daniteleco/psp-22-23/UA2)
-3. [UA3 - Programación de comunicaciones en red](https://github.com/daniteleco/psp-22-23/UA3)
-4. [UA4 - Desarrollo de Servicios en Red](https://github.com/daniteleco/psp-22-23/UA4)
-5. [UA5 - Técnicas de Programación segura](https://github.com/daniteleco/psp-22-23/UA5)
+1. [UA1 - Programación Multiproceso](https://github.com/daniteleco/psp-22-23/tree/main/UA1)
+2. [UA2 - Programación Multihilo](https://github.com/daniteleco/psp-22-23/tree/main/UA2)
+3. [UA3 - Programación de comunicaciones en red](https://github.com/daniteleco/psp-22-23/tree/main/UA3)
+4. [UA4 - Desarrollo de Servicios en Red](https://github.com/daniteleco/psp-22-23/tree/main/UA4)
+5. [UA5 - Técnicas de Programación segura](https://github.com/daniteleco/psp-22-23/tree/main/UA5)
 
 
 ## Recursos
