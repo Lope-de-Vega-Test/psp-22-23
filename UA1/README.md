@@ -46,14 +46,29 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 |                        |**100 %**    |             |
 
 
-### Tarea 1 - Criterios a), f), g), h)
+### **Tarea 1 - Programación de Procesos en C**
+##### **Criterios a), f), g), h)**
+Crea un programa en C que cree un proceso (existirán en realidad dos procesos, uno padre y el otro hijo). El programa principal pedirá al usuario una variable y el proceso padre restará 5 a dicha variable, mientras que el proceso hijo le sumará 4. Muestra todos los valores por pantalla.
 
-### Tarea 2 - Criterios a), f), g), h)
 
-### Tarea 3 - Criterios a), f), g), h)
+### **Tarea 2 - Programación de procesos en Java (I)**
+##### **Criterios a), f), g), h)**
+PROCESOS. Crea un programa Java que lea una cadena de caracteres desde la entrada estándar hasta escribir un *. Al final se tendrá que escribir toda la información leída. Crea después otro programa que ejecute el anterior.
 
-### Examen 
 
+### **Tarea 3 - Programación de procesos en Java (II)**
+##### **Criterios a), f), g), h)**
+Crea un programa en Java que admita argumentos desde main() y devuelva con System.exit() los siguientes valores:
+
+- Si el número de argumentos es < 1 debe devolver 1
+- Si el argumento es una cadena debe devolver 2
+- Si el argumento es un número entero menor que 0 debe devolver 3
+- En cualquier otro caso debe devolver 0
+
+Realiza un segundo programa Java que ejecute al anterior. Este programa deberá mostrar por pantalla lo que sucede según el valor devuelto al ejecutar el programa principal.
+
+### **Examen - Fecha a Determinar**
+##### **Criterios a), b), c), d), e) f), g) y h)**
 
 
 ## Recursos
