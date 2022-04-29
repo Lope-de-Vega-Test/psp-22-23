@@ -1,3 +1,4 @@
+
 /*
     CFGS Desarrollo Aplicaciones Multiplataforma
     Programación Servicios y Procesos
@@ -13,10 +14,25 @@
     Muestra todos los valores por pantalla.
 */
 //import java.*;
+ 
+//package ua1;
 
-class psp_ua1_tarea_1 
+// https://medium.com/@pelensky/java-tdd-with-junit-without-using-an-ide-cd24d38adff
+public class Tarea1 
 {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!"); 
+    //public void main(String[] args) {
+    //    System.out.println("Hello, World!"); 
+    //}
+
+    public String hello() {
+        return("Hello, World!"); 
+    }
+
+    public int add(int op1, int op2)
+    {int suma = op1+op2;
+        return suma;
+    }
+    public void goodBye() {
+        System.out.println("Good bye, World!"); 
     }
 }
