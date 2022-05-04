@@ -6,7 +6,7 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 [CFGS Desarrollo de Aplicaciones Multiplaforma.](https://www.ceslopedevega.com/grado-superior-desarrollo-de-aplicaciones-multiplataforma/)  
 [CES Lope de Vega](https://www.ceslopedevega.com/) en Córdoba (Andalucía, Spain).  
 
-![internet](https://img.freepik.com/vector-gratis/ilustracion-concepto-redes-sociales_53876-18146.jpg)
+![internet](?w=996&t=st=1651654103~exp=1651654703~hmac=daab0065ef8f47b1014862f621b1ad0de8444aa22c1aa2c5e5d0c96e7f4e5eb8)
 
 
 ## Contenidos
