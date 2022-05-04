@@ -2,11 +2,11 @@
 
 # Programación de Servicios y Procesos - 2022/2023
 
-Repositorio para el seguimiento y evaluación de la asignatura Programación de Servicios y Procesos.  
-[CFGS Desarrollo de Aplicaciones Multiplaforma.](https://www.ceslopedevega.com/grado-superior-desarrollo-de-aplicaciones-multiplataforma/)  
-[CES Lope de Vega](https://www.ceslopedevega.com/) en Córdoba (Andalucía, Spain).  
+Repositorio para el seguimiento y evaluación de la asignatura Programación de Servicios y Procesos.
+[CFGS Desarrollo de Aplicaciones Multiplaforma.](https://www.ceslopedevega.com/grado-superior-desarrollo-de-aplicaciones-multiplataforma/)
+[CES Lope de Vega](https://www.ceslopedevega.com/) en Córdoba (Andalucía, Spain).
 
-![internet](https://img.freepik.com/vector-gratis/fondo-blanco-hexagono-tecnologia-azul_1017-19366.jpg)
+![internet](https://img.freepik.com/vector-gratis/ilustracion-concepto-redes-sociales_53876-17828.jpg?)
 
 
 ## Contenidos
@@ -20,16 +20,17 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 
 El desarrollo del módulo profesional se basará en el uso de tecnologías actuales de desarrollo tales como Git, realización de tests unitarios, etc.
 
-- Lenguajes de Programación: 
+- Lenguajes de Programación:
   - [C++](https://isocpp.org/)
   - [Java](https://docs.oracle.com/en/java/javase/18/docs/api/index.html)
 - Entornos de Desarrollo:
   - Eclipse
   - VSCode
-  - CodeBlocks 
+  - CodeBlocks
 - [Git](https://git-scm.com/)
 - Unit Testing - [Junit](https://junit.org/junit5/)
-  
+- [Instrucciones de Entrega](https://github.com/daniteleco/psp-22-23/tree/main/INSTRUCCIONES_ENTREGAS.md)
+
 ## Recursos
 
 - Canal Slack del Módulo Profesional //TODO
@@ -38,7 +39,7 @@ El desarrollo del módulo profesional se basará en el uso de tecnologías actua
 - Programación Didáctica
 - [Real Decreto 450-2010 de 16 de abril](https://www.boe.es/buscar/doc.php?id=BOE-A-2010-8067)
 - [BOJA. Orden 16 junio de 2011](https://www.juntadeandalucia.es/boja/2011/142/20)
-- Bibliografía Recomendada: 
+- Bibliografía Recomendada:
   - **Programación de servicios y procesos - Técnico Superior en DAM.** *Mª Jesús Ramos Martín. Editorial Garceta. 2ª Edición. 2018. ISBN: 978-84-1728-931-7.*
 
 
