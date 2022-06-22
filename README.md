@@ -33,15 +33,14 @@ El desarrollo del módulo profesional se basará en el uso de tecnologías actua
 
 ## Recursos
 
-- Canal Slack del Módulo Profesional //TODO
--  [Repositorio Asignatura](https://github.com/daniteleco/psp-22-23)
+- [Canal SLACK](https://psp-2223.slack.com/)
+- [Repositorio Asignatura](https://github.com/daniteleco/psp-22-23)
 - [Presentación Asignatura](https://docs.google.com/presentation/d/e/2PACX-1vThgrhL3Xa-ikJbOLEhtFyXF719GTm6M4rSH0FiDisNHK13id7bxeD7FpccvOkjnZFIjf_GfmKF3CFd/pub?start=true&loop=false&delayms=10000&slide=id.gedc4121aa8_0_925) //TODO
-- Programación Didáctica
+- Programación Didáctica //TODO
 - [Real Decreto 450-2010 de 16 de abril](https://www.boe.es/buscar/doc.php?id=BOE-A-2010-8067)
 - [BOJA. Orden 16 junio de 2011](https://www.juntadeandalucia.es/boja/2011/142/20)
 - Bibliografía Recomendada:
   - **Programación de servicios y procesos - Técnico Superior en DAM.** *Mª Jesús Ramos Martín. Editorial Garceta. 2ª Edición. 2018. ISBN: 978-84-1728-931-7.*
-
 
 
 ## Autor
