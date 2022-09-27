@@ -21,8 +21,8 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 El desarrollo del módulo profesional se basará en el uso de tecnologías actuales de desarrollo tales como Git, realización de tests unitarios, etc.
 
 - Lenguajes de Programación:
-  - [C++](https://isocpp.org/)
-  - [Java](https://docs.oracle.com/en/java/javase/18/docs/api/index.html)
+  - [C/C++](https://isocpp.org/)
+  - [Java SE 17 (Long Term Support)](https://docs.oracle.com/en/java/javase/17/docs/api/index.html)
 - Entornos de Desarrollo:
   - Eclipse
   - VSCode
