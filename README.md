@@ -10,32 +10,32 @@ Repositorio para el seguimiento y evaluación de la asignatura Programación de 
 
 
 ## Contenidos
-- [UA1 - Programación Multiproceso](https://github.com/daniteleco/psp-22-23/tree/main/UA1)
-- [UA2 - Programación Multihilo](https://github.com/daniteleco/psp-22-23/tree/main/UA2)
-- [UA3 - Programación de comunicaciones en red](https://github.com/daniteleco/psp-22-23/tree/main/UA3)
-- [UA4 - Desarrollo de Servicios en Red](https://github.com/daniteleco/psp-22-23/tree/main/UA4)
-- [UA5 - Técnicas de Programación segura](https://github.com/daniteleco/psp-22-23/tree/main/UA5)
+- [UA1 - Programación Multiproceso](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA1)
+- [UA2 - Programación Multihilo](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA2)
+- [UA3 - Programación de comunicaciones en red](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA3)
+- [UA4 - Desarrollo de Servicios en Red](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA4)
+- [UA5 - Técnicas de Programación segura](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA5)
 
 ## Requerimientos Básicos
 
 El desarrollo del módulo profesional se basará en el uso de tecnologías actuales de desarrollo tales como Git, realización de tests unitarios, etc.
 
 - Lenguajes de Programación:
-  - [C++](https://isocpp.org/)
-  - [Java](https://docs.oracle.com/en/java/javase/18/docs/api/index.html)
+  - [C/C++](https://isocpp.org/)
+  - [Java SE 17 (Long Term Support)](https://docs.oracle.com/en/java/javase/17/docs/api/index.html)
 - Entornos de Desarrollo:
   - Eclipse
   - VSCode
   - CodeBlocks
 - [Git](https://git-scm.com/)
 - Unit Testing - [Junit](https://junit.org/junit5/)
-- [Instrucciones de Entrega](https://github.com/daniteleco/psp-22-23/tree/main/INSTRUCCIONES_ENTREGAS.md)
+- [Instrucciones de Entrega](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/INSTRUCCIONES_ENTREGAS.md)
 
 ## Recursos
 
 - [Canal SLACK](https://psp-2223.slack.com/)
-- [Repositorio Asignatura](https://github.com/daniteleco/psp-22-23)
-- [Presentación Asignatura](https://docs.google.com/presentation/d/e/2PACX-1vThgrhL3Xa-ikJbOLEhtFyXF719GTm6M4rSH0FiDisNHK13id7bxeD7FpccvOkjnZFIjf_GfmKF3CFd/pub?start=true&loop=false&delayms=10000&slide=id.gedc4121aa8_0_925) //TODO
+- [Repositorio Asignatura](https://github.com/Lope-de-Vega-Test/psp-22-23)
+- [Presentación Asignatura](https://docs.google.com/presentation/d/e/2PACX-1vThgrhL3Xa-ikJbOLEhtFyXF719GTm6M4rSH0FiDisNHK13id7bxeD7FpccvOkjnZFIjf_GfmKF3CFd/pub?start=true&loop=false&delayms=10000&slide=id.gedc4121aa8_0_925)
 - Programación Didáctica //TODO
 - [Real Decreto 450-2010 de 16 de abril](https://www.boe.es/buscar/doc.php?id=BOE-A-2010-8067)
 - [BOJA. Orden 16 junio de 2011](https://www.juntadeandalucia.es/boja/2011/142/20)
@@ -50,7 +50,7 @@ Creado por [Daniel Pérez Rodríguez](https://twitter.com/daniteleco) e inspirad
 ## Contacto
 - Email: [dperez@ceslopedevega.com](mailto:dperez@ceslopedevega.com)
 - LinkedIn: https://www.linkedin.com/in/danielperezrodriguez/
-- GitHub: https://github.com/daniteleco/
+- GitHub: https://github.com/Lope-de-Vega-Test/
 
 ## Referencias
 

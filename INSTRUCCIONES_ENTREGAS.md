@@ -18,13 +18,13 @@ Para ello, se ha diseñado un procedimiento automático de entrega y testeo del 
 
 Los pasos básicos a seguir son:
 
-1. **Registrar** un usuario en GitHub y solicitar acceso al repositorio, en adelante USERNAME.
-2. Crear una **rama** con el nombre del usuario asociado al repositorio.
-3. Se creará una **carpeta** con el nombre del usuario en dicha rama del repositorio.
+1. **Registrar** un usuario en [GitHub](https://github.com/) y solicitar acceso al repositorio, en adelante USERNAME.
+2. Crear/Utilizar una [**rama**](https://es.wikipedia.org/wiki/Rama_(control_de_versiones)) con el nombre del usuario asociado al repositorio (dev_X).
+3. Por cada unidad, se creará una **carpeta** con el nombre del usuario (dev_X) en dicha rama del repositorio, dentro de la subcarpeta **tareas**.  Ver ejemplo para [dev_0](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA1/tareas/dev_0) en la UA1.
 4. El usuario **ÚNICAMENTE** podrá crear ficheros en dicha rama y carpeta del repositorio. Ver [Penalizaciones](#Penalizaciones).
 5. Una vez desarrollado el código, se ejecuctarán los Tests que indicarán si se han superado los requerimientos y la nota asociada.  Ver [Ejecución de Tests](#ejecución-de-tests)
 
-
+Es importante también, aunque se irá recordando en clase y avisando por SLACK de realizar actualizaciones de la rama **main** e integrándolas en la rama de desarrollo individual (dev_X).
 
 ## Ejecución de Tests
 
@@ -45,8 +45,13 @@ También se realizará un procedimiento automático de control del plagio sobre 
 ## Penalizaciones
 ### Suspenso Automático de la Práctica:
 1. Crear ficheros fuera de la carpeta asignada al usuario.
-2. Resultados altos en las herramientas de comparación automática de código
+2. Resultados altos en las herramientas de comparación automática de código.
+
+```
+Aprobar != Aprender
+```
 
 ### Penalización en Puntos
 1. Subida de ficheros binarios (compilados) al repositorio.
 2. Subida de ficheros de configuración de entornos de desarrollo al repositorio.
+3. Subida de datos personales no cifrados al repositorio.
