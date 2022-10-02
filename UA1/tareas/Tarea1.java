@@ -18,21 +18,38 @@
 //package ua1;
 
 // https://medium.com/@pelensky/java-tdd-with-junit-without-using-an-ide-cd24d38adff
-public class Tarea1 
-{
-    //public void main(String[] args) {
-    //    System.out.println("Hello, World!"); 
-    //}
+#include <stdio.h>
+#include <unistd.h>
+#include <stdio.h>
 
-    public String hello() {
-        return("Hello, World!"); 
-    }
+int main() {
+    pid_t proceso,proceso1;
+    
+    int numero; //Numero que se le pide al usuario
+    
+    //Pedimos al usuario el numero con el que operaremos
+    printf("introduce el numero que quieras");
+    scanf("%d",&numero);
+    
+    //Se crea el proceso hijo
+     proceso=fork();
+     
+     //Comprobamos que se ha creado correctamente
+     if(proceso==-1){
+         printf("Error");
+     }
+     if(proceso==0){
+         numero=numero+4;
+        
+     }
+     //Lo que realiza el proceso padre
+     else {
+    wait(NULL);
+    numero=numero-5;
+     }
+     
+     //Nos muestra el resultado por pantalla
+    printf("variable: %d\n",numero);
+    
 
-    public int add(int op1, int op2)
-    {int suma = op1+op2;
-        return suma;
-    }
-    public void goodBye() {
-        System.out.println("Good bye, World!"); 
-    }
 }
