@@ -13,26 +13,37 @@
     El programa principal pedirá al usuario una variable y el proceso padre restará 5 a dicha variable, mientras que el proceso hijo le sumará 4. 
     Muestra todos los valores por pantalla.
 */
-//import java.*;
- 
-//package ua1;
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+int main() {
+  pid_t pid, Hijo_pid;
+  int num;
+  printf("Introduzca un numero entero: ");
+    scanf("%d", &num);
+   // 
+  pid = fork();
 
-// https://medium.com/@pelensky/java-tdd-with-junit-without-using-an-ide-cd24d38adff
-public class Tarea1 
-{
-    //public void main(String[] args) {
-    //    System.out.println("Hello, World!"); 
-    //}
-
-    public String hello() {
-        return("Hello, World!"); 
-    }
-
-    public int add(int op1, int op2)
-    {int suma = op1+op2;
-        return suma;
-    }
-    public void goodBye() {
-        System.out.println("Good bye, World!"); 
-    }
+//Control de errores
+  if (pid == -1 ) //Ha ocurrido un error 
+  {
+    printf("No se ha podido crear el proceso hijo...");
+    exit(-1);       
+  }
+  if (pid == 0 )  //Nos encontramos en Proceso hijo 
+  {        
+    printf("Soy el proceso hijo \n\t Mi PID es %d, El PID de mi padre es: %d.\n",  
+            getpid(), getppid() );
+            //Sumamos 4 al numero introducido
+            num += 4;	
+  }
+  else    //Nos encontramos en Proceso padre 
+  { 
+   Hijo_pid = wait(NULL); //espera la finalización del proceso hijo
+   printf("\n Soy el proceso padre:\n\t Mi PID es %d, El PID de mi padre es: %d.\n\t Mi hijo: %d terminó.\n",  getpid(), getppid(), pid);
+   //Restamos 5 al numero introducido
+   num -= 5;          
+   }
+   printf("%d",num);
+   exit(0);
 }
