@@ -52,14 +52,14 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 
 | CRITERIO de EVALUACIÓN | PONDERACIÓN | INSTRUMENTOS de EVALUACIÓN|
 |------------------------|-------------|-------------|
-| a)                     |12,5 %       | T1, T2 y T3 |
-| b)                     |12,5 %       | EX1         |
-| c)                     |12,5 %       | EX1         |
-| d)                     |12,5 %       | EX1         |
-| e)                     |12,5 %       | T1, T2 y T3 |
-| f)                     |12,5 %       | T1, T2 y T3 |
-| g)                     |12,5 %       | T1, T2 y T3 |
-| h)                     |12,5 %       | T1, T2 y T3 |
+| a)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| b)                     |12,5 %       | EX1 (100%)  |
+| c)                     |12,5 %       | EX1 (100%)  |
+| d)                     |12,5 %       | EX1 (100%)  |
+| e)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| f)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| g)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| h)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
 |                        |**100 %**    |             |
 
 
