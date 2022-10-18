@@ -67,7 +67,7 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 ### **T1 - Tarea 1 - Programación de Procesos en C**
 ##### **Criterios a), e), f), g), h)**
 ```
-Fecha de Entrega: 05/10/2022 - 14:00:00
+AMPLIADO! Fecha de Entrega: 12/10/2022 - 14:00:00
 ```
 PROCESOS. Crea un único programa en C que implemente las siguientes Funcionalidades Requeridas (FRs):
 * FR1: cree un proceso (existirán en realidad dos procesos, uno padre y el otro hijo) - 1 punto
