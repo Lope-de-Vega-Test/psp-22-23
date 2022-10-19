@@ -2,11 +2,13 @@ package practica2servicios;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class ProcesoMain {
 
 	public static void main(String[] args) {
-		String ruta = "C:\\Users\\aliva\\eclipse-workspace\\practica2servicios\\bin";
+		Path currentRelativePath = Paths.get("bin");
+		String ruta = currentRelativePath.toAbsolutePath().toString();
 		ProcessBuilder pb = new ProcessBuilder();
 		pb.command("java", "practica2servicios.Lectura").directory(new File(ruta));
 		pb.redirectErrorStream(true);
