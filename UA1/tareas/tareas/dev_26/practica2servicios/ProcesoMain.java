@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 public class ProcesoMain {
 
 	public static void main(String[] args) {
-		Path currentRelativePath = Paths.get("bin");
+		Path currentRelativePath = Paths.get("");
 		String ruta = currentRelativePath.toAbsolutePath().toString();
 		ProcessBuilder pb = new ProcessBuilder();
 		pb.command("java", "practica2servicios.Lectura").directory(new File(ruta));
