@@ -13,7 +13,7 @@ public class Ejecutable_tarea2_CarlosVillatoro {
 		File directorio = new File("build/classes");
 		
 		// DefiniciAn del ProcessBuilder encargado de localizar el ejecutable
-		ProcessBuilder pb = new ProcessBuilder("java", "tarea2procesos.prueba3");	// Estudiar como hacerlo con paquetes: com.ceslopedevega....
+		ProcessBuilder pb = new ProcessBuilder("java", "tarea2procesos.Tarea2_CarlosVillatoro");	// Estudiar como hacerlo con paquetes: com.ceslopedevega....
 		// Esta sentencia debe estar cuadrada con la ruta en la que se encuentran los ejecutables compilados: .class, .jar o lo que sea
 		pb.directory(directorio);
 				
