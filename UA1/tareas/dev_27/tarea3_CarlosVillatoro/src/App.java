@@ -11,9 +11,9 @@ public class App {
         } else {
             try {
     // Con el try, intentará convertir el argumento a string y si lo consigue, devolvera 0.
-                int argumentoInt = Integer.parseInt(args[0]);
+                int arg = Integer.parseInt(args[0]);
     // si el argumento es menor a 0, devolvera 3.
-                if (argumentoInt < 0) {
+                if (arg < 0) {
                     System.out.println("3");
                     System.exit(3);
                 } else
