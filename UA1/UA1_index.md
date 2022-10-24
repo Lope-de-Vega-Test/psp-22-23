@@ -127,6 +127,10 @@ Crea un programa Java que implemente las siguientes Funcionalidades Requeridas (
 ```
 Fecha de Examen: 26/10/2022 - 17:45:00
 ```
+El examen constará de dos partes:
+* Una primera parte de teoría, centrada sobre todo en los criterios de evaluación b), c) y d).  Serán unas preguntas cortas, donde deberéis responder utilizando vuestras propias palabras.  Para esta parte de teoría daremos un tiempo fijo y no permitiré el acceso a internet salvo para subir el resultado al repositorio.
+* La segunda parte será resolver un problema de sincronización de procesos en lenguaje de programación en C.
+Os recuerdo que los "problemas técnicos" para compilar y comprobar el funcionamiento del programa es vuestra responsabilidad.  Podéis usar compiladores online, máquinas virtuales, máquinas físicas con linux, ...
 
 ## Recursos
 
