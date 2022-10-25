@@ -1,0 +1,44 @@
+package tarea3pspvictoraljama;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.*;
+
+public class Tarea3PSPVictorAljamaEjecutar {
+    
+    public static void main(String[] args) throws IOException{
+        
+        // En la variable ruta declaramos todo el path hasta la carpeta donde se encuentra el archivo que queremos ejecutar
+        File ruta = new File("C:\\Users\\victo\\OneDrive\\Escritorio\\archivos DAM\\programacion servicios y procesos"
+                + "\\Tarea3PSPVictorAljama\\src\\tarea3pspvictoraljama");
+        // Definimos el ProcessBuilder que se encarga de localizar el ejecutable a partir de la ruta especificada
+        ProcessBuilder pb = new ProcessBuilder("java","Tarea3PSPVictorAljamaExit.java","prueba");
+        //Aquí le pasamos la ruta en la que debe buscar el archivo .java que le hemos indicado antes
+        pb.directory(ruta);
+
+        try {
+            // Redireccion de la entrada y salida del proceso lanzado a mi mismo
+            pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+			
+            // El proceso indicado anteriormente se ejecuta			
+            Process p = pb.start();
+            // Esperamos a que finalice el programa/proceso lanzado.
+            try {
+		p.waitFor();
+                System.out.println("El valor devuelto del System.exit es: "+p.exitValue());
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+	}
+        catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+	}
+    }
+}
