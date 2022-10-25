@@ -30,6 +30,7 @@ public class Tarea3PSPVictorAljamaEjecutar {
             // Esperamos a que finalice el programa/proceso lanzado.
             try {
 		p.waitFor();
+                //con esta linea queremos mostrar el valor del System.exit que obtenemos del otro programa
                 System.out.println("El valor devuelto del System.exit es: "+p.exitValue());
             }
             catch (InterruptedException e) {
