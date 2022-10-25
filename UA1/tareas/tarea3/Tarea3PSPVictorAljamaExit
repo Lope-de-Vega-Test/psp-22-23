@@ -1,0 +1,47 @@
+package tarea3pspvictoraljama;
+
+import java.util.*;
+import java.lang.*;
+
+public class Tarea3PSPVictorAljamaExit {
+
+    
+    public static void main(String[] args) {
+        
+        if(args.length<1){
+            System.exit(1);
+        }
+        else{
+            if(comprobarNumero(args[0]) == false && args.length==1){
+                System.exit(2);
+            }
+            else{
+                if(comprobarNumero(args[0]) && args.length==1){
+                    int valorNumero = 0;
+                    valorNumero = Integer.parseInt(args[0]);
+                    
+                    if(valorNumero<0){
+                        System.exit(3);
+                    }
+                    else{
+                        System.exit(0);
+                    }
+                }
+                else{
+                    System.exit(0);
+                }
+            }  
+        }
+    }
+    
+    public static boolean comprobarNumero(String argumento){
+        
+        try{
+           Integer.parseInt(argumento);
+           return true;
+        }
+        catch (NumberFormatException error){
+           return false;
+        }
+    }
+}
