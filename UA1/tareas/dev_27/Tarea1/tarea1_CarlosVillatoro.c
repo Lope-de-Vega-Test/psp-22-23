@@ -8,7 +8,6 @@ int main() {
     scanf("%d", &num);
    // 
   pid = fork();
-
 //Control de errores
   if (pid == -1 ) //Ha ocurrido un error 
   {

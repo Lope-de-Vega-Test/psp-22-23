@@ -9,7 +9,7 @@ public class Ejecutable_Tarea3 {
 		File directorio = new File(dir);
 		
 		// Localizamos el ejecutable con el processbuilder
-		ProcessBuilder pb = new ProcessBuilder("java", "App.java","argumento");	
+		ProcessBuilder pb = new ProcessBuilder("java", "Ejecutable_Tarea3.java","argumento");	
 		pb.directory(directorio);
 				
 		try {
