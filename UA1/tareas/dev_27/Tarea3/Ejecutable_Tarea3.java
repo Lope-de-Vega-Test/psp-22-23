@@ -8,7 +8,7 @@ public class Ejecutable_Tarea3 {
         final String dir= System.getProperty("user.dir");
 		File directorio = new File(dir);
 		
-		// Localizamos el ejecutable con el processbuilder
+		// Ejecutamos el programa con el ProcessBuilder y le pasamos el argumento
 		ProcessBuilder pb = new ProcessBuilder("java", "Tarea3.java","argumento");	
 		pb.directory(directorio);
 				
