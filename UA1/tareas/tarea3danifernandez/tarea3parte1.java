@@ -1,5 +1,7 @@
+
 package com.mycompany.tarea3parte1;
 import java.util.Scanner;
+import java.lang.*;
 /**
  *
  * @author daniel fernandez
@@ -9,88 +11,83 @@ import java.util.Scanner;
 
 public class Tarea3parte1 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
     
-        Scanner sca1 = new Scanner(System.in);
         
-       // Declaramos las variables 
-       // Variables principales: 
-        int datoNumerico;
-        String datoCadena;
-        // Variables secundarias: 
+            // SI NO EXISTEN ARGUMENTOS, NOS DEVOLVERA EL VALOR 1
+            
+            
+        if (args.length < 1)
+        {
         
-        int cantidad;
-        int opcion;
+            
+            System.out.println("No hay argumentos, valor: 1");
         
-        
-        //Creamos un menu de opcion en el que podremos escoger si vamos a introducir un valor entero o una cadena
-         System.out.println("Escoja una opcion: ");        
-         System.out.println("1. Introducir dato numerico");        
-         System.out.println("2. Introducir dato de tipo Cadena");        
-         opcion = sca1.nextInt();
-         switch (opcion)
-         {
-             /*En el caso 1 estaremos tratando la variable numerica en la que
-             tendremos varias opciones a usar*/
-         
-             case 1: 
-                 // Primera opcion, introducimos una cantidad de argumentos, si esa cantidad es menor a 1, nos devuelve un valor
-                 System.out.println("Introduzca la cantidad de argumentos:  ");
-                 cantidad = sca1.nextInt();
-                 if (cantidad < 1)
-                 {
-                     System.out.println("Valor devuelto: 1");
-                 System.exit(0);
-                 }
-                 // En caso contrario tendremos otras dos opciones viables
-                 
-                 else
-                 {
-                  for(int i = 0; i<cantidad;i++)
-                 {
-                 System.out.println("Introducir dato: ");
-                 datoNumerico = sca1.nextInt();
-                 
-                 // Si el valor es menor que 0 nos va a devolver un 3
-                 if (datoNumerico < 0)
-                 {
-                  System.out.println("Valor devuelto: 3");
-                 System.exit(0);
-                 }
-                 
-                 // En caso contrario nos devolvera un 0
-                 else
-                 {
-                  System.out.println("Valor devuelto: 0");
-                  System.exit(0);
-                 }
-                 
-                 }
-                 }
+        }
+                  else
+        {
+            
+            // DE OTRO MODO; VA A LEER SI NO ES INT, EN ESE CASO DEVOLVERA UN VALOR 2
+          
+            
+          for (int i=0; i<args.length;i++)
+            {
+              if (esNumero(args[i]) == false)
+            {
+            
+                System.out.println("El argumento es "+args[i]+" valor devuelto: 2");
                 
-                 
-                     
-                    
-                     
-                 break;
-                 
-                 /*El caso 2 es muy simple, solamente debemos devolver un valor 2 cuando introduzcamos
-                 la cadena de caracteres*/
-             case 2:
-                 
-                 System.out.println("Introduzca una cadena de caracteres: ");
-                 datoCadena = sca1.next();
-              
-                     System.out.println("Valor devuelto: 2");
-                 System.exit(0);
-                 
-               
+            }
+            
+            if (esNumero(args[i]) == true)
+            {
+                // SI EL VALOR ES INT, NOS VA A DEVOLVER UN NUMERO U OTRO DEPENDIENDO DE DIFERENTES FACTORES
+            
+                int argInt;
+                argInt = Integer.parseInt(args[i]);
                 
-                 
-             break;
+                if (argInt < 0)
+                {
+                System.out.println("El argumento es "+argInt+" valor devuelto: 3");
+            
+                }
+                
+                if (argInt > 0)
+                {
+                System.out.println("El argumento es "+argInt+" valor devuelto: 0");
+            
+                }
+                
+            }
+          
+            
+            }
+        
+          
+           
+            
+            
+           
+        
+        }
+                      
+            
+                }
+           
+    // ESTA ES LA FUNCION ESNUMERO, LA CUAL SE ENCARGA DE LA COMPROBACIÓN, ESTAMOS TRABAJANDO CON UNA FUNCION BOOLEANA
              
-             /*POR CADA DATO INTRODUCIDO NOS VA A SACAR DEL PROGRAMA*/
-         }
-       
+    public static boolean esNumero(String cadena)
+    {
+        
+        boolean dev;
+    
+    try
+    {
+    Integer.parseInt(cadena);
+    dev = true;
+    }catch(NumberFormatException excepcion)
+    {
+    dev = false;
     }
-}
+    return dev;  
+    }}
