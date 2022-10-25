@@ -10,8 +10,8 @@ public class ua1tarea2_CrearProceso {
      */
     public static void main(String[] args) throws IOException {
 
-
-        String dir= System.getProperty("user.dir");
+		// obtenemos el directorio en el que nos encontramos
+        String dir = System.getProperty("user.dir");
 		File directorio = new File(dir);
 		
 		// Localizamos el ejecutable con el processbuilder
@@ -24,10 +24,10 @@ public class ua1tarea2_CrearProceso {
 			pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
 			pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
 			
-			// El proceso se ejecuta			
+			// ejecutamos el procesp			
 			Process p = pb.start();
                         System.out.println("Proceso iniciado"); 
-			// Debemos esperar a la finalizacion del programa/proceso lanzado.
+			// esperamos a que termine el programa
 			try {
 				p.waitFor();
 			} catch (InterruptedException e) {
