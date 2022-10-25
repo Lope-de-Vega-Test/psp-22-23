@@ -1,4 +1,4 @@
-public class App {
+public class Tarea3 {
     /**
  *
  * @author avilnec

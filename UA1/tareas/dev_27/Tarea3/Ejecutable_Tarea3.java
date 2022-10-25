@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 
-public class Ejecutable {
+public class Ejecutable_Tarea3 {
     
     public static void main(String args[]) throws IOException{
 		// Declaracion de la direccion del ejecutable del programa a ejecutar	
@@ -27,6 +27,7 @@ public class Ejecutable {
 				e.printStackTrace();
 			}
 		} catch (IOException e1) {
+			//Control de errores
 			e1.printStackTrace();
 		}
 	}
