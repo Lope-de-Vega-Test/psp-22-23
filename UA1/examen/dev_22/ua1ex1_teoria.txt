@@ -25,7 +25,12 @@ c) Utilizando tus propias palabras, indica las características de la programaci
 
 	Como hemos dicho en el ejercicio anterior, la programación concurrente es aquella en la que los procesos comparten los recursos del procesador y se
 sincronizan de manera que, según nos interese, se detengan, pausen o reinicien (como por ejemplo ordenando a otro proceso detenerse con kill(SIGUSR, void func)
-y diciendo a un proceso que se detenga con sleep(int tiempo), además de esperar a que acaben con wait(NULL)) para lograr esta concurrencia.
+y diciendo a un proceso que se detenga con sleep(int tiempo), además de esperar a que acaben con wait(NULL)) para lograr esta concurrencia. Y como hemos dicho antes,
+cada proceso tiene su propio PCB donde se ejecuta.
+En Linux los procesos dentro de otros procesos o procesos hijo se crean mediante fork(), función que devuelve -1 en caso de error, 0 si estamos en el hijo y otra cosa
+si estamos en el padre. Cada proceso tiene un id, que podemos ver con getpid() y el del padre vía getppid(). Para comunicarse entre sí usamos las llamadas tuberías
+o pipes, mediante un vector entero (llamémosle fd[2]) y con pipe(fd), de manera que escribimos mediante write(fd[1], "mensaje a leer así o en un char[]", tamañomensaje), y leemos con una variable char[] (llamémosla buffer por ejemplo) y con read(fd[0], buffer, tamañomensaje) guardaremos el mensaje en ese "buffer" que
+más tarde podemos imprimir en pantalla. También podemos usar ficheros.
 Un ejemplo son nuestros propios equipos personales, estos ejecutan una gran cantidad de procesos y servicios de forma concurrente para poder llevar a cabo las tareas
 del sistema operativo. Podemos ver los procesos en ejecución vía ps en Linux y vía tasklist o administrador de tareas en Windows.
 
