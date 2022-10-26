@@ -1,1 +1,31 @@
+NOMBRE: Víctor Aljama Iglesias
+FECHA:26/10/2022
 
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.
+
+Un proceso es un programa en ejecución, aunque otra posible deficición es toda aquella actividad asíncrona que se le pueda asignar a un procesador.
+
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Un proceso, como ya he explicado en la pregunta anterior, es un programa en ejecución, mientras que un hilo es una tarea simple que se ejecuta dentro del propio proceso, es decir, un proceso se compone de diversos hilos que se ejecutan al mismo tiempo para dar funcionalidad al programa. El motivo principal por el que se usan es porque resulta mas sencillo preparar un hilo que un subproceso. Para ello existen dos métodos, el primero es heredar de la clase Thread() y hacer una sobrecarga en run(), no obstante, si ya hemos heredado de otra clase, podemos implementar la interfaz Runnable() para posteriormente hacer lo propio con la funcion run().
+
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+La programación concurrente se basa en asignar cada tarea a realizar (o hilo) a un unidad de procesamiento, agilizando la ejecución de tareas a rasgos generales y realizando las operaciones pertinentes al mismo tiempo, es decir, de forma simultánea. Quizá el ámbito de aplicación mas reconocible para este tipo de programación sea el de Sistemas Gestores de Bases de Datos (SGBD), ya que puede darse el caso de que, por ejemplo, dos ususarios accedan al mismo tiempo a la misma tabla y uno se encuentre leyendo datos mientras que otro los está editando. Si se da esta situación la base de datos crea una sección crítica para salvaguardar la integridad de la información. No obstante, hay más ámbitos en los que es bastante aconsejable hacer uso de este sistema de programación, como por ejemplo sistemas de control o tecnologías web.
+
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+El fundamento principal de la programación paralela es, básicamente, que las tareas a realizar de un mismo proceso se dividen entre las unidades de procesamiento, desglosando así las operaciones a realizar y haciendo que la ejecución del proceso sea más rápida. Otra ventaja de este modelo es que se realizan tareas complejas con mayor facilidad y que la ejecución de las mismas es simultánea. Por otro lado, contamos con las desventajas de que resulta más complejo acceder a datos, su compilado y escribir su código, así como un mayor consumo de energía, entre otras
+
+En cambio, la programación distribuida, como su nombre indica, distribuye sus componentes, no sólo de software sino también de hardware, conectándolos posteriormente a través de una red. El caso más recurrente es el de internet.
+Este modelo tiene las ventajas de ser más accesible, contar con mayor disponibilidad y en caso de tener errores, estos son independientes. Pero esto no quiere decir que no tenga desventajas, que, a grades rasgos y al igual que en la programación paralela, se pueden resumir en mayor complejidad y de seguridad.
+
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
