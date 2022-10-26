@@ -10,10 +10,10 @@ b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 
 Los hilos de un mismo proceso comparten el mismo espacio de memoria, por tanto, dos hilos del mismo proceso pueden compartir estructuras de datos,variables, etc...
 
 c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
-La programacion concurrente es capaz de procesar dos o más acciones progresivamente, los procesos se ejecutan de manera independiente y es capaz de procesar múltiples datos al mismo tiempo.
+La programacion concurrente es capaz de procesar dos o más acciones progresivamente, los procesos se ejecutan de manera independiente y es capaz de procesar múltiples datos al mismo tiempo. Su ambito se encuentra en el diseño del software.
 
 d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
-En la programacion paralela las operaciones se realizan simultáneamente y se necesita un solo equipo. Estos a su vez realizan diferentes operaciones. Puede tener memoria compartida o distribuida
+En la programacion paralela las operaciones se realizan simultáneamente y se necesita un solo equipo. Estos a su vez realizan diferentes operaciones. Puede tener memoria compartida o distribuida.
 Por otro lado, en la programacion distribuida los componentes del sistema están ubicados en diferentes ubicaciones y utiliza varios equipos. Estos realizan múltiples operaciones. Solo tiene memoria distribuida.
 
 Notas:
