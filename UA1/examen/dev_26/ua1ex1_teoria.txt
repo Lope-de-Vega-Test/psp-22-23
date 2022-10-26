@@ -1,0 +1,38 @@
+NOMBRE: FRANCISCO JAVIER VALVERDE LUQUE
+FECHA: 26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+- Un proceso podríamos definirlo como un programa en momento de ejecución. También podríamos tratarlo como cualquier suceso asíncrono capaz de ser procesado.
+
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+- Un hilo es, muy resumidamente, un proceso ligero con la diferencia de que los recursos y memoria usados de diferentes hilos en un programa
+ están "encapsulados", mientras que los procesos no tienen esa restricción y no tienen porqué compartirlo. Además la creación y ejecución
+ de hilos es mucho más rápida con respecto a los procesos. 
+
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+- La característica principal de la programación concurrente es la simultaneidad de ejecución de los procesos de una aplicación. Por ello,
+nos ahorra una gran cantidad de tiempo de ejecución a cambio del uso de más recursos. Podemos usar este paradigma de programación para dividir
+nuestro programa en pequeños segmentos que pueden comunicarse entre ellos y así poder optimizar y acelerar el proceso de ejecución. El gran problema
+que puedo ver en este paradigma, es que debemos tener cuidado a la hora de sincronizar los procesos, ya que debemos evitar un bloqueo por acceso
+multiple a un fichero o archivo de varios procesos. Para ello deberemos usar semáforos, señales... Además, tenemos que tener en cuenta los conjuntos de Bernstein,
+para poder conocer si 2 procesos pueden ser concurrentes entre ellos (Lectura/Escritura).
+
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+- La gran diferencia entre la programación paralela y distribuida es la forma en la que están dispuestos los medios físicos, siendo así que, la programación distribuida,
+pueda y tenga que depender de la red y sea mucho más escalable con respecto a la paralela. Al estar basadas ambas en la programación concurrente, ambas tienen las ventajas de 
+dividir el programa en pequeños procesos, con la diferencia de que los programas serán mucho más pesados de compilar, ejecutar, acceder a datos, uso de escritura y teniendo además, la programación paralela,
+una simultaneidad temporal, al ejecutarse a la vez los procesos. Además, ambas usan unidades de multiprocesamiento. Otro gran problema que hay que tener en cuenta en la programación distribuida,
+es la red, ya que hay que tener en cuenta la pérdida de paquetes, restando calidad al programa final.
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
