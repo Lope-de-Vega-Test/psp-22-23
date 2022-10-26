@@ -66,7 +66,8 @@ int main()
     pid_t pid_cp;
     
     // Bucle de 3 iteraciones:
-    // En cada iteracion se hace un fork y
+    // En cada iteracion se hace un fork
+    // (se crea un proceso hijo) y
     // se evalua si se ha creado o no
     // - Si no se ha creado lanza un codigo de salida
     // - Si se ha creado imprime su informacion y lanza un codigo de salida
