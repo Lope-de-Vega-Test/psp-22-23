@@ -1,1 +1,39 @@
+NOMBRE: José Ramón Crespo Castro
+FECHA: 26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+Un proceso es un programa en ejecución
+
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Un proceso es un conjunto de hilos de ejecución que comparten los mismos recursos
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+La programación concurrente se encarga de resolver los problemas de comunicación y sincronía que pueden ocurrir entre procesos, se pueden aplicar a la hora de que el programador se asegure de que la comunicación sea correcta, los procesos concurrentes pueden funcionar a la vez
+
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+
+Diferencias programación paralela:
+
+-Ejecuta varias instrucciones simultaneamente
+-Solo necesita un ordenador para llevarla a cabo
+-Puede tener memoria compartida o distribuida
+
+
+Diferencias programación distribuida:
+
+-Los componentes del sistema están ubicados en diferentes ubicaciones
+-Necesita varios ordenadores
+-Solo tiene memoria distribuida
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
 
