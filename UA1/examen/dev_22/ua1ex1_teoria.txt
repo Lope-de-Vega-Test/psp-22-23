@@ -1,0 +1,46 @@
+NOMBRE: Ignacio Javier Martínez Sánchez
+FECHA: 26-10-2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+	Un proceso es un programa en ejecución.
+
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+	Tanto los hilos como los procesos permiten separar las tareas, con la diferencia de que los hilos permiten la programación paralela y los procesos la 
+concurrente.
+
+Los procesos tienen su propio PCB, comparten los recursos del procesador y a la hora de programar, normalmente nos encargaremos de que cada proceso no actúe hasta
+que otro no acabe o se pause, y para esto último usaremos señales que permiten comunicarse a estos entre sí. En resumen, a gran velocidad podría parecer que estos 
+procesos se ejecutan a la vez pero en realidad están constantemente deteniéndose y trabajando, se sincronizan para compartir los recursos del procesador.
+
+Los hilos por su parte trabajan cada uno con un procesador/núcleo, por lo que estos sí que pueden realmente trabajar a la vez sin que tengan que detenerse como tal,
+más allá de la necesidad de requerir una respuesta de otro hilo para poder proseguir con su propia función. Estos sí trabajan estrictamente a la vez.
+
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+	Como hemos dicho en el ejercicio anterior, la programación concurrente es aquella en la que los procesos comparten los recursos del procesador y se
+sincronizan de manera que, según nos interese, se detengan, pausen o reinicien (como por ejemplo ordenando a otro proceso detenerse con kill(SIGUSR, void func)
+y diciendo a un proceso que se detenga con sleep(int tiempo), además de esperar a que acaben con wait(NULL)) para lograr esta concurrencia.
+Un ejemplo son nuestros propios equipos personales, estos ejecutan una gran cantidad de procesos y servicios de forma concurrente para poder llevar a cabo las tareas
+del sistema operativo. Podemos ver los procesos en ejecución vía ps en Linux y vía tasklist o administrador de tareas en Windows.
+
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+	La programación paralela es aquella en la que los hilos trabajan a la vez usando cada uno un procesador/núcleo, con la ventaja de no tener que sincronizarse
+con otros, pero con el problema de que efectivamente necesitaremos estos núcleos y no todos los equipos disponen de ello.
+
+La programación distribuida es aquella en la que cada proceso no lo ejecuta una CPU diferente sino un equipo entero. Tiene el inconveniente de requerir muchos más
+recursos pero tener una potencia de cálculo totalmente superior, es por ello que se usa en las fotografías de microscopios, de tal tamaño que ocupan GBs y necesitan
+gran potencia para ser obtenidas.
+
+
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
