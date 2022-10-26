@@ -1,1 +1,38 @@
+#include <stdio.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <fcntl.h>
+// To avoid WARNINGS
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdbool.h>
 
+void funcion(int nhijo, int pidpadre, int pidhijo){
+    printf("Soy el hijo %d, mi padre es= %d y mi PID= %d\n",nhijo,pidpadre,pidhijo);
+}
+
+int main(){
+  pid_t pid_padre,pid_hijo1,pid_hijo2,pid_hijo3;
+  pid_padre=fork();
+  
+  switch(pid_padre)
+  {
+     case -1:
+          printf( "Error \n");
+          exit( -1 );        
+     case 0:  
+           for(int i=1;i<=3;i++){
+                funcion(i,getppid(),getpid());
+            }     
+            printf("Proceso PADRE = %d\n",getppid());
+     break;    
+     default: 
+            pid_hijo1=wait(NULL);
+            pid_hijo2=wait(NULL);
+            pid_hijo3=wait(NULL);
+     break;
+  } 
+  
+  return 0;
+}
