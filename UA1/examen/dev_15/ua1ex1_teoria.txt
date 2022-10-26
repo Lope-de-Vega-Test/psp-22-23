@@ -1,0 +1,58 @@
+NOMBRE:Lucía García Díaz
+FECHA:26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+Programa que se está ejecutando.
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Un hilo es la ejecución de una tarea que puede ser ejecutada a la misma vez que otra. 
+El conjunto de hilos de ejecucíon son un conjunto conocido como proceso.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+La programación concurrente se trata de intercalar las intrucciones de los procesos.
+Se puede utilizar en estos ámbitos:
+-Sistemas gestores de Bases de Datos
+-Aplicaciones GUI
+-Tecnologías web
+-Sistemas de control
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+La programación paralela se trata de un programa que puede soportar dos o más acciones a la misma vez,estos se suelen ejecutar en un sistema multiprocesador.
+La programación distribuida se trata de desarrollar un sistema libre y con control de errores.
+
+Principales diferencias:
+
+Programación paralela:
+Ventajas:
+- Ejecución simultánea
+- Disminuye el tiempo de ejecución
+- Abordaje y resolución de problemas complejos
+
+Inconvenientes:
+- Los compiladores y entornos son más complejos
+- Los programas son más difíciles de escribir
+- Mayor consumo de energía
+- Mayor complejidad en el acceso a los datos
+- Comunicación y sincronización más compleja
+
+Programación distribuida:
+Ventajas:
+- Se pueden compartir recursos y datos
+- Capacidad de crecimiento incremental
+- Mayor flexibilidad
+- Alta disponibilidad
+- Carácter abierto y heterogéneo
+
+Inconvenientes:
+- Aumento de complejidad
+- Problemas con las redes de comunicación (pérdida de mensajes, saturación...)
+- Problemas de seguridad 
+
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
