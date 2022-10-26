@@ -1,1 +1,70 @@
+NOMBRE: Luis Manuel Rodríguez López 
+FECHA: 26/10/2022
 
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto. 
+
+Un proceso consiste en un programa en ejecución que contiene código el cual puede ser ejecutado en dicho programa
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+La relación que contienen los hilos y los procesos es que los hilos son ejecuciones de un programa mediante los recursos de los procesos,
+el cual permite la ejecución concurrente de varias instrucciones las cuales pueden estar asociadas a diferentes funciones pero afectan al mismo proceso, compartiendo los mismos datos y estructura de datos en el núcleo.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+La programacion concurrente posee las siguientes características :
+
+-Aprovechamiento de la cpu
+
+-Alta velocidad de ejecución
+
+-Solución de poblemas concurrentes
+
+Los ambitos en los cuales se pueden aplicar son :
+
+-Hilos:
+Se pueden crear varios hilos de ejecución en el mismo proceso, y requieren el uso del núcleo del sistema operativo.
+
+
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+La programación paralela consiste en el proceso de creación de programas dedicadas a ejecutarse en sistemas multiprocesadores, en el cual se requiere el trabajo de varias cpu, y las cuales requieren que el programa se divida en varias partes para resolverlo.
+
+Las ventajas que posee son las siguienets:
+-Ejecución simultánea
+-Tiempos bajos de ejecución
+-Posibilidad de resolver problemas dificiles o complejos
+
+Las desventajas que tienen tambien son :
+-Entornos de desarrollo complejos 
+-Lenguaje complicado de dominar y escribir
+-Alto porcentaje de consumo de energía
+-Acceso a datos mas complejo
+- Comunicación mas compleja
+
+La programación distribuida en cambio esta mas enfocada en el uso de todos los componentes, ya sea hardware o software,y los componentes se conectan mediante la red
+
+Sus ventajas:
+
+-Compartir datos
+
+-Crecimiento incremental
+
+-Flexibilidad
+
+-Caracter abierto
+
+Sus desventajas:
+
+-Complejidad
+
+-Problemas con redes de comunicación
+
+-Seguridad
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
