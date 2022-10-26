@@ -7,11 +7,11 @@ a) Definición de proceso. 1 punto.
    Un programa que está en ejecución.
 
 b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
-   Un proceso es la definición de un programa que se encuentra en ejecución, mientras que un hilo trata de ser un subrproceso que se encadena con unas tareas              (normalmente muy pequeñas) que son ejecutadas por el sistema operativo. 
+   Un proceso es la definición de un programa que se encuentra en ejecución, mientras que un hilo trata de ser un subrproceso que se encadena con unas tareas(normalmente muy pequeñas) que son ejecutadas por el sistema operativo. 
    Su relación trata de que los procesos inicializan un programa entero que se ejecuta usando varios subprocesos, mientras que un hilo forma parte de un procesos para    que ejecute otros subprocesos o unidades de este que son mas ligeros.
 
 c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
-   La programación concurrente es cuando un programa esta ejecutando varios procesos a la vez, pero no tiene que entenderse con la programacion paralela, la              programación    concurrente puede terminar con un proceso y despues empezar con otro sin ningún tipo de problema. Eso si los procesos tendrian que colaborar para      llegar a cumplir una    función que pida el programa, para ello tienen una serie de mecanismos que les permite poder comunicarse entre si o sincronizarse para saber    si un proceso ha terminado    o no.
+   La programación concurrente es cuando un programa esta ejecutando varios procesos a la vez, pero no tiene que entenderse con la programacion paralela, la              programación  concurrente puede terminar con un proceso y despues empezar con otro sin ningún tipo de problema. Eso si los procesos tendrian que colaborar para llegar a cumplir una función que pida el programa, para ello tienen una serie de mecanismos que les permite poder comunicarse entre si o sincronizarse para saber si un proceso ha terminado o no.
    
 d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
    La programacion paralela esta pensada para la ejecución de programas a traves de un multiprocesador, es decir, la ejecucion de varios procesos al mismo tiempo,        normalmente pequeños problemas que normalmente tienen que ir dividos en partes que se pueden resolver a su vez.
