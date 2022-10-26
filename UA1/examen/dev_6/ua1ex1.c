@@ -24,30 +24,31 @@ void main(){
   pid_t hijo1_pid, hijo2_pid, hijo3_pid;
   int status;
   
-  hijo1_pid=fork();
+  hijo1_pid=fork(); //Nos encontramos en el primer proceso hijo
   
   if(hijo1_pid==0){
-      wait(&status);
-    printf("Soy el hijo 1, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());
+      
+    printf("Soy el hijo 1, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());//te muestra el hijo y su padre
     exit(0);
   }
-  wait(&status);
-  hijo2_pid=fork();
+  wait(&status);//espera a terminar el if
+  hijo2_pid=fork();//Nos encontramos en el segundo proceso hijo
   
   if(hijo2_pid==0){
       
-    printf("Soy el hijo 2, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());
+    printf("Soy el hijo 2, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());//te muestra el hijo y su padre
     exit(0);
   }
-  wait(&status);
-  hijo3_pid=fork();
+  wait(&status); //espera a terminar el if
+  
+  hijo3_pid=fork();//Nos encontramos en el tercer proceso hijo
   
   if(hijo3_pid==0){
-    wait(&status);
-    printf("Soy el hijo 3, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());
+    wait(&status);//espera a terminar el if
+    printf("Soy el hijo 3, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid()); //te muestra el hijo y su padre
     exit(0);
   }
-  wait(&status);
-  printf("Proceso PADRE = %d",getpid());
+  wait(&status);//espera a terminar el if
+  printf("Proceso PADRE = %d",getpid()); //te muestra el Proceso PADRE
   exit(0);
 }
