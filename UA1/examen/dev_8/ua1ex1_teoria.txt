@@ -1,0 +1,24 @@
+NOMBRE: Francisco Javier Campos Gutiérrez
+FECHA: 26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+    Es un programa en ejecución.
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+    Un hilo es donde se ejecuta un proceso, que pueden existir varios a la vez y un proceso es un conjunto de hilos que comparten recursoss.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+    Es la forma en la cual podemos resolver ciertos problemas, es decir, ejecutando múltiples tareas a la misma vez o no. En un programa concurrente las tareas puede continuar sin la necesidad que otras comiencen o finalicen.
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+    La programación paralela es capaz de ejecutar varias instrucciones simultáneamente, en cambio, la programación distruida no. Estos sistemas cuyos componentes están comunicados entre si, se comunican y coordinan sus acciones mediante el paso de mensajes, para el logro de un objetivo.
+    Ventajas:
+    - La programacion concurrente aprovecha más el ordenador
+    Desventajas:
+    - No se conoce el orden de ejecución
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
