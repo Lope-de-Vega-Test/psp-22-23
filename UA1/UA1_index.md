@@ -52,14 +52,14 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 
 | CRITERIO de EVALUACIÓN | PONDERACIÓN | INSTRUMENTOS de EVALUACIÓN|
 |------------------------|-------------|-------------|
-| a)                     |12,5 %       | T1, T2 y T3 |
-| b)                     |12,5 %       | EX1         |
-| c)                     |12,5 %       | EX1         |
-| d)                     |12,5 %       | EX1         |
-| e)                     |12,5 %       | T1, T2 y T3 |
-| f)                     |12,5 %       | T1, T2 y T3 |
-| g)                     |12,5 %       | T1, T2 y T3 |
-| h)                     |12,5 %       | T1, T2 y T3 |
+| a)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| b)                     |12,5 %       | EX1 (100%)  |
+| c)                     |12,5 %       | EX1 (100%)  |
+| d)                     |12,5 %       | EX1 (100%)  |
+| e)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| f)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| g)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| h)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
 |                        |**100 %**    |             |
 
 
@@ -67,7 +67,7 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 ### **T1 - Tarea 1 - Programación de Procesos en C**
 ##### **Criterios a), e), f), g), h)**
 ```
-Fecha de Entrega: 05/10/2022 - 14:00:00
+AMPLIADO! Fecha de Entrega: 12/10/2022 - 14:00:00
 ```
 PROCESOS. Crea un único programa en C que implemente las siguientes Funcionalidades Requeridas (FRs):
 * FR1: cree un proceso (existirán en realidad dos procesos, uno padre y el otro hijo) - 1 punto
@@ -127,6 +127,10 @@ Crea un programa Java que implemente las siguientes Funcionalidades Requeridas (
 ```
 Fecha de Examen: 26/10/2022 - 17:45:00
 ```
+El examen constará de dos partes:
+* Una primera parte de teoría, centrada sobre todo en los criterios de evaluación b), c) y d).  Serán unas preguntas cortas, donde deberéis responder utilizando vuestras propias palabras.  Para esta parte de teoría daremos un tiempo fijo y no permitiré el acceso a internet salvo para subir el resultado al repositorio.
+* La segunda parte será resolver un problema de sincronización de procesos en lenguaje de programación en C.
+Os recuerdo que los "problemas técnicos" para compilar y comprobar el funcionamiento del programa es vuestra responsabilidad.  Podéis usar compiladores online, máquinas virtuales, máquinas físicas con linux, ...
 
 ## Recursos
 
