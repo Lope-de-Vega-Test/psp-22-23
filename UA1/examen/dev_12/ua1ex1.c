@@ -7,16 +7,16 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdbool.h>
-int codigo;
+int codigo; //variable para saber en que fork estamos en la funcion funcionfork
 void funcionfork(){
     if(codigo==1){
-        printf("Soy el hijo 1, Mi padre es: %d, Mi PID es: %d\n",getppid(),getpid());
+        printf("Soy el hijo 1, Mi padre es: %d, Mi PID es: %d\n",getppid(),getpid());  //Funcion para llamar al proceso hijo 1
     }
     if(codigo==2){
-        printf("Soy el hijo 2, Mi padre es: %d, Mi PID es: %d\n",getppid(),getpid());
+        printf("Soy el hijo 2, Mi padre es: %d, Mi PID es: %d\n",getppid(),getpid());  //Funcion para llamar al proceso hijo 2
     }
     if(codigo==3){
-        printf("Soy el hijo 3, Mi padre es: %d, Mi PID es: %d\n",getppid(),getpid());
+        printf("Soy el hijo 3, Mi padre es: %d, Mi PID es: %d\n",getppid(),getpid());  //Funcion para llamar al proceso hijo 3
 
     }
     
