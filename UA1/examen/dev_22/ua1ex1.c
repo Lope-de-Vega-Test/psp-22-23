@@ -22,6 +22,17 @@ El nombre del fichero .c a entregar debe ser: examen\dev_X\ua1ex1.c , es decir, 
 
 void muestraId(int idHijo, int idPadre){
     printf("Soy el hijo %d (%d, hijo de %d)\n", idHijo-idPadre, idHijo, idPadre);
+    
+    /* Cada hijo tiene un identificador cuyo valor es el del
+    padre +1 si es e primero, +2 si es el segundo, +3 si es el
+    tercero y así si hubiese más hijos, entonces idHijo-idPadre
+    debe darme el nº del hijo teniendo solo su identificador y
+    su padre sin tener que poner un printf por cada hijo y poner
+    hijo 1, hijo 2, hijo 3...
+    
+    Por otra parte, los int que recibe el void son los getpid y 
+    getppid, que nos dan la id de cada hijo y cada padre
+    Getppid nos debe dar el mismo número siempre.*/
 }
 
 int main() {
@@ -32,20 +43,24 @@ int main() {
                                 //para asegurarnos de que el padre
                                 //espere a sus hijos
     
-    if ( (pidHijo1=fork()) == 0 ){ /* hijo 1, ejecuta el último*/
-	  //int status1;
-   	  //printf("Soy el hijo 1 (%d, hijo de %d)\n", getpid(),getppid());
+    if ( (pidHijo1=fork()) == 0 ){ /* hijo 1 */
+    
    	  muestraId(getpid(),getppid());
+   	  //Debe mostrar:
+   	  //Soy el hijo 1 (idhijo, hijo de idpadre)
    	  
-	}else if ( (pidHijo2=fork()) == 0 ){ /* hijo 2, ejecuta el segundo*/
-	  //int status2;
-   	  //printf("Soy el hijo 2 (%d, hijo de %d)\n", getpid(),getppid());
+	}else if ( (pidHijo2=fork()) == 0 ){ /* hijo 2 */
+	
+	
    	  muestraId(getpid(),getppid());
+   	  //Debe mostrar:
+   	  //Soy el hijo 2 (idhijo, hijo de idpadre)
    	  
-	}else if ( (pidHijo2=fork()) == 0 ){ /* hijo 3, ejecuta el primero*/
-	  //int status3;
-   	  //printf("Soy el hijo 3 (%d, hijo de %d)\n", getpid(),getppid());
+	}else if ( (pidHijo2=fork()) == 0 ){ /* hijo 3 */
+	
    	  muestraId(getpid(),getppid());
+   	  //Debe mostrar:
+   	  //Soy el hijo 3 (idhijo, hijo de idpadre)
    	  
 	}else{ /* padre */
           wait(&status1);
@@ -53,14 +68,9 @@ int main() {
           wait(&status3); //Esto hace que el padre no ejecute hasta
                         //que sus tres hijos acaben
                         
-	  printf("Soy el padre %d y el padre de todos es %d)\n", getpid(),getppid());
+	  printf("Soy el padre %d\n", getpid());
 	}
     
 
     return 0;
 }
-
-
-
-
-
