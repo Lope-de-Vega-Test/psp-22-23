@@ -1,0 +1,20 @@
+NOMBRE: Adrián Luque Mantero (dev_21)
+FECHA: 26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+- Un proceso es un programa en ejecución.
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+- Los procesos son programas que se ejecutan en hilos (threads). Un hilo es una característica del procesador que éste utiliza para asignar tiempos de ejecución a los procesos.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+- La concurrencia es la ejecución simultanea de múltiples procesos mediante el uso de hilos. Se utiliza para desarrollar programas que requieran la ejecución de programas multihilos.
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+- La programación paralela es la ejecución simultánea de varios procesos mediante el uso de hilos que se comunican entre sí para controlar los tiempos de ejecución.
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
