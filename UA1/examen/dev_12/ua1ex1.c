@@ -24,6 +24,7 @@ void funcionfork(){ //Funcion para llamar a los fork
 }
 void main(){
   pid_t pid_hijo1,pid_hijo2,pid_hijo3;
+    
   pid_hijo1=fork();
   if (pid_hijo1 == -1 ) //Ha ocurrido un error 
   {
@@ -36,6 +37,7 @@ void main(){
     exit(0);
   }
   pid_hijo1 = wait(NULL); //espera la finalización del proceso hijo 1
+    
   pid_hijo2=fork();
   if (pid_hijo2 == -1 ) //Ha ocurrido un error 
   {
@@ -48,6 +50,7 @@ void main(){
     exit(0);
   }
 pid_hijo2 = wait(NULL); //espera la finalización del proceso hijo 2
+    
   pid_hijo3=fork();
   if (pid_hijo3 == -1 ) //Ha ocurrido un error 
   {
@@ -62,7 +65,9 @@ pid_hijo2 = wait(NULL); //espera la finalización del proceso hijo 2
   else{
       //Nos encontramos en Proceso Padre
   }
+    
   pid_hijo3 = wait(NULL); //espera la finalización del proceso hijo 3
+    
   printf("Soy el Proceso PADRE, mi PID es: %d\n",getpid());
   exit(0);
 }
