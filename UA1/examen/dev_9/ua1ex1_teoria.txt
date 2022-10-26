@@ -1,1 +1,27 @@
+NOMBRE: Javier Castilla Tejeda
+FECHA: 26/10/22
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+Es una aplicacion ejecutandose. 
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Los hilos se suelen usar en java. En un proceso puede haber varios hilos funcionando a la vez.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+la programación concurrente ejecuta procesos de forma continua que pueden ayudarse entre ellos o competir por los recursos del ordenador.
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+La diferencia entre la programación paralela y distribuida es que la primera puede permitir trabajar a la vez varios procesos de forma simultanea, mientras que la programacion distribuida divide los procesos en tareas que se ejecutaran en distintas ubicaciones del sistema para usar más recursos.
+
+Las ventajas de la programación paralela  es que los problemas se resuelven mucho más rápidos, su ejecución es simultanea y el tiempo de ejecución es menor ya que hay varios procesos trabajando a la vez. La desventaja es que consume mucha más energia, su programación es más compleja, los compiladores son mucho más difícil de usar.
+
+Las ventajas que tiene la programacion distribuida es que se pueden compartir de una forma más fácil los documentos, haciendo que este tipo de programación sea más flexible. Las desventajas es puede llegar a tener un fallo en la comunicación entre el software y el hardware, y también puede tener un fallo en la seguridad.
+
+Notas:
 
