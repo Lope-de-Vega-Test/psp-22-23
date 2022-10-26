@@ -13,7 +13,7 @@ c) Utilizando tus propias palabras, indica las características de la programaci
 La programación concurrente es aquella que se centra en solucionar sus problemas de comunicación y sincronización. Sus ámbitos son encontrar los errores que se puedan dar en el programa.
 
 d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
-La programación distribuida es cuando los pasos del programa se distrubuyen uno a uno. Mientras que la programación paralela hace referencia a cuando se desarrolla de manera paralela.
+La programación distribuida es un paradigma de programación que se centra en desarrollar sistemas distribuidos, abiertos, ect. La programación distribuida es el resultado del uso de las computadoras y las redes. La programación paralela se usa para resolver problemas cuando los recursos de la máquina no son capaces de solucionar el problema o los problemas que surgen. Su intención es disminuir el tiempo de procesamiento utilizando la distribución de las tareas entre los procesadores disponibles.
 
 Notas:
 
