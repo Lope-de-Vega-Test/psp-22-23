@@ -9,14 +9,44 @@ Un proceso es un programa en ejecucion que contiene un codigo ejecutable.
 
 b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
 
-
+Un proceso es un conjunto de hilos que comparten los mismos recursos.
 
 c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
 
-La programacion concurrente es un tipo de programacion que permiten que ocurran varios procesos al mismo tiempo
+La programacion concurrente es un tipo de programacion que permiten que ocurran varios procesos al mismo tiempo es decir que sus instrucciones se intercalan entre si.
+Algunas de sus caracterisitcas son las siguientes:
+- Mejor aprovechamiento de la CPU
+- Incremento de la velocidad de ejecución
+- Solución de problemas cuya naturaleza es concurrente:
+  - Sistemas de control
+  - Tecnologías web
+  - Aplicaciones con GUI
 
 d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+ 
+Un programa paralelo esta pensado para ejecutarse en un sistema multiproceso es decir varios procesadores trabajan al mimso tiempo para solucionar un problema mientras
+que la programacion distribuida los componentes estan en diferentes lugares y estan conectados entre si mediante la red.
 
+Las ventajas y desventajas de la programacion paralela es:
+- Ventajas
+  - Ejecución simultánea
+  - Disminuye el tiempo de ejecución
+  
+Inconvenientes
+  - Los programas son más difíciles de escribir
+  - Mayor complejidad en el acceso a los datos
+  - Comunicación y sincronización más compleja
+  
+Y las ventajas y desventajas de la programacion paralela son:
+- Ventajas
+  - Se pueden compartir recursos y datos
+  - Capacidad de crecimiento incremental
+  - Mayor flexibilidad
+  
+- Inconvenientes
+  - Aumento de complejidad
+  - Problemas con las redes de comunicación (pérdida de mensajes, saturación…)
+  - Problemas de seguridad (DDoS)
 Notas:
 
 El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
