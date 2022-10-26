@@ -5,9 +5,15 @@ PARTE TEÓRICA
 
 a) Definición de proceso. 1 punto.  
 
+Un proceso es un programa en ejecucion que contiene un codigo ejecutable.
+
 b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
 
+
+
 c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+La programacion concurrente es un tipo de programacion que permiten que ocurran varios procesos al mismo tiempo
 
 d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
 
