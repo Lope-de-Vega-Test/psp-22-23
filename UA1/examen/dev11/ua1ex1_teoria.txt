@@ -1,1 +1,52 @@
+NOMBRE: Rafael Damian Cristea
+FECHA: 26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+Un proceso es un programa en ejecución
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Basicamente un hilo es una tarea una tarea única, y un proceso es un conjunto de hilos que comparten y usan los mismos recursos.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+La programación concurrente permite a los procesos colaborar o competir, dependiendo de la naturaleza del programa. Colaborar siginifica que se los procesos trabajan conjuntamente para un mismo objetivo, mientras que competir significa que los procesos competiran por los recursos disponibles del sistema. El sistema operativo proporciona los siguientes mecanismos para el correcto funcionamiento:
+
+Mecanismos de colaboración: Permite la colaboración de los procesos
+Mecanismos de sincronización: Organiza los procesos y como estos se reparten los recursos disponibles
+
+Ámbitos de aplicación
+Este tipo de programacion la podemos aplicar en tecnologias web, en sistemas de control, en gestores de bases de datos, etc.
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+En la programación paralela varias CPUs trabajan en conjunto para resolver un mismo problema, dividiendo el problema en partes, mientras que en la programación distribuida los componentes hardware o software estan distribuidos, y estos se conectan a traves de una red, el ejemplo más común es Internet, el cual trabaja de tal forma
+
+Ventajas y desventajas programación paralela
+
+Ventajas
+- Se ejecuta de manera simultanea
+- Acelera el proceso
+
+Desventajas
+- En general los compiladores y los programas usados son mucho más complejos
+- Los programas resultan mucho más complicados de realizar
+- Consumen mucha más energia
+- Trabajar con las bases de datos resulta mucho más complicado
+
+Ventajas y desventajas programación distribuida
+
+Ventajas
+- Alta disponibilidad
+- Se pueden compartir recursos ya sean de hardware o software
+- Muy flexible
+- Puede ser aumentada con el tiempo
+
+Desventajas
+- Problemas con las redes
+- Complejidad alta
+- Problemas de DDOS
 
