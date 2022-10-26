@@ -51,7 +51,6 @@ int main() {
    	  
 	}else if ( (pidHijo2=fork()) == 0 ){ /* hijo 2 */
 	
-	
    	  muestraId(getpid(),getppid());
    	  //Debe mostrar:
    	  //Soy el hijo 2 (idhijo, hijo de idpadre)
