@@ -1,1 +1,29 @@
+NOMBRE: Lucia Marina Ayllón Pozo
+FECHA: 26/10/2022
 
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+  Un proceso es un programa en ejecución
+  
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+    *Un conjunto de hilos se le llamaria proceso, si comparten la misma informacion o recursos. 
+    *los hilos trabajan juntos para resolver incidencias y tambien se tarda menos tiempo en crear un hilo que un proceso 
+    
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+    las carasteristicas de la programación concurrente son :
+      *permite que se ejecuten varios procesos a la misma vez.
+      *si se ejecuta un programa puede darse la opcion de que haya mas de un proceso
+      *en cada proceso es posible que se ejecute un hilo al mismo tiempo
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+    *la programacion paralela :
+        La programacion paralela esta pensada para los ordenadores los cuales pueden trabajar con multiproceso.
+         sus ventajas son que puede solucionar problemas bastante complejos y se puede ejecutar a la vez
+         sus desventajas son que consumen mas energia, es mas dificil acceder a los datos y los compiladores son mas complejos.
+    *La programacion distribuida : 
+        La programación distribuida es la que se distribuye a los distintos ordenadores y los componentes se interconectan a traves de la red
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
