@@ -7,7 +7,7 @@ a) Definición de proceso. 1 punto.
 Un proceso es básicamente un programa en ejecución.
 
 b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
-Los hilos de un mismo proceso comparten el mismo espacio de memoria, por tanto, dos hilos del mismo proceso pueden compartir estructuras de datos,variables, etc...
+Los hilos son creados, ejecutados y finalizados dentro de los procesos, por lo que son capaces de compartir información entre ellos.
 
 c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
 La programacion concurrente es capaz de procesar dos o más acciones progresivamente, los procesos se ejecutan de manera independiente y es capaz de procesar múltiples datos al mismo tiempo. Su ambito se encuentra en el diseño del software.
