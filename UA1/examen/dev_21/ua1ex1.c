@@ -32,6 +32,10 @@ El nombre del fichero .c a entregar debe ser: examen\dev_X\ua1ex1.c , es decir, 
 #include<unistd.h>
 #include<stdbool.h>
 
+// Declaracion e inicializacion de variable
+// que servira para incrementarla cada vez
+// que se haga una iteracion de creacion de
+// procesos hijo
 int x=0;
 
 // Funcion imprimir los datos del proceso
