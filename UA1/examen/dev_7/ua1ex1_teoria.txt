@@ -1,1 +1,37 @@
+NOMBRE: David Bravo Fernández
+FECHA: 26/10/2022
 
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+Programa en ejecución.
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Los procesos son programas en ejecución y cuando creas un nuevo hilo y lo lanzas hace que se ejecute un programa indicado. Puedes lanzar varios hilos a la vez para que se ejecuten varios programas a la vez (Los programas pueden ser el mismo o diferentes).
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+En la programación concurrente pueden ocurrir varios sucesos al mismo tiempo.
+
+Puede ser colaborativa, en donde los procesos colaboran entre sí para conseguir una función.
+
+Puede ser competitiva, en donde los procesos compiten entre sí para acaparar los recursos del sistema
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+En la programación paralela los procesos se ejecutan a la misma vez, por lo que se realizan de forma mas rápida pero consumen mas recursos.
+
+P1 |-|-|-|
+P2 |-|-|-|
+P3 |-|-|-|
+
+En la programación distribuida se van ejecutando una parte de un proceso y después se ejecuta otra parte de otra, tarda mas pero consume menos recursos
+
+P1 |-| | |
+P2 | |-| |
+P3 | | |-|
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
