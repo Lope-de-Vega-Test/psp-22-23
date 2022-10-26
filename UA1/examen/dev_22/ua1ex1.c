@@ -21,6 +21,8 @@ El nombre del fichero .c a entregar debe ser: examen\dev_X\ua1ex1.c , es decir, 
 #include <stdio.h>
 
 void muestraId(int idHijo, int idPadre){
+    /////// FUNCIÓN DE MUESTRA ID PADRE-HIJO ///////
+    
     printf("Soy el hijo %d (%d, hijo de %d)\n", idHijo-idPadre, idHijo, idPadre);
     
     /* Cada hijo tiene un identificador cuyo valor es el del
@@ -43,31 +45,54 @@ int main() {
                                 //para asegurarnos de que el padre
                                 //espere a sus hijos
     
-    if ( (pidHijo1=fork()) == 0 ){ /* hijo 1 */
+    	if ( (pidHijo1=fork()) == 0 ){
+            /////// HIJO 1 ///////
     
-   	  muestraId(getpid(),getppid());
-   	  //Debe mostrar:
-   	  //Soy el hijo 1 (idhijo, hijo de idpadre)
+   	    muestraId(getpid(),getppid());
+   	    //Debe mostrar:
+   	    //Soy el hijo 1 (idhijo, hijo de idpadre)
    	  
-	}else if ( (pidHijo2=fork()) == 0 ){ /* hijo 2 */
+	}else if ( (pidHijo2=fork()) == 0 ){
+	    /////// HIJO 2 ///////
 	
-   	  muestraId(getpid(),getppid());
-   	  //Debe mostrar:
-   	  //Soy el hijo 2 (idhijo, hijo de idpadre)
+   	    muestraId(getpid(),getppid());
+   	    //Debe mostrar:
+   	    //Soy el hijo 2 (idhijo, hijo de idpadre)
    	  
-	}else if ( (pidHijo2=fork()) == 0 ){ /* hijo 3 */
+	}else if ( (pidHijo2=fork()) == 0 ){ 
+	    /////// HIJO 3 ///////
 	
-   	  muestraId(getpid(),getppid());
-   	  //Debe mostrar:
-   	  //Soy el hijo 3 (idhijo, hijo de idpadre)
+   	    muestraId(getpid(),getppid());
+   	    //Debe mostrar:
+   	    //Soy el hijo 3 (idhijo, hijo de idpadre)
    	  
-	}else{ /* padre */
-          wait(&status1);
-          wait(&status2);
-          wait(&status3); //Esto hace que el padre no ejecute hasta
-                        //que sus tres hijos acaben
+	}else{ 
+	    /////// CONTROL DE ERRORES ///////
+	    if(pidHijo1 == -1 ){
+	        printf("\nError creando hijo 1\n");
+	        exit(-1);
+	    }else if(pidHijo2 == -1){
+	        printf("\nError creando hijo 2\n");
+	        exit(-1);
+	    }else if(pidHijo3 == -1){
+	        printf("\nError creando hijo 3\n");
+	        exit(-1);
+	        
+	        /* Una vez hechos, o intentados crear, los fork de cada
+	       hijo, comprobaremos si en su id hay un -1, esto es, un 
+	       error. Identificamos cuál falla vía print y cerramos
+	       el programa vía exit(-1). Si no falla nada, podremos
+	       esperar a que los hijos se ejecuten y luego el padre */
+	        
+	    }else{
+	    /////// PADRE ///////
+            wait(&status1);
+            wait(&status2);
+            wait(&status3); //Esto hace que el padre no ejecute
+                            //hasta que sus tres hijos acaben
                         
-	  printf("Soy el padre %d\n", getpid());
+	        printf("\n\nSoy el padre %d\n", getpid());
+	    }
 	}
     
 
