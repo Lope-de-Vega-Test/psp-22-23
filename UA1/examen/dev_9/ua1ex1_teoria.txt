@@ -25,3 +25,6 @@ Las ventajas que tiene la programacion distribuida es que se pueden compartir de
 
 Notas:
 
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
+
+
