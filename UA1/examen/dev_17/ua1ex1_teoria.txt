@@ -11,8 +11,8 @@ Los hilos se crean dentro de un proceso, por lo que todos los hilos que se creen
 
 c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
 
-La programacion concurrente consiste en que varios procesos se esten ejecutando a la vez. Esto es gracias a la funcion multiproceso. En cada proceso podemos ejecutar hilos.
-Esto os ofrece mayor velocidad de ejecución y mayor facilidad a la hora de resolver determinados problemas.
+La programacion concurrente consiste en que varios procesos se esten ejecutando a la vez. Esto es gracias a un sistema multiproceso. En cada proceso podemos ejecutar hilos.
+Esto nos ofrece mayor velocidad de ejecución y mayor facilidad a la hora de resolver determinados problemas.
 
 Cuando varios procesos son concurrentes, puede que compitan y colaboren:
 Cuando dos procesos compiten, lo hacen por los recursos que puedan obtener del sistema.
