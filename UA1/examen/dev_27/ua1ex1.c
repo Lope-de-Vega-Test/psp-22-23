@@ -37,10 +37,10 @@ de manera ordenada en pantalla.*/
 //Programa realizado por CARLOS VILLATORO NEVADO, alumno de 2º de DAM
 int main()
 {
-    //Creamos el padre y los hijos
+    //Creamos el proceso padre
     pid_t pid;
   
-    // Hacemos un fork con el padre
+    // Hacemos un fork con el proceso padre cada vez que procedamos a crear un hijo del mismo
     pid = fork();
     //Hacemos control de errores, para que en caso de no poder crearlo, nos lo muestre por pantalla
   if (pid == -1 ) //Ha ocurrido un error 
