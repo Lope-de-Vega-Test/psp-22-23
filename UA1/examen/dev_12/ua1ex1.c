@@ -7,8 +7,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdbool.h>
-int codigo;
-void funcionfork(){
+int codigo; //Codigo para saber en que fork situarnos en la funcion funcionfork
+void funcionfork(){ //Funcion para llamar a los fork
     if(codigo==1){
         printf("Soy el hijo 1, Mi padre es: %d, Mi PID es: %d\n",getppid(),getpid());
     }
