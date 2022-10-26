@@ -63,6 +63,5 @@ int main() {
      */
     void muestraHijoProceso(pid) {
     
-    
-        printf("%d says bye!\n", getpid());
+        printf("%d says bye!\n", getpid()); // Mostramos el pid cada vez que cada hijo termina
     }
