@@ -1,0 +1,46 @@
+NOMBRE: Javier Escribano Claudel
+FECHA: 26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+Un proceso es un programa que está siendo ejecutado por el sistema operativo.
+
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Un hilo es una división del programa en diferentes mini programas que se ejecutan simultáneamente.
+Por otra parte, un proceso es la ejecución de ese hilo en el sistema operativo. De esta forma,
+un programa puede dividirse en hilos que el S.O. recogerá como procesos de un hilo cada uno.
+
+
+c) Utilizando tus propias palabras, indica las características de la programación 
+concurrente y sus ámbitos de aplicación. 3 puntos.
+
+En la programación concurrente, los diferentes hilos del programa se coordinan para que solo uno
+se ejecute a la vez. Estos pueden corrdinarse "pacíficamente" o competir por la supervivencia
+del mas fuerte. Su ámbito de uso se limita a programas simples y que no requieran de mucha velocidad.
+Tambien estos programas pueden ser ejecutados en todos los S.O.
+
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela 
+y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+La principal diferencia es que en la programación paralela todos los sistemas disponibles 
+colaboran entre sí para resolver una tarea, mientras que en caso del paradigma de la 
+programación distribuida, todos los sistemas tienen acceso a todos las peticiones y pueden 
+realizarlas por su cuenta
+
+Por una parte, la programación paralela busca la ejecución paralela de los programas en varios ordenadores
+ simultaneamente. Estos se dividen los procesos para garantizar una mayor velocidad
+de la ejecución del programa.
+
+Por su lado, la programación distribuida permite a cada ordenador gestionar la petición íntegramenta.
+ El nodo con menos carga de trabajo (o más bien más espacio libre) recibirá la tarea
+y la llevará a cabo
+Notas:
+
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , 
+es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
