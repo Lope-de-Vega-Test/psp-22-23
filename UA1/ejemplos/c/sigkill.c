@@ -2,7 +2,7 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <fcntl.h>
-// To avoid WARNINGS
+// Para evitar WARNINGS
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
