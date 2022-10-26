@@ -23,7 +23,13 @@ Tambien se puede considerar programación concurrente cuando las instrucciones s
 
 Este tipo de programacion esta pensada para sistemas monoprocesador y necesita un S.O que controle la comunicacion y sincronizacion
 
-Otra característicasde la programación concurrente es que las instrucciones se intercalan
+Otra característicasde la programación concurrente es que las instrucciones se intercalan.
+
+Sus ambitos de aplicacion son:
+
+Aplicaciones con interfazr grafica(GUI)
+Sistemas de BBDD
+Sistemas web
 
 
 d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
