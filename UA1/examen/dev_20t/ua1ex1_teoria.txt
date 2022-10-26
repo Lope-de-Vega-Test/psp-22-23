@@ -1,0 +1,20 @@
+NOMBRE: Lucía Luna Posadas
+FECHA: 26/10/22
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+Un proceso es un programa en ejecución.
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+Un proceso es un programa en ejecución, mientras que un hilo es una tarea que se puede ejecutar al mismo tiempo que otra tarea u otras tareas.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+La programación concurrente es aquella que se centra en solucionar sus problemas de comunicación y sincronización. Sus ámbitos son encontrar los errores que se puedan dar en el programa.
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+La programación distribuida es cuando los pasos del programa se distrubuyen uno a uno. Mientras que la programación paralela hace referencia a cuando se desarrolla de manera paralela.
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
