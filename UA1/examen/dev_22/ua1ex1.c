@@ -68,7 +68,15 @@ int main() {
    	    //Soy el hijo 3 (idhijo, hijo de idpadre)
    	  
 	}else{ 
-	    /////// CONTROL DE ERRORES ///////
+	    /////// PADRE ///////
+            wait(&status1);
+            wait(&status2);
+            wait(&status3); //Esto hace que el padre no ejecute
+                            //hasta que sus tres hijos acaben
+			    //pero primero comprobamos si hay
+			    //errores en alguno, o todos
+                        
+            /////// CONTROL DE ERRORES ///////
 	    if(pidHijo1 == -1 ){
 	        printf("\nError creando hijo 1\n");
 	        exit(-1);
@@ -78,22 +86,16 @@ int main() {
 	    }else if(pidHijo3 == -1){
 	        printf("\nError creando hijo 3\n");
 	        exit(-1);
-	        
+	    }
 	        /* Una vez hechos, o intentados crear, los fork de cada
 	       hijo, comprobaremos si en su id hay un -1, esto es, un 
 	       error. Identificamos cuál falla vía print y cerramos
 	       el programa vía exit(-1). Si no falla nada, podremos
-	       esperar a que los hijos se ejecuten y luego el padre */
-	        
-	    }else{
-	    /////// PADRE ///////
-            wait(&status1);
-            wait(&status2);
-            wait(&status3); //Esto hace que el padre no ejecute
-                            //hasta que sus tres hijos acaben
-                        
-	        printf("\n\nSoy el padre %d\n", getpid());
-	    }
+	       esperar a que los hijos se ejecuten y luego el padre
+	       podrá por fin ejecutarse*/
+            
+	       printf("\n\nSoy el padre %d\n", getpid());
+	    
 	}
     
 
