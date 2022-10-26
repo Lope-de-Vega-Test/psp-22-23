@@ -34,13 +34,16 @@ realizarlas por su cuenta
 
 Por una parte, la programación paralela busca la ejecución paralela de los programas en varios ordenadores
  simultaneamente. Estos se dividen los procesos para garantizar una mayor velocidad
-de la ejecución del programa.
+de la ejecución del programa. Es necesaria una comunicación rápida, fluida y confiable
+para que no se queden procesos colgados.
 
 Por su lado, la programación distribuida permite a cada ordenador gestionar la petición íntegramenta.
- El nodo con menos carga de trabajo (o más bien más espacio libre) recibirá la tarea
-y la llevará a cabo
-Notas:
+El nodo con menos carga de trabajo (o más bien más espacio libre) recibirá la tarea
+y la llevará a cabo. Al trabajar con nodos independientes la conexión es más segura, ya que si uno falla 
+otro nodo podrá reemplazarlo sin problemas.
 
+
+Notas:
 
 El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , 
 es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
