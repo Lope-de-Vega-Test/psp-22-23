@@ -19,6 +19,7 @@ El nombre del fichero .c a entregar debe ser: examen\dev_X\ua1ex1.c , es decir, 
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+//En teoría debería poder funcionar solo con la unistd.h
 
 void muestraId(int idHijo, int idPadre){
     /////// FUNCIÓN DE MUESTRA ID PADRE-HIJO ///////
