@@ -15,3 +15,39 @@ Las impresión por pantalla, correctamente indentada y verticalmente espaciada .
 Los warnings del presente ... son los errores del futuro.
 El nombre del fichero .c a entregar debe ser: examen\dev_X\ua1ex1.c , es decir, el fichero ua1ex1.cdebe estar ubicado en tu carpeta dev_X\
 */
+
+#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+void main(){
+  pid_t hijo1_pid, hijo2_pid, hijo3_pid;
+  int status;
+  
+  hijo1_pid=fork();
+  
+  if(hijo1_pid==0){
+      wait(&status);
+    printf("Soy el hijo 1, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());
+    exit(0);
+  }
+  wait(&status);
+  hijo2_pid=fork();
+  
+  if(hijo2_pid==0){
+      
+    printf("Soy el hijo 2, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());
+    exit(0);
+  }
+  wait(&status);
+  hijo3_pid=fork();
+  
+  if(hijo3_pid==0){
+    wait(&status);
+    printf("Soy el hijo 3, Mi padre es= %d, Mi PID= %d\n",getppid(),getpid());
+    exit(0);
+  }
+  wait(&status);
+  printf("Proceso PADRE = %d",getpid());
+  exit(0);
+}
