@@ -27,6 +27,7 @@ for (int i = 0; i < 3; i++) {
         exit(EXIT_SUCCESS); //En caso de que haya funcionado, se sale del if para evitar la creacion de más hijos
     }
     else{
+        pid=wait(NULL); //Control de errores que hace que siempre salgan los hijos en orden
         //Proceso padre
     }
     
@@ -39,4 +40,3 @@ for (int i = 0; i < 3; i++) {
 
 printf("\nEl PID del PADRE DE TODOS es: %d",  getpid());
 }
-
