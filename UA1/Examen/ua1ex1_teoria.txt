@@ -1,0 +1,64 @@
+NOMBRE:Alfonso Alcaraz Valera
+FECHA:26/10/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto.  
+
+Proceso es un programa en ejecución o la secuenciación de instrucciones de un programa dentro del procesador.
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+Los procesos tambien llamados proceso pesados se relacionan con los hilos o llamados procesos ligeros de forma que dentro de un proceso podemos crear hilos para que de forma coordinada o no, puedan cooperar en la resulución de problemas.
+La ventaja de los hilos frente a los procesos es su sencilles y la habilidad de compartir contexto, es decir los datos del proceso. Los procesos necesariamente requieren comunicarse con el nucleo del Sistema Operativo cosa que los hilos no requieren.
+
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+La concurrencia es la capacidad de que varios sucesos ocurran al mismo tiempo aunque en programación la concurrencia "engaña" al usuario creando una falsa sincronia ya que entre dos procesos concurrentes los datos y tareas se van intercalando según la importancia que queremos darle a cada parte del proceso.
+La problematica de la concurrencia es que sus procesos tienen que competir por los recursos o coorperar para un fin común para ello se crean metodologías de comunicación y metodología de sincronización. 
+Aunque parezca que la concurrencia sigue un flujo la verdad es que es más impredecible de lo que creemos.
+Los ambitos de la concurrencia se usan para solocionar problemas en:
+-Sistemas de control
+-Tecnología Web
+-Aplicaciones GUI como por ejemplo los navegadores Web
+-Simulación
+-Sistemas de gestión de base de datos
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+Programación paralela
+La programación paralela es un tipo de programación concurrente con la ventaja que es usada en sistemas multiprocesos siendo cada nucleo el destinatario de cada proceso. 
+Esto hace que podamos dividir los procesos en tareas se repartan por varios nucleos de proceso
+Las ventajas de la programación paralela son:
+-La habilidad de hacer procesos simultaneamente
+-Mayor velocidad de procesado
+-La unión de varios procesos para solucionar problemas más dificiles
+Las desventajas de la programación paralela son:
+-El aumento en el gasto energetico de estos procesos
+-La complejidad de los compiladores y los entornos de desarrollo
+-La complejidad en el acceso a datos
+-La complejidad en la escritura del codigo
+-La complejidad en la comunicación de los procesos
+-La complejidad en la sincronización de los procesos
+
+Programación distribuida
+La programación distribuida es una programación paralela pero con un sistema distribuido es decir que no los procesos no ocurren en el mismo lugar donde se lanzan por ejemplo Internet
+Este tipo de programación no depende de tiempos de reloj pero hace que los problemas particulares de cada punto del proceso puedan causar problemas de forma individual al proceso
+Las ventajas de la programación distribuida son:
+-Compartir datos
+-Alta disponibilidad
+-Flexibilidad
+-Ambiente abierto y heterogeneo
+-Capacidad de expandierse y creer
+
+Las desventajas de la programación distribuida son:
+-La complejidad que ya venismos arrastrando de la programación paralela
+-Problemas con la red de comunicación como la perdida de mensaje o paquetes
+-Problemas de seguridad, no se está a salvo de los ataques DDoS
+
+
+
+Notas:
+
+El nombre del fichero .txt a entregar debe ser:	examen\dev_X\ua1ex1_teoria.txt , es decir, el fichero ua1ex1_teoria.txt debe estar ubicado en tu carpeta examen\dev_X\
