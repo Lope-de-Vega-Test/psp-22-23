@@ -9,19 +9,19 @@ class Contador
 {
     private int cont = 0;  // Atributo Contador
     Contador (int cont) { 
-        this.cont = cont;
+        this.cont = cont; 
     }
 
     public void incrementa() {
-        cont++;
+        cont++; //Se incrementa el valor 1 vez
     }
 
     public int valor() {
-        return cont;
+        return cont; //Se devuelve el valor resultante
     }
 } 
 
-class HiloSumador extends Thread 
+class HiloSumador extends Thread //Creacion de la clase Hilo
 {
     private Contador contador;
 
@@ -31,11 +31,11 @@ class HiloSumador extends Thread
     }
 
     public void run() {
-        for(int j=0; j<1000;j++)
+        for(int j=0; j<1000;j++) //Se incrementa 1000 veces el valor
         {
             contador.incrementa();
         }
-        System.out.println("Hilo: " + contador.valor());
+        System.out.println("Hilo: " + contador.valor()); //Se muestra el resultado del hilo
     }
 }
 
@@ -47,17 +47,21 @@ public class Ua2tarea1fr1 {
     public static void main(String[] args) {
         // TODO code application logic here
         Contador conta = new Contador(0);
+        //Creamos todos los hilos
         HiloSumador hilo1 = new HiloSumador("Hilo 1", conta);
         HiloSumador hilo2 = new HiloSumador("Hilo 2", conta);
         HiloSumador hilo3 = new HiloSumador("Hilo 3", conta);
         HiloSumador hilo4 = new HiloSumador("Hilo 4", conta);
         HiloSumador hilo5 = new HiloSumador("Hilo 5", conta);
+        
+        //Se inician los hilos
         hilo1.start();
         hilo2.start();
         hilo3.start();
         hilo4.start();
         hilo5.start();
         
+        //Hacemos un try catch por si ocurre un error
         try {
             hilo1.join();
             hilo2.join();
@@ -68,9 +72,10 @@ public class Ua2tarea1fr1 {
         catch (InterruptedException e)
         {
             // Nothing to do here ...
+            System.out.println("Error, pruebe de nuevo");
         }
         
+        //Se muestra el resultado final
         System.out.println("Valor Final del Contador: " + conta.valor());
-    }
-    
+    } 
 }
