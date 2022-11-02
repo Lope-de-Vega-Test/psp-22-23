@@ -1,0 +1,76 @@
+package ua2tarea1fr1;
+
+/**
+ *
+ * @author damik
+ */
+
+class Contador
+{
+    private int cont = 0;  // Atributo Contador
+    Contador (int cont) { 
+        this.cont = cont;
+    }
+
+    public void incrementa() {
+        cont++;
+    }
+
+    public int valor() {
+        return cont;
+    }
+} 
+
+class HiloSumador extends Thread 
+{
+    private Contador contador;
+
+    public HiloSumador(String nombre, Contador cont) {
+        setName(nombre);
+        contador = cont;
+    }
+
+    public void run() {
+        for(int j=0; j<1000;j++)
+        {
+            contador.incrementa();
+        }
+        System.out.println("Hilo: " + contador.valor());
+    }
+}
+
+public class Ua2tarea1fr1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Contador conta = new Contador(0);
+        HiloSumador hilo1 = new HiloSumador("Hilo 1", conta);
+        HiloSumador hilo2 = new HiloSumador("Hilo 2", conta);
+        HiloSumador hilo3 = new HiloSumador("Hilo 3", conta);
+        HiloSumador hilo4 = new HiloSumador("Hilo 4", conta);
+        HiloSumador hilo5 = new HiloSumador("Hilo 5", conta);
+        hilo1.start();
+        hilo2.start();
+        hilo3.start();
+        hilo4.start();
+        hilo5.start();
+        
+        try {
+            hilo1.join();
+            hilo2.join();
+            hilo3.join();
+            hilo4.join();
+            hilo5.join();
+        }
+        catch (InterruptedException e)
+        {
+            // Nothing to do here ...
+        }
+        
+        System.out.println("Valor Final del Contador: " + conta.valor());
+    }
+    
+}
