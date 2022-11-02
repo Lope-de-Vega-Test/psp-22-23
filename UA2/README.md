@@ -82,6 +82,8 @@ Fecha de Entrega: 09/11/2022 - 14:00:00
 * Entregables:
   * tareas\dev_X\tarea_1\ua2tarea1fr1.java
   * tareas\dev_X\tarea_1\ua2tarea1fr2.java
+  * tareas\dev_X\tarea_1\ua2tarea1fr2runnable.java
+
 
 
 ### **T2 - Tarea 2 - Programación y sincronización de hilos en Java 2**
