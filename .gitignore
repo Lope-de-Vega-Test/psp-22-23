@@ -55,5 +55,5 @@ release.properties
 pom.xml.releaseBackup
 pom.xml.tag
 
-# pdf files
+# pdf filescd
 *.pdf
