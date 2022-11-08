@@ -1,6 +1,6 @@
 
 
-package com.mycompany.ua2tarea1fr2;
+package com.mycompany.ua2tarea1fr1;
 
 /**
  *
@@ -63,7 +63,7 @@ class hilo extends Thread
 
 
 
-public class ua2tarea1fr2 {
+public class ua2tarea1fr1 {
 
     public static void main(String[] args) {
        
