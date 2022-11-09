@@ -1,0 +1,41 @@
+NOMBRE: Irene Alba Posadas
+FECHA: 09/11/2022
+
+PARTE TEÓRICA
+
+a) Definición de proceso. 1 punto. 
+
+	Un proceso es un programa en ejecución. 
+
+b) Utilizando tus propias palabras, indica la relación entre hilos y procesos. 3 puntos.
+
+	Un hilo es una línea de código del proceso en ejecución. Un proceso puede estar formado por uno o más hilos.
+
+c) Utilizando tus propias palabras, indica las características de la programación concurrente y sus ámbitos de aplicación. 3 puntos.
+
+	Entre las características de la programación concurrente encontramos:
+	- Se clasifica como un método de computación modular, por lo que un cálculo lo puede dividir en subcálculos que se ejecutan de forma concurrente.
+	- Se puede procesar diversa cantidad de datos en un mismo procesador.
+
+d) Utilizando tus propias palabras, indica las diferencias entre programación paralela y programación distribuida, sus ventajas e inconvenientes. 3 puntos.
+
+	- Programación paralela. 
+		- Se realizan diversas operaciones simultáneamente.
+		- Se requiere un único ordenador.
+		- Múltiples procesadores se encargan de realizar múltiples operaciones.
+		- Puede tener memoria compartida o distribuida.
+		- Los procesadores se comunican entre sí a través del bus.
+		- Mejora el rendimiento del sistema.
+
+	- Programación distribuída.
+		- Los componentes del sistema están ubicados en diferentes ubicaciones.
+		- Utiliza varios ordenadores.
+		- Varios ordenadores realizan múltiples operaciones
+		- Solo tiene memoria distribuida
+		- Los ordenadores se comunican entre sí a través del paso de mensajes.	
+		- Mejora la escalabilidad del sistema, la tolerancia a fallas y las capacidades de uso compartido de recursos.
+
+
+
+	
+
