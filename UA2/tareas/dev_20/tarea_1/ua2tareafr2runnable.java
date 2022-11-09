@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class BloquesNoSincronizados {
 
-public static void main(String[] args) {
+public static void main(String[] args) throws InterruptedException {
 
 
 
@@ -174,7 +174,8 @@ System.out.println("--------------------------------------");
 
 }
 
-//Clase HiloSumador
+//HiloSumador
+
 package bloquesnosincronizados;
 
 /**
@@ -183,7 +184,7 @@ package bloquesnosincronizados;
 */
 
 
-class HiloSumador implements Runnable
+class HiloSumador extends Thread implements Runnable
 {
 
 private Contador contador;
@@ -215,27 +216,13 @@ System.out.println(getName() + " - contador vale " + contador.valor());
 
 }
 
-    private void setName(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    void start() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    void join() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+   
 
 } // Fin Class HiloSumador
-    
 
-//Clase Contador
+
+//Contador
+
 package bloquesnosincronizados;
 /**
  *
