@@ -40,8 +40,9 @@ public class ua2tarea1fr2 {
         System.out.println("----------------------------");
         System.out.println("Hilos: Metodos Sincronizados");
         System.out.println("----------------------------");
-
+        // Declaramos la variable contador
         Contador cont = new Contador(0);
+        // Generamos los hilos con su nombre y contador
         HiloSumador hiloSuma1 = new HiloSumador("Hilo Sumador 1", cont);
         HiloSumador hiloSuma2 = new HiloSumador("Hilo Sumador 2", cont);
         HiloSumador hiloSuma3 = new HiloSumador("Hilo Sumador 3", cont);
@@ -50,19 +51,20 @@ public class ua2tarea1fr2 {
 
         System.out.println("Comienza la ejecución de los hilos ...");
         System.out.println("--------------------------------------");
-
+        // Lanzamos los hilos
         Thread t1 = new Thread(hiloSuma1);
         Thread t2= new Thread(hiloSuma2);
         Thread t3 = new Thread(hiloSuma3);
         Thread t4 = new Thread(hiloSuma4);
         Thread t5 = new Thread(hiloSuma5);
-
+        // Lanzamos los hilos
         t1.start();
         t2.start();
         t3.start();
         t4.start();
         t5.start();
 
+        // Hacemos que se paren los hilos hasta que no terminen los demás
         try {
             t1.join();
             t2.join();
@@ -73,7 +75,7 @@ public class ua2tarea1fr2 {
         } catch (InterruptedException e) {
             // Nothing to do here ...
         }
-
+        // Mostramos los resultados
         System.out.println("--------------------------------------");
         System.out.println("... Finaliza la ejecución de los hilos");
         System.out.println("--------------------------------------");
