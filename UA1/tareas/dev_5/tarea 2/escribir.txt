@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Tarea2VictorAljamaPSPEscribir {
+
+    
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        
+        //Declaramos las variables que usaremos para introducir los caracteres y la cadena de caracteres que mostraremos al final del proceso
+        String caracter = "";
+        String cadena = "";
+        
+        //Mientras el caracter introducido sea diferente a *, seguiremos pidiendo un nuevo caracter y concatenando el valor de
+        //la cadena con el nuevo caracter introducido
+        while(!caracter.equals("*")){
+            
+            caracter = entrada.next();
+            if(!caracter.equals("*")){
+                cadena += caracter;
+            }
+        
+        }
+        //Mostramos la cadena resultante
+        System.out.println("La cadena introducida es: " + cadena);
+        
+    }
+    
+}
