@@ -1,0 +1,165 @@
+﻿/* FR1: Crea una clase CuentaCorriente, con un atributo que indique el saldo de la cuenta, 
+el constructor que le da un valor inicial al saldo y después los métodos setter y getter. 
+En estos métodos deberás añadir un sleep() aleatorio, que duerma al hilo durante un número 
+de milisegundos que oscile entre 250 y 2000 (0,25s y 2s respectivamente). Añade también otro 
+método que reciba una cantidad y la añada al saldo, indicando por pantalla el estado previo del 
+saldo, el estado final y quién realiza el ingreso. Deberás definir los parámetros que reciba
+este método y deberás definirlo como synchronized - 2 puntos.*/
+/**
+ *
+ * @author RafaelRomero
+ */
+
+package cuentaCorriente;
+import java.util.Random;
+
+
+
+public class principal {
+
+
+    public static void main(String[] args) {
+// CREACION DE LA CLASE BASE CON LA CANTIDAD INICIAL DE DINERO DE LA CUENTA
+		
+/* El Index es el "menu" de nuestro programa necesitamos inicializar(crear un
+* objeto con las carasteristicas iniciales) en este caso un saldo inicial de 100 */
+    
+		CuentaCorriente cuenta = new CuentaCorriente(100);
+                
+// CREACION DE VARIOS HILOS CON EL INCREMENTO DE SALDO Y EL NOMBRE DE QUIEN REALIZA
+/* Aqui creamos los hilos que vamos a usar con sus datos iniciales en este caso
+* hilos con los datos de la CuentaCorriente, el saldo a incrementar y el nombre
+* del hilo*/
+		
+                HiloCC user1 = new HiloCC(cuenta, 500, "Pepe");
+		HiloCC user2 = new HiloCC(cuenta, 700, "Ana");
+		HiloCC user3 = new HiloCC(cuenta, 750, "Ruz");
+                
+// COMIENZA EJECUCIÓN DE LOS HILOS
+/* Aqui ejecutamos el metodo run de la clase HiloCC con todo lo que ello
+* conlleva que es llamar a otro metodo de la clase CuentaCorriente y ese metodo
+* hace sus cosas y termina mostrando el resultado */
+
+		user1.start();
+		user2.start();
+		user3.start();
+                
+// CREA UN ORDEN DE EJECUCIÓN DE LLEGADA
+/* Esto solo es un control de errores y deberia ser un metodo de espera para que
+* los hilos esperen mientras se esta ejecutando alguno con mas preferencia */
+		try {
+			user1.join();
+			user2.join();
+			user3.join();
+
+		} catch (Exception e) {
+
+		}
+                
+/* Al final volvemos a usar el objeto CuentaCorriente para llamar a su variable
+* saldo que es la que ha ido acumulando todo los cambios de los saldo de HiloCC*/
+		
+                System.out.println("Saldo total: " + cuenta.getSaldo());
+
+   }
+    
+}
+
+class CuentaCorriente {
+    double saldo = 0 ; int numero = 0;
+
+    // Constructores de sobrecarga
+    
+    CuentaCorriente(double saldo) {
+		this.saldo = saldo;
+	}
+    
+    CuentaCorriente() {
+		saldo = 0;
+	}
+    
+    // METODO, DEVUELE UN NUMERO ALEATORIO ENTRE 250 Y 2000
+	
+    private static long numRandom() {
+		double num = (Math.random() * ((2000 - 250) + 1)) + 250;
+		long num_redondeo = (long) (Math.round(num * 100.0) / 100.0);
+		return num_redondeo;
+	}
+    
+    public double getSaldo() {
+		try {
+			Thread.sleep(numRandom());
+		} catch (InterruptedException e) {}
+		
+                return saldo;
+	}
+
+    public void setSaldo(double saldo) {
+		this.saldo = saldo;
+                
+		try {
+			Thread.sleep(numRandom());
+		} catch (InterruptedException e) {}
+	}
+    
+
+    
+    
+// METODO, RECIBE SALDO Y NOMBRE, MUESTRA SALDO, INCREMENTA SALDO Y MUESTRA
+//TODOS
+/* Este es el metodo que vamos a llamar desde el HiloCC es decir que se llamara
+* tantas veces como hilos creamos, cada uno desde su propio flujo y la variable
+* saldo es general y por eso el valor se va acumulando mientras que la variable
+* nombre solo es de HiloCC y por eso no se acumula, al final hace los println
+* para mostrar los resultados. La palabra synchronized hace que siempre se vaya
+* ejecutando el metodo segun el orden de llamada (ver explicacion final para
+* mas info. spoiler:sale mal) lo que si es seguro es que sin la palabra clave
+* synchronized el programa se desmadra y va ejecutando segun le vaya dando la
+* gana y cambianddo el orden cada vez que corremos el programa geeneral */
+	
+public synchronized void IncrementarS (double saldo, String nombre) {
+
+		double s_inicial = getSaldo();
+		setSaldo(s_inicial + saldo);
+		double s_final = getSaldo();
+		System.out.println("Saldo Inicial: " + s_inicial);
+		System.out.println("Saldo Final: " + s_final);
+		System.out.println("Operacion realizada por: " + nombre);
+	}
+}
+    
+
+class HiloCC extends Thread {
+// VARIABLES PRIVADAS DE LA CLASE
+/* Creamos una variable tipo CuentaCorriente, una double y un tipo String para
+* poder rellenar el constructor con el objeto CuentaCorriente(que puede tener
+* como elemento propio para rellenar el saldo o no) un nuevo saldo(que usaremos
+* para incrementar el saldo base de la clase Cuenta Corriente) y un nombre que
+* como solo es de esta clase ira enlazando a cada hilo que se vaya creando */
+        
+	private CuentaCorriente cuenta;
+	private double saldo;
+	private String nombre;
+
+// CONSTRUCTOR
+/* La variable "cuenta" es la que nos va a dar las propiedades de la clase
+ * CuentaCorriente */
+        
+        HiloCC (CuentaCorriente cc, double saldo, String nombre) {
+		this.saldo = saldo;
+		this.nombre = nombre;
+		cuenta = cc;
+	}
+
+// METODO, EJECUTA EL METODO LLAMADO COMO HILO
+/* Este metodo es el corazon de los hilos lo que este dentro de este metodo es
+* lo que se ejecuta cuando iniciamos los hilos (hilo.star()) como el metodo
+* IncrementarS pertenece a la clase CuentaCorriente, necesitamos un objeto con
+* ese tipo para poder llamarla (cuenta)y aque le pasamos el saldo que le vamos
+* a incrementar y el nombre del hilo que hace la inicializacion */
+	public void run() {
+		cuenta.IncrementarS(saldo, nombre);
+	}
+
+}    
+
