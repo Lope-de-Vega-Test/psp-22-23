@@ -2,7 +2,7 @@
 import java.util.Scanner;
 
 
-public class Actividad2PSPEjecutable {
+public class tarea2_1 {
     public static void main(String[] args) {
     Scanner entrada=new Scanner(System.in);
         String letra = "";
