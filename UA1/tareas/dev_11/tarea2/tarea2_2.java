@@ -2,7 +2,7 @@
 import java.io.File;
 import java.io.IOException;
 
-public class tarea2PSP {
+public class tarea2_2 {
 
 
 public static void main(String[] args) {
@@ -10,7 +10,7 @@ public static void main(String[] args) {
 		//File directorio = new File(".\\bin");
 		File directorio = new File("build\\classes\\");
 		// DefiniciAn del ProcessBuilder encargado de localizar el ejecutable
-		ProcessBuilder pb = new ProcessBuilder("java", "tarea2PSPejecutar");	// Estudiar como hacerlo con paquetes: com.ceslopedevega....
+		ProcessBuilder pb = new ProcessBuilder("java", "tarea2_1");	// Estudiar como hacerlo con paquetes: com.ceslopedevega....
 		pb.directory(directorio);
 // Esta sentencia debe estar cuadrada con la ruta en la que se encuentran los ejecutables compilados: .class, .jar o lo que sea
 		//pb.directory(directorio);
