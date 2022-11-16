@@ -118,4 +118,7 @@ public class Tarea2 {
         System.out.println("--------------------------------------");    }
 }
     
+//La diferencia entre los dos apartados es que si no usamos "Synchronized", los hilos se ejecutan sin orden y por lo tanto los valores que van generando no estan en orden,
+//lo que no permite que puedan realizar de forma correcta lo que nosotros estamos intentando hacer. Pero al añadir "Synchronized" los hilos se esperan unos a 
+//otros lo que permite que los valores sean correctos.
 
