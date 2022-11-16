@@ -36,7 +36,7 @@ class Contador{
        }
     }
    
-public class ua2tarea1fr3 
+public class ua2tarea1fr2runnble 
 {
     public static void main(String args[]) 
     {
