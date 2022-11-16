@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class Actividad2PSP {
+public class act2ejecutable {
     
 public static void main(String[] args) {
         File directorio=new File("build\\classes\\");
