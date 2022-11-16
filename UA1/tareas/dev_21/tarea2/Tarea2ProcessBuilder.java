@@ -10,17 +10,27 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Scanner;
 
-public class Main {
+public class Tarea2ProcessBuilder {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        InputStreamReader istream = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(istream);
-        char c;
-        boolean done=false;
+        InputStreamReader is = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(is);
+
         System.out.println("Escribe cualquier texto: ");
-        
+
+        String texto = sc.nextLine();
+        char charSeq[] = texto.toCharArray();
+
+        for(char c : charSeq) {
+            if (Character.valueOf(c) != '\u002A') {
+                System.out.print(c);
+            } else {
+                break;
+            }
+        }
+
         /*try {
             while ( Character.valueOf(c = (char)br.read())!='\u002A') {
                 done=true;
@@ -28,13 +38,7 @@ public class Main {
         } catch (Exception e){
             System.out.println("Error");
         }
-        */
-        for(char c : charSeq){
-            if(Character.valueOf(c)!='\u002A')
-                System.out.print(c);
-            else break;
-        }
-        
-        // ProcessBuilder pb = new ProcessBuilder("java", );
+         */
+        try{is.close();} catch (Exception e) {e.printStackTrace();}
     }
 }
