@@ -1,5 +1,3 @@
-package tarea2procesos;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -9,11 +7,12 @@ import java.io.IOException;
  */
 public class Ejecutable_tarea2_CarlosVillatoro {
 	 public static void main(String args[]) throws IOException{
+
 		// Declaracion de la direccion del ejecutable del programa a ejecutar		
-		File directorio = new File("build/classes");
-		
+		final String dir= System.getProperty("user.dir");
+		File directorio = new File(dir);
 		// DefiniciAn del ProcessBuilder encargado de localizar el ejecutable
-		ProcessBuilder pb = new ProcessBuilder("java", "tarea2procesos.Tarea2_CarlosVillatoro");	// Estudiar como hacerlo con paquetes: com.ceslopedevega....
+		ProcessBuilder pb = new ProcessBuilder("java", "Tarea2_CarlosVillatoro");// Estudiar como hacerlo con paquetes: com.ceslopedevega....
 		// Esta sentencia debe estar cuadrada con la ruta en la que se encuentran los ejecutables compilados: .class, .jar o lo que sea
 		pb.directory(directorio);
 				

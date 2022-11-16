@@ -1,5 +1,3 @@
-package tarea2procesos;
-
 import java.io.*;
 import java.util.Scanner;
 
