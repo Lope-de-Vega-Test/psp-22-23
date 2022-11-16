@@ -1,36 +1,34 @@
-import java.io.IOException;
-
-public class tarea3_2 {
+public class tarea3_1 {
 
     public static void main(String[] args) {
-                
-        //Process builder con la ruta del archivo
         
-        ProcessBuilder pb = new ProcessBuilder("java", "D:\\DAM\\PSP\\tareaPrueba2\\src\\tarea3_1.java","PepeViyuela");
-		
-	try {
-            // Redireccion de la entrada y salida del proceso lanzado a mi mismo
-            pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
-            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-			
-            // Ejecutamos el proceso	
-            Process p = pb.start();
-
-            try {
-                // Usamos un wait para que el programa espere a que se ejecute el otro y no de problemas
-		p.waitFor();
+        if (args.length < 1){
+            System.exit(1);
+        }
+        
+        else{
                 
-                //Mostramos lo que el otro programa genera
-                System.out.println("Devolucion: "+p.exitValue());
-                                
-                //Control de errores
-		} catch (InterruptedException e1) {
-				e1.printStackTrace();
-		}
-         
-        //Control de errores
-	} catch (IOException e2) {
-			e2.printStackTrace();
-	}
-    }
+            try{
+                
+                //Intento de convertir el argumento a Int y si funciona devuelve 0
+                int argumentoProbar = Integer.parseInt(args[0]);
+                
+                //Si se ha podido transformar a INT, aplicaremos las peticiones del ejercicio
+                if(argumentoProbar < 0){
+                    //Si es menor que 0 devuelve 3
+                    System.exit(3);
+                }
+                
+                else{
+                    //Si es cualquier otro devuelve 0
+                    System.exit(0);
+                }
+                    
+            }catch(Exception e) {
+                
+                //Si da error significa que no se ha podio transformar a Int, por lo tanto sabemos que es una cadena
+                System.exit(2);
+            }
+        }
+}
 }
