@@ -1,0 +1,111 @@
+package com.mycompany.Ua2tarea2fr1;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/**
+ *
+ * @author JRC
+ */
+
+
+// Creamos una clase llamada cuentacorriente
+class cuentacorriente
+{
+int contadorsaldo;
+
+public cuentacorriente(int saldototal)     
+{
+    this.contadorsaldo = saldototal;
+
+}
+
+
+// Gracias a la función Math.ramdom podremos obtener valores aleatorios recogidos con "getsaldo"
+public synchronized int getsaldo()
+{
+try
+{
+Thread.sleep((int)(Math.random()*(1900)+250));
+}catch(InterruptedException e){}
+return contadorsaldo;
+}
+
+
+
+// Volvemos a repetir la misma operación asignando un valor a saldo
+public synchronized void setsaldo(int saldototal)
+{
+try
+{
+Thread.sleep((int)(Math.random()*(1900)+250));
+}catch(InterruptedException e){}
+this.contadorsaldo = saldototal;
+}
+public synchronized  void sumarsaldo(int anadir, String nombre)
+{
+    System.out.println("Tu cuenta contaba con un saldo de: "+this.contadorsaldo);
+    this.contadorsaldo+=anadir;
+    System.out.println("Tu nuevo saldo es: "+this.contadorsaldo);
+    System.out.println("------------------------------");
+    System.out.println("Creador de la operacion: "+nombre);
+}
+}
+
+
+// creamos una clase persona
+class persona extends Thread
+{
+String nombre;
+int saldototal;
+cuentacorriente cuenta;
+public persona(String nombre, int saldo, cuentacorriente cuenta )
+{
+
+this.nombre = nombre;
+this.saldototal=saldo;
+this.cuenta = cuenta;
+}
+// La siguiente función ejecutará los hilos
+@Override
+public void run()
+{
+cuenta.sumarsaldo(saldototal, nombre);
+}
+}
+
+
+public class Ua2tarea2fr1 {
+    public static void main(String[] args) {
+        // Declaramos hilos y el dinero de la cuenta
+        cuentacorriente cuenta = new cuentacorriente(150);
+        ArrayList<Thread> hilos = new ArrayList<>();
+      for(int i=0; i<5; i++)
+        {
+            int saldo = (int) (Math.random()*(160)+50);
+            usuario user = new usuario("Hilo "+i,saldo*i,cuenta);
+            hilos.add(new Thread(user));
+        }
+  
+      
+     
+      // Iniciamos los hilos
+      for (int i=0; i<hilos.size();i++)
+      {
+      hilos.get(i).start();
+      }
+     
+      
+      // Finalizamos los hilos
+      for (int i=0; i<hilos.size();i++)
+      {
+      try
+      {
+      hilos.get(i).join();
+      }catch(InterruptedException e){}
+     
+          System.out.println("TOTAL: "+cuenta.getsaldo());
+         
+      }
+    }
+}
