@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class tarea2PSPejecutar {
+public class tarea2_1 {
     public static void main(String[] args) {
 
         Scanner sca = new Scanner(System.in);
