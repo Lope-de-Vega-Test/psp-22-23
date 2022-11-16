@@ -1,6 +1,5 @@
-package tarea3procesosfranciscovalverde;
 
-public class Procesolectura {
+public class ProcesoLectura {
 
 	public static void main(String[] args) {
 		
@@ -8,7 +7,7 @@ public class Procesolectura {
 			System.exit(1);
 		}
 		//Creación del proceso
-		ProcessBuilder pb = new ProcessBuilder("java","ProcesoLectura.java",args[0]);
+		ProcessBuilder pb = new ProcessBuilder("java","Argumentos",args[0]);
 		
 		try {
 			//Comenzamos el proceso
