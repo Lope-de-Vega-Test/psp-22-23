@@ -8,7 +8,7 @@ import java.lang.*;
 
 
 
-public class Tarea3parte1 {
+public class tarea3 {
 
     public static void main(String[] args)  {
     
