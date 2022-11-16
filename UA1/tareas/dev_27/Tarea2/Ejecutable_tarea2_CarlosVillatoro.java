@@ -11,7 +11,7 @@ public class Ejecutable_tarea2_CarlosVillatoro {
 		// Declaracion de la direccion del ejecutable del programa a ejecutar		
 		final String dir= System.getProperty("user.dir");
 		File directorio = new File(dir);
-		// DefiniciAn del ProcessBuilder encargado de localizar el ejecutable
+		// Ejecutamos el programa con el ProcessBuilder
 		ProcessBuilder pb = new ProcessBuilder("java", "Tarea2_CarlosVillatoro");// Estudiar como hacerlo con paquetes: com.ceslopedevega....
 		// Esta sentencia debe estar cuadrada con la ruta en la que se encuentran los ejecutables compilados: .class, .jar o lo que sea
 		pb.directory(directorio);
