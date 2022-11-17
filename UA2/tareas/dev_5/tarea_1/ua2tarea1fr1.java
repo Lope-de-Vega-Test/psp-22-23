@@ -64,7 +64,7 @@ class Hilo extends Thread
     }
 }
 
-public class TAREA1 {
+public class ua2tarea1fr1 {
     public static void main(String[] args) {
         System.out.println("-------------------------------");
         System.out.println("Hilos: Bloques NO Sincronizados");
@@ -81,17 +81,13 @@ public class TAREA1 {
         
         System.out.println("Comienza la ejecución de los hilos ...");
         System.out.println("--------------------------------------");
-        Runnable Hilo1 = null;
-        new Thread(Hilo1).start();
-        Runnable Hilo2 = null;
-        new Thread(Hilo2).start();
-        Runnable Hilo3 = null;
-        new Thread(Hilo3).start();
-        Runnable Hilo4 = null;
-        new Thread(Hilo4).start();
-        Runnable Hilo5 = null;
-        new Thread(Hilo5).start();
+        hilo1.start();
+        hilo2.start();
+        hilo3.start();
+        hilo4.start();
+        hilo5.start();
         
+
         try {
             hilo1.join();
             hilo2.join();
