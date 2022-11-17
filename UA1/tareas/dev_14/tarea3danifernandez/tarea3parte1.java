@@ -1,5 +1,5 @@
 
-package com.mycompany.tarea3parte1;
+
 import java.util.Scanner;
 import java.lang.*;
 /**
@@ -9,7 +9,7 @@ import java.lang.*;
 
 
 
-public class Tarea3parte1 {
+public class tarea3parte1 {
 
     public static void main(String[] args)  {
     
