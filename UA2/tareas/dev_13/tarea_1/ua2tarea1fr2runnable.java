@@ -67,7 +67,7 @@ class Hilo implements Runnable
 }
 
 
-public class ua2tarea1fr1 {
+public class ua2tarea1fr2runnable {
     
     public static void main(String[] args) {
         
