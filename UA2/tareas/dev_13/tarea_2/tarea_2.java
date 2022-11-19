@@ -1,9 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-package tarea2dani;
-
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +60,7 @@ class Usuario extends Thread{
 }
 
 
-public class Tarea2dani {
+public class tarea_2 {
 
     public static void main(String[] args) {
         //Creamos e inicializamos la cuenta a 200
