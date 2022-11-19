@@ -64,7 +64,7 @@ class Hilo extends Thread
 }
 
 
-public class ua2tarea1fr1 {
+public class ua2tarea1fr2 {
 
     
     public static void main(String[] args) {
