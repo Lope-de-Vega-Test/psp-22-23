@@ -12,11 +12,12 @@ import java.util.logging.Logger;
 
 class Lector extends Thread{
     String[] args;
+    int numero
     int totalLineas;
     public void run(){
         
         try{
-            FileReader fr = new FileReader(args[0]);
+            FileReader fr = new FileReader(args[numero]);
             
             while(fr.read()!=-1){
             totalLineas++;   
@@ -30,8 +31,9 @@ class Lector extends Thread{
         }
     }
 
-    public Lector(String[] args) {
+    public Lector(String[] args, int numero) {
         this.args = args;
+        this.numero = numero;
     }
 }
 
@@ -73,7 +75,7 @@ public class Ua2t3_hilos {
         ArrayList<Lector> lectores = new ArrayList();
         
         for(int i=0; i<3; i++){
-            Lector lector = new Lector(args);
+            Lector lector = new Lector(args,i);
             lectores.add(lector);
         }
           
