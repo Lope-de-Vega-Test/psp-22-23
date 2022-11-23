@@ -147,6 +147,7 @@ public class HilosClientes extends Thread{
                     //DEVUELVE CERVEZA
                     camarero.devolverCerveza();
                     System.out.println(nombre+" devuelve la cerveza a mou");
+                    System.out.println(nombre+" lleva bebidos: "+litrosbebidos);
                     //ESPERAR ANTES DE PERDIR OTRA
                     sleep(400);
     
