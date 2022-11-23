@@ -62,10 +62,10 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 | b)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX2 (10%) |
 | c)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX2 (10%) |
 | d)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX2 (10%) |
-| e)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
-| f)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
-| g)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
-| h)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX1 (10%) |
+| e)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX2 (10%) |
+| f)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX2 (10%) |
+| g)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX2 (10%) |
+| h)                     |12,5 %       | T1 (30%), T2 (30%), T3 (30%) y EX2 (10%) |
 |                        |**100 %**    |             |
 
 Por favor, leed el documento [INSTRUCCIONES_ENTREGAS.md](..\INSTRUCCIONES_ENTREGAS.md)
@@ -82,6 +82,8 @@ Fecha de Entrega: 09/11/2022 - 14:00:00
 * Entregables:
   * tareas\dev_X\tarea_1\ua2tarea1fr1.java
   * tareas\dev_X\tarea_1\ua2tarea1fr2.java
+  * tareas\dev_X\tarea_1\ua2tarea1fr2runnable.java
+
 
 
 ### **T2 - Tarea 2 - Programación y sincronización de hilos en Java 2**
