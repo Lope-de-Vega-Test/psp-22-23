@@ -16,11 +16,11 @@ class CuentaCorriente{
     public synchronized void Incrementa(float meter,String nombre)
     {
         
-        System.out.println("saldo actual es: "+saldo);
+        System.out.println("SALDO ACTUAL: "+saldo);
         this.saldo+=meter;
         
-        System.out.println("Saldo nuevo: "+saldo);
-        System.out.println("Operacion realizada por: "+nombre);
+        System.out.println("SALDO NUEVO: "+saldo);
+        System.out.println("REALIZADO: "+nombre);
 
     }
         public float getSaldo() {
