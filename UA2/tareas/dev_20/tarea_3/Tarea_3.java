@@ -1,105 +1,178 @@
 package tarea_3;
-import java.io.BufferedReader;
-import java.io.File;
+import java.util.Scanner;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.FileNotFoundException;
 
 /**
  *
  * @author Lucía Luna
  */
 
-public class Tarea_3 {
+class Reader extends Thread{  
+    //Creamos la clase READER para leer el argumento y para contar la cantidad de caracteres
+    private String fichero;
+    
+    public Reader(String fichero)
+    {
+        this.fichero=fichero;
+        setName(fichero);
+    }
 
-    public static void main(String[] args) {
-        System.out.println();
-        // Creamos una lista
-        ArrayList<String> file_path = new ArrayList<String>(); 
-        // Agregamos a la lista los N 
-        Collections.addAll(file_path, args); 
+    public void run()
+      {      
+        int numeroCaracteres=0;
         
-        if (file_path.size() > 0) {
-            ArrayList<File> file = new ArrayList<File>();
-
-            // Se realiza un for para cada uno de los argumentos
-            for(int i = 0; i < file_path.size(); i++) {
-                File f = new File(file_path.get(i));
-                if (f.exists()) {
-                    file.add(f);
-                } else {
-                    System.out.println(file_path.get(i) + " no existe.");
-                }
+        FileReader fr= null;
+        
+        try{
+            fr= new FileReader(fichero);
+            int caracter=fr.read();
+            
+            while(caracter!=-1)
+            {
+                numeroCaracteres++;
+                caracter=fr.read();
             }
-
-            // Se realiza un for para cada uno de los ficheros
-            for(int i = 0; i < file.size(); i++) {
-                long t_comienzo, t_fin;
-                
-                Hilo h = new Hilo(file.get(i)); //se crea el hilo
-                
-                t_comienzo =  System.currentTimeMillis(); // Nos indica el tiempo que tarda antes de ejecutar el hilo
-                
-                h.start(); // se encarga de lanzar el hilo
-                
-                //Une el proceso del hilo al proceso principal
-                try{h.join();} catch (Exception e) {}
-                
-                t_fin = System.currentTimeMillis(); // Nos muestra el tiempo que ha tardado en ejecutarse el hilo
-                
-                long t_total = t_fin - t_comienzo;
-                System.out.println("\t- Tiempo transcurrido: " + t_total + " ms");
-            }
-          } else {
-            System.out.println("No se introdujeron parametros.");
+        }catch(FileNotFoundException e)
+        {
+            System.out.println("Error al leer el fichero");
+            System.out.println(e.getMessage());
         }
+        catch(Exception e)
+        {
+            System.out.println("Error al leer el fichero");
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try
+            {
+                if(fr!=null)
+                {
+                    fr.close();     
+                    System.out.println(" Total de caracteres de los textos que se han introducido: "+numeroCaracteres);
+                    
+                }
+            }catch(Exception e)
+            {
+                System.out.println("Fichero cerrado");
+                System.out.println(e.getMessage());
+            }
+        }
+ }
+}
 
+    
+
+//Class ExecutionTimer.En esta clase se almacena el tiempo que tarda el programa en ejecutar
+
+class ExecutionTimer
+{
+    private long startTime=0;
+    private long endTime=0;
+    private long timeElapsed;
+    
+    public void start()
+    {
+        startTime=System.nanoTime();
     }
     
-    public static void countCharacters(File f) {
-        try {
-            FileReader fr = new FileReader(f); // Se usa para crear una copia en la memoria 
-            BufferedReader br = new BufferedReader(fr); // Almacena el contenido del fichero en la memoria
-            int char_count = 0; // variable contador 
-            // Mientras que lea caracteres y no el final del archivo [...]
-            while (br.read() != -1) {
-                char_count++; // incrementa el contador en 1
-            }
-            System.out.println("El fichero '" + f.getName() + "' tiene " + char_count + " caracteres.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void stop()
+    {
+        endTime=System.nanoTime();
     }
+    
+    public long elapsedTime()
+    {
+       return timeElapsed=endTime-startTime;
+    } 
 }
 
 
- //Comienza la clase Hilo
-
-class Hilo extends Thread {
-
-    File f;
-
-    public Hilo(File f) {
-        this.f = f;
-    }
-
-    public void run() {
-        try {
-            // Se usa para crear una copia en la memoria 
-            FileReader fr = new FileReader(f); 
-            // Almacena el contenido del fichero en la memoria
-            BufferedReader br = new BufferedReader(fr); 
-            // variable contador 
-            int char_count = 0;
-            // mientras que lea caracteres y no el final del archivo 
-            while (br.read() != -1) {
-                char_count++; // Se incrementa en uno el contador
+//Class main se encarga de recorrer el numero de argumentos para finalmente ejecutar el programa 
+public class  Tarea_3 {
+ public static void main(String[] args) {   
+     
+        ExecutionTimer timerH= new ExecutionTimer();
+        ExecutionTimer timerSinH= new ExecutionTimer();
+        int numeroArgumentos=args.length;
+        
+        //Usamos la clase READER para leer los hilos al ejecutar
+        
+        System.out.println("--------Ejecucion de hilos--------");
+        timerH.start();
+        
+        for(int i=0; i<numeroArgumentos; i++)
+        {
+            Reader hilo= new Reader(args[i]);
+            
+            
+            hilo.start();
+            
+            try{
+                hilo.join();
+            }catch(InterruptedException e)
+            {
+                
             }
-            System.out.println("El fichero '" + f.getName() + "' tiene " + char_count + " caracteres.");
-        } catch (Exception e) {
-            e.printStackTrace();
+            
         }
+        timerH.stop();
+        
+        //Hacemos lo mismo que en paso anterior pero esta vez sin ejecutar hilos
+        
+        System.out.println("-----Ejecucion sin hilos-----");
+        timerSinH.start();
+        for(int i=0; i<numeroArgumentos; i++)
+        {
+            reader(args[i]);
+        }
+        timerSinH.stop();
+        
+        System.out.println("El tiempo transcurrido de ejecucion con hilos es: "+(timerH.elapsedTime()/1000000)+", y el tiempo de ejecucion sin hilos es: "+timerSinH.elapsedTime()/1000000);
     }
-}
-
-//Termina la clase hilo
+ 
+ 
+    //Class Reader para leer los caracteres sin usar los hilos
+ 
+    public static void reader(String fichero)
+ {      
+        int numeroCaracteres=0;
+        
+        FileReader fr= null;
+        
+        try{
+            fr= new FileReader(fichero);
+            int caracter=fr.read();
+            
+            while(caracter!=-1)
+            {
+                numeroCaracteres++;
+                caracter=fr.read();
+            }
+        }catch(FileNotFoundException e)
+        {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try
+            {
+                if(fr!=null)
+                {
+                    fr.close();
+                    System.out.println("Numero de caracteres de los textos introducidos: "+numeroCaracteres);
+                    
+                }
+            }catch(Exception e)
+            {
+                System.out.println("Cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
+ }
+} 
