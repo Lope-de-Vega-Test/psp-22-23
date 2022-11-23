@@ -1,12 +1,12 @@
-package u2tarea1.java;
-
 /**
  *
  * @author Lucía Luna
  */
+
+//Comienza la clase contador
 class Contador
 {
-    private int c = 0; 
+    private int c = 0;  
     Contador (int c) { 
         this.c = c;
     }
@@ -21,11 +21,11 @@ class Contador
         return c;
     }
 } 
+// Termina la clase contador
 
-// Termina la Class Contador
 
-  
-class hilo extends Thread 
+//Comienza la clase hilo
+  class hilo extends Thread 
 {
     private Contador contador;
 
@@ -52,12 +52,11 @@ class hilo extends Thread
     }
 
    
- // Fin Class HiloSumador
+ // Termina la clase hilo
 
 
-
-
-public class ua2tarea1fr1 {
+//Clase main
+public class tarea1ua2fr1 {
 
     public static void main(String[] args) {
        
@@ -98,7 +97,7 @@ public class ua2tarea1fr1 {
         }
         catch (InterruptedException e)
         {
-            // Nothing to do here ...
+            
         }
 
         System.out.println("--------------------------------------");
@@ -111,10 +110,7 @@ public class ua2tarea1fr1 {
     }
 }
 }
-
-
-
-
+//Termina la clase main
 
 
 
