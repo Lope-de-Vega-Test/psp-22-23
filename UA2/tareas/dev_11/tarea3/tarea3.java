@@ -105,12 +105,12 @@ public class tarea3 {
         System.out.println("------");
         System.out.println("");
         
-        //después sin hilos
+        //Ahora lo vamos a hacer sin hilos
         System.out.println("Ahora vamos a mostrar la ejecucion sin hilos");
         System.out.println("------");
         
         timerSinHilos.start();
-        //por cada argumento se llamará a la función reader
+        //Por cada argumento se llamará a la función readerSinHilos
         for(int i = 0; i < nArgs; i++){
             readerSinHilos(args[i]);
         }
