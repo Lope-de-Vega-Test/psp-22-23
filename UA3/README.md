@@ -10,57 +10,75 @@
 
 En esta unidad de aprendizaje se desarrollan los siguientes resultados de aprendizaje:
 
-- **RA2:** *.*
+// TODO
 
 ### Criterios de Evaluación
 
-
+// TODO
 
 ## Contenidos
 
 //TODO
 
 
-
 ## Evaluación
 
-La evaluación de esta unidad didáctica estará basada en la entrega de las tareas, corregidas automáticamente por los tests necesarios a superar y examen teórico y práctico de la materia, acorde a la siguiente tabla
+// TODO
 
-| CRITERIO de EVALUACIÓN | PONDERACIÓN | INSTRUMENTOS de EVALUACIÓN|
-|------------------------|-------------|-------------|
-| a)                     |12,5 %       | Tareas 1,2 y 3      |
-| b)                     |12,5 %       | Examen      |
-| c)                     |12,5 %       | Examen      |
-| d)                     |12,5 %       | Examen      |
-| e)                     |12,5 %       | Tareas 1,2 y 3     |
-| f)                     |12,5 %       | Tareas 1,2 y 3      |
-| g)                     |12,5 %       | Tareas 1,2 y 3      |
-| h)                     |12,5 %       | Tareas 1,2 y 3      |
-|                        |**100 %**    |             |
+### **Tarea 1 - Programación de Sockets 1**
+##### **Criterios c), f), g), h)**
 
+Crea un programa en Java que admita desde la línea de comandos una URL y visualice información sobre esta. Modifica el programa para que admita continuamente nuevas IP o URL y muestre la información hasta que el usuario inserte "localhost".
 
+```
+Fecha de Entrega: 07/12/2022
+```
 
-### **Tarea 1 - Programación de Procesos en C**
+### **Tarea 2 - Programación de Sockets 2**
 ##### **Criterios a), f), g), h)**
+
+Realiza un programa servidor TCP que acepte dos clientes.  Muestra por cada cliente conectado sus puertos local y remoto.
+
+Crea también el programa cliente que se conecte a dicho servidor.  Muestra los puertos locales y remotos a los que está conectado su socket y la dirección IP de la máquina remota a la que se conecta.
+
+```
+Fecha de Entrega: A definir
+```
+### **Tarea 3 - Programación de Sockets 3**
+##### **Criterios a), f), g), h)**
+
+Crea un cliente que pida un mensaje al usuario por pantalla y lo mande al servidor. El servidor deberá recibir el mensaje, convertirlo todo a mayúsculas y devolvérselo al cliente, que lo imprimirá por pantalla.
 
 ```
 Fecha de Entrega: A definir
 ```
 
-### **Tarea 2 - Programación de procesos en Java (I)**
+### **Tarea 4 - Programación de Sockets 4**
 ##### **Criterios a), f), g), h)**
 
+Crea un programa cliente usando sockets UDP que envíe el texto escrito desde la entrada estándar al servidor. El servidor devolverá la cadena en mayúsculas. El proceso de entrada de datos finalizará cuando el cliente introduzca un astrerisco. El servidor se encargará de procesar las cadenas de caracteres hasta recibir un asterisco.
+
+Deberás establecer un tiempo de espera de varios segundos para que el método receive() del cliente se bloquee. Controlas las excepciones de IO e indica si los paquetes se han perdido. Haz varias pruebas de la aplicación sin ejecutar el servidor y ejecutando varios clientes a la vez.
 
 ```
 Fecha de Entrega: A definir
 ```
-### **Tarea 3 - Programación de procesos en Java (II)**
+
+### **Tarea 5 - Programación de Sockets 5**
 ##### **Criterios a), f), g), h)**
+
+Crea una clase Java llamada Numeros que defina 3 atributos: uno entero, otros dos de tipo long. Crea un constructor con parámetros y otro vacío. Define los getters y setters y crea un programa cliente que introduzca por teclado el atributo entero.
+
+Después, envía este objeto a un proceso servidor para que calcule el cuadrado y el cubo del número y envíe el objeto de vuelta al cliente con los cálculos realizados, almacenándolos en los atributos oportunos.
+
+Deberás controlar todos los errores posibles (que el servidor no esté iniciado, que se produzcan excepciones o cortes abruptos del cliente o servidor, que el número introducido por pantalla por el clientea sea menor que 0, etcétera).
 
 ```
 Fecha de Entrega: A definir
 ```
-### **Examen UA2 - Programación Multihilo**
+
+
+### **Examen UA3 - Programacion de Comunicaciones en Red**
 ##### **Criterios a), b), c), d), e) f), g) y h)**
 ```
 Fecha de Examen: A definir
