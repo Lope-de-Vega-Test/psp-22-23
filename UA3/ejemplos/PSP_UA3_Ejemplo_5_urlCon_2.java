@@ -1,4 +1,3 @@
-package com.ceslopedevega.red;
 
 import java.io.*;
 import java.net.*;
