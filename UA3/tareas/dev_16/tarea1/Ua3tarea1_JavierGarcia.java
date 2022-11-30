@@ -1,5 +1,3 @@
-package ua3tarea1_javiergarcia;
-
 import java.net.*;
 import java.util.Scanner;
 
