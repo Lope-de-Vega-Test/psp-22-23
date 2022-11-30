@@ -1,6 +1,6 @@
 ![lope_logo](https://www.ceslopedevega.com/wp-content/uploads/2020/03/pruebalogo.svg_.png)
 
-# UA2 - Programación Multihilo
+# UA3 - Programacion de Comunicaciones en Red
 
 - Temporalización: **1T**
 - Duración: **12 horas**
