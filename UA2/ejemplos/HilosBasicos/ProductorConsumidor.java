@@ -57,18 +57,18 @@ class ExecutionTimer
 class Productor extends Thread 
 {
     private Cola cola;
-    private int n;
+    private int idProductor;
 
     public Productor(Cola c, int n) {
         cola = c;
-        this.n = n;
+        this.idProductor = n;
     }
 
     public void run() {        
         for(int i=0; i<5;i++)
         {
             cola.put(i); // Pongo datos
-            System.out.println(i + " => Productor : "  + n + " produce: " +i);
+            System.out.println("Productor : "  + idProductor + " en Iteración: " + i + " produce: " + i);
 
             try {
                 sleep(100);
@@ -81,11 +81,11 @@ class Productor extends Thread
 class Consumidor extends Thread 
 {
     private Cola cola;
-    private int n;
+    private int idConsumidor;
 
     public Consumidor(Cola c, int n) {
         cola = c;
-        this.n = n;
+        this.idConsumidor = n;
     }
 
     public void run() { 
@@ -93,7 +93,7 @@ class Consumidor extends Thread
         for(int i=0; i<5;i++)
         {
             valor = cola.get(); // Pongo datos
-            System.out.println(i + " => Consumidor : "  + n + " consume: " + valor);
+            System.out.println("Consumidor : "  + idConsumidor + " en Iteración: " + i + " consume: " + valor);
 
             try {
                 sleep(100);
@@ -112,18 +112,24 @@ public class ProductorConsumidor {
         ExecutionTimer timer = new ExecutionTimer();
 
         Cola cola = new Cola();
-        Productor p = new Productor(cola, 1);
+        Productor p1 = new Productor(cola, 1);
+        //Productor p2 = new Productor(cola, 2);
+        //Productor p3 = new Productor(cola, 3);
         Consumidor c = new Consumidor(cola, 1);
 
         timer.start();
         System.out.println("Comienza la ejecución de los hilos ...");
         System.out.println("--------------------------------------");
         
-        p.start();
+        p1.start();
+        //p2.start();
+        //p3.start();
         c.start();
 
         try {
-            p.join();
+            p1.join();
+            //p2.join();
+            //p3.join();
             c.join();
         }
         catch (InterruptedException e)

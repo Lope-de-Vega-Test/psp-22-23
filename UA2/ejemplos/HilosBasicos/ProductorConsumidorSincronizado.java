@@ -64,18 +64,18 @@ class ExecutionTimer
 class Productor extends Thread 
 {
     private Cola cola;
-    private int n;
+    private int idProductor;
 
     public Productor(Cola c, int n) {
         cola = c;
-        this.n = n;
+        this.idProductor = n;
     }
 
     public void run() {        
         for(int i=0; i<5;i++)
         {
             cola.put(i); // Pongo datos
-            System.out.println(i + " => Productor : "  + n + " produce: " +i);
+            System.out.println(i + " => Productor : "  + idProductor + " produce: " +i);
 
             try {
                 sleep(100);
@@ -88,11 +88,11 @@ class Productor extends Thread
 class Consumidor extends Thread 
 {
     private Cola cola;
-    private int n;
+    private int idConsumidor;
 
     public Consumidor(Cola c, int n) {
         cola = c;
-        this.n = n;
+        this.idConsumidor = n;
     }
 
     public void run() { 
@@ -100,7 +100,7 @@ class Consumidor extends Thread
         for(int i=0; i<5;i++)
         {
             valor = cola.get(); // Pongo datos
-            System.out.println(i + " => Consumidor : "  + n + " consume: " + valor);
+            System.out.println(i + " => Consumidor : "  + idConsumidor + " consume: " + valor);
 
             try {
                 sleep(100);
