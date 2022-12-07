@@ -1,8 +1,10 @@
 /*
-Crea un programa en Java que admita desde la línea de comandos una URL y 
-visualice información sobre esta. Modifica el programa para que admita 
-continuamente nuevas IP o URL y muestre la información hasta que el usuario 
-inserte "localhost".
+Realiza un programa servidor TCP que acepte dos clientes. Muestra por cada 
+cliente conectado sus puertos local y remoto.
+
+Crea también el programa cliente que se conecte a dicho servidor. 
+Muestra los puertos locales y remotos a los que está conectado su socket y la 
+dirección IP de la máquina remota a la que se conecta.
  */
 
 package pkg1.dani.socket.tarea1;
