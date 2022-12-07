@@ -53,7 +53,6 @@ class CuentaCorriente{
         CuentaCorriente cuenta;
         String nombre;
     
-       
         public hilo(float monedas, CuentaCorriente cuenta, String nombre) {
             this.monedas = monedas;
             this.cuenta = cuenta;
@@ -84,19 +83,20 @@ class CuentaCorriente{
             hilo3.start();
             hilo4.start();
             hilo5.start();
-             try{
-                 
-                  hilo1.join(); 
-                  hilo2.join();
-                  hilo3.join(); 
-                  hilo4.join();
-                  hilo5.join();
-             }     
-             
-             catch(Exception e){
+            try{
+            
+            hilo1.join(); 
+            hilo2.join();
+            hilo3.join(); 
+            hilo4.join();
+            hilo5.join();
+            }     
+        
+        catch(Exception e){
                     
         }
-             System.out.println("EL SALDO TOTAL ES: "+cuenta.getSaldo());
+        
+        System.out.println("EL SALDO TOTAL ES: "+cuenta.getSaldo());
         
     }
     }
