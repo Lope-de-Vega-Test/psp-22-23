@@ -80,7 +80,7 @@ Realiza un programa servidor TCP que acepte dos clientes.  Muestra por cada clie
 Crea también el programa cliente que se conecte a dicho servidor.  Muestra los puertos locales y remotos a los que está conectado su socket y la dirección IP de la máquina remota a la que se conecta.
 
 ```
-Fecha de Entrega: A definir
+Fecha de Entrega: 14/12/2022
 ```
 ### **Tarea 3 - Programación de Sockets 3**
 ##### **Criterios a), f), g), h)**
@@ -88,7 +88,7 @@ Fecha de Entrega: A definir
 Crea un cliente que pida un mensaje al usuario por pantalla y lo mande al servidor. El servidor deberá recibir el mensaje, convertirlo todo a mayúsculas y devolvérselo al cliente, que lo imprimirá por pantalla.
 
 ```
-Fecha de Entrega: A definir
+Fecha de Entrega: 21/12/2022
 ```
 
 ### **Tarea 4 - Programación de Sockets 4**
@@ -99,7 +99,7 @@ Crea un programa cliente usando sockets UDP que envíe el texto escrito desde la
 Deberás establecer un tiempo de espera de varios segundos para que el método receive() del cliente se bloquee. Controlas las excepciones de IO e indica si los paquetes se han perdido. Haz varias pruebas de la aplicación sin ejecutar el servidor y ejecutando varios clientes a la vez.
 
 ```
-Fecha de Entrega: A definir
+Fecha de Entrega: 11/01/2023
 ```
 
 ### **Tarea 5 - Programación de Sockets 5**
@@ -112,14 +112,20 @@ Después, envía este objeto a un proceso servidor para que calcule el cuadrado 
 Deberás controlar todos los errores posibles (que el servidor no esté iniciado, que se produzcan excepciones o cortes abruptos del cliente o servidor, que el número introducido por pantalla por el clientea sea menor que 0, etcétera).
 
 ```
-Fecha de Entrega: A definir
+Fecha de Entrega: 11/01/2023
+```
+
+### **Actividad Evaluable UA3 - Programacion de Comunicaciones en Red**
+##### **Criterios a), b), c), d), e) f), g) y h)**
+```
+Fecha de Examen: 14/12/2022
 ```
 
 
 ### **Examen UA3 - Programacion de Comunicaciones en Red**
 ##### **Criterios a), b), c), d), e) f), g) y h)**
 ```
-Fecha de Examen: A definir
+Fecha de Examen: 11/01/2023
 ```
 
 ## Recursos
