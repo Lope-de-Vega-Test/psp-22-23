@@ -10,20 +10,58 @@
 
 En esta unidad de aprendizaje se desarrollan los siguientes resultados de aprendizaje:
 
-// TODO
+- **RA3:** Programa mecanismos de comunicación en red empleando sockets y analizando el escenario de ejecución
 
 ### Criterios de Evaluación
 
-// TODO
+a) Se han identificado escenarios que precisan establecer comunicación en red entre varias aplicaciones.
+
+b) Se han identificado los roles de cliente y de servidor y sus funciones asociadas.
+
+c) Se han reconocido librerías y mecanismos del lenguaje de programación que permiten programar aplicaciones en red.
+
+d) Se ha analizado el concepto de socket, sus tipos y características.
+
+e) Se han utilizado sockets para programar una aplicación cliente que se comunique con un servidor.
+
+f) Se ha desarrollado una aplicación servidor en red y verificado su funcionamiento.
+
+g) Se han desarrollado aplicaciones que utilizan sockets para intercambiar información.
+
+h) Se han utilizado hilos para implementar los procedimientos de las aplicaciones relativos a la comunicación en red.
 
 ## Contenidos
 
-//TODO
-
+* Protocolos de comunicaciones (IP, TCP,UDP).
+* Comunicación entre aplicaciones
+* El modelo cliente/servidor
+* El modelo p2p (peer-to-peer)
+* Modelos híbridos.
+* Sockets
+* Concepto de socket
+* Dominios y direcciones.
+* Estilos de comunicación.
+* Escenario cliente/servidor orientado a conexión.
+* Escenario cliente/servidor sin conexión.
+* Programación con sockets en Java.
 
 ## Evaluación
 
-// TODO
+La evaluación de esta unidad didáctica estará basada en la entrega de las tareas, corregidas automáticamente por los tests necesarios a superar y examen teórico y práctico de la materia, acorde a la siguiente tabla
+
+| CRITERIO de EVALUACIÓN | PONDERACIÓN | INSTRUMENTOS de EVALUACIÓN|
+|------------------------|-------------|-------------|
+| a)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+| b)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+| c)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+| d)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+| e)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+| f)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+| g)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+| h)                     |12,5 %       | T1 (15%), T2 (15%), T3 (15%), T4 (15%), T5 (15%) y EX3 (25%) |
+|                        |**100 %**    |             |
+
+Por favor, leed el documento [INSTRUCCIONES_ENTREGAS.md](..\INSTRUCCIONES_ENTREGAS.md)
 
 ### **Tarea 1 - Programación de Sockets 1**
 ##### **Criterios c), f), g), h)**
