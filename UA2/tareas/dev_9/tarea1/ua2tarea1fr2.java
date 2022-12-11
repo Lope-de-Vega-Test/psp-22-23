@@ -1,4 +1,4 @@
-package ua2tarea1fr2;
+
 //Creamos la clase numero que se usara para crear la variable comun entre los hilos
 class Numero{
     private int num=0;
@@ -34,7 +34,7 @@ class Hilos extends Thread{
     }
 }
 
-public class Ua2tarea1fr2 {
+public class ua2tarea1fr2 {
     public static void main(String[] args) {
         //Usamos la variable.
         Numero nmero=new Numero(0);
