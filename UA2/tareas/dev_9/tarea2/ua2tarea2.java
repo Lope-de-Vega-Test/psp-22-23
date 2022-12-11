@@ -1,4 +1,4 @@
-package ua2tarea2;
+
 //Declaramos la clase CuentaCorriente
 class CuentaCorriente{
     //Declaramos las variables que llevara la clase, en este caso son saldo e incremento donde los dos son int.
