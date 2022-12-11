@@ -1,6 +1,4 @@
 
-package ua2tarea1fr2_b;
-
 class Numero{
     private int num=0;
     Numero(int num){
@@ -37,7 +35,7 @@ class Hilos implements Runnable{
         System.out.println(nombrehilo+" - contador vale "+numero.valor());
     }
 
-public class Ua2tarea1fr2_b {
+public class ua2tarea1fr2_b {
     public static void main(String[] args) {
         //Usamos la variable.
         Numero nmero=new Numero(0);
