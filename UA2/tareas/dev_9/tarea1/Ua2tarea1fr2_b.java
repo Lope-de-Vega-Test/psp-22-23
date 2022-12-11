@@ -1,4 +1,4 @@
-class Ua2tarea1fr2_b {
+public class Ua2tarea1fr2_b {
     public static void main(String[] args) {
         //Usamos la variable.
         Numero nmero=new Numero(0);
