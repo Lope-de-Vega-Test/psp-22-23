@@ -117,6 +117,7 @@ Fecha de Entrega: 11/01/2023
 
 ### **Actividad Evaluable UA3 - Programacion de Comunicaciones en Red**
 ##### **Criterios a), b), c), d), e) f), g) y h)**
+Enunciado disponible en [UA3\actividad\README.md](UA3\actividad\README.md)
 ```
 Fecha de Examen: 14/12/2022
 ```
