@@ -3,7 +3,7 @@
 import java.io.*;
 import java.net.*;
 
-public class PSP_UA3_Ejemplo_7_ClientSocket {
+public class Tarea2_cliente {
 
     public static void main(String[] arg) throws IOException {
         String Host = "10.2.1.169";
