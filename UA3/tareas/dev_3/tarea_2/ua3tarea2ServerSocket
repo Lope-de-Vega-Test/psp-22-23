@@ -1,0 +1,41 @@
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
+public class ua3tarea2ServerSocket {
+  public static void main(String[] arg) throws IOException {
+    Scanner entrada = new Scanner(System.in);
+    int Puerto = 6000;// Puerto
+    int backlog = 50;//Backlog
+
+    String direccionIP="";
+
+    System.out.println("-------------------------");
+    System.out.println("Introduce la direccion IP del socket servidor");
+    System.out.println("Ej. XXXX.XXXX.XXXX.XXXX");
+    System.out.println();
+    System.out.print("IP: "); direccionIP = entrada.nextLine();
+
+    InetAddress bindAddr = InetAddress.getByName(direccionIP);
+
+    ServerSocket Servidor = new ServerSocket(Puerto,backlog, bindAddr);
+    System.out.println("Escuchando en " + Servidor.getLocalPort());
+
+    Socket cliente1 = Servidor.accept();
+    System.out.println("Cliente 1 terminado");
+    System.out.println();
+    System.out.println("Escuchando en: " + Servidor.getLocalPort());
+    System.out.println();
+    // Realizar Acciones con cliente 1
+
+    Socket cliente2 = Servidor.accept();
+    System.out.println("Cliente 2 terminado");
+    System.out.println();
+    System.out.println("Escuchando en: " + Servidor.getLocalPort());
+    System.out.println();
+    // Realizar Acciones con cliente 2
+
+    Servidor.close();
+  }
+
+}
