@@ -4,7 +4,7 @@
 import java.io.*;
 import java.net.*;
 
-public class PSP_UA3_Ejemplo_7_ServerSocket {
+public class Tarea2_server {
   public static void main(String[] arg) throws IOException {
 	int Puerto = 6000;// Puerto
 	ServerSocket Servidor = new ServerSocket(Puerto);
