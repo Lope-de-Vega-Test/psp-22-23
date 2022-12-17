@@ -1,0 +1,166 @@
+package tarea3;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+/**
+ *
+ * @author JRC
+ */
+ 
+class Reader extends Thread
+{
+    private String FicheroTexto;
+    
+    public Reader(String fichero)
+    {
+        this.FicheroTexto=fichero;
+        setName(fichero);
+    }
+
+    public void ejecutarRun()
+ {      
+        int numeroCaracteres=0;
+        
+        FileReader fr= null;
+        
+        try{
+            fr= new FileReader(FicheroTexto);
+            int caracter=fr.read();
+            
+            while(caracter!=-1)
+            {
+                numeroCaracteres++;
+                caracter=fr.read();
+            }
+        }catch(FileNotFoundException e)
+        {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error de lectura del fichero");
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try
+            {
+                if(fr!=null)
+                {
+                    fr.close();
+                    System.out.println("Numero de caracteres de los textos introducidos: "+numeroCaracteres);
+                    
+                }
+            }catch(Exception e)
+            {
+                System.out.println("Cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
+ }
+}
+
+    
+class ExecutionTimer
+{
+    private long startTime=0;
+    private long endTime=0;
+    private long timeElapsed;
+    
+    public void start()
+    {
+        startTime=System.nanoTime();
+    }
+    
+    public void stop()
+    {
+        endTime=System.nanoTime();
+    }
+    
+    public long elapsedTime()
+    {
+       return timeElapsed=endTime-startTime;
+    } 
+}
+
+   
+public class Tarea3 {
+ public static void main(String[] args) {   
+     
+        ExecutionTimer timerH= new ExecutionTimer();
+        ExecutionTimer timerSinH= new ExecutionTimer();
+        int numeroArgumentos=args.length;
+      
+        System.out.println("Ejecutando con los hilos");
+        timerH.start();
+        
+        for(int i=0; i<numeroArgumentos; i++)
+        {
+            Reader hilo= new Reader(args[i]);
+            
+            hilo.start();
+            
+            try{
+                hilo.join();
+            }catch(InterruptedException e)
+            {
+                
+            }
+            
+        }
+        timerH.stop();
+        
+        
+        System.out.println("Ejecutando pero sin hilos");
+        timerSinH.start();
+        for(int i=0; i<numeroArgumentos; i++)
+        {
+            reader(args[i]);
+        }
+        timerSinH.stop();
+        
+        System.out.println("Los hilos han durado en ejecutarse: "+(timerH.elapsedTime()/1000000)+", y el tiempo que han tardado en ejecutarse sin hilos es: "+timerSinH.elapsedTime()/1000000);
+    }
+ 
+
+    public static void reader(String fichero)
+ {      
+        int numero=0;
+        
+        FileReader fr= null;
+        
+        try{
+            fr= new FileReader(fichero);
+            int caracter=fr.read();
+            
+            while(caracter!=-1)
+            {
+                numero++;
+                caracter=fr.read();
+            }
+        }catch(FileNotFoundException e)
+        {
+            System.out.println("No se ha podido leer el fichero");
+            System.out.println(e.getMessage());
+        }
+        catch(Exception e)
+        {
+            System.out.println("No se ha podido leer el fichero");
+            System.out.println(e.getMessage());
+        }
+        finally{
+            try
+            {
+                if(fr!=null)
+                {
+                    fr.close();
+                    System.out.println("Cantidad de caracteres de los textos introducidos: "+numero);
+                    
+                }
+            }catch(Exception e)
+            {
+                System.out.println("Cerrar el fichero");
+                System.out.println(e.getMessage());
+            }
+        }
+ }
+} 
