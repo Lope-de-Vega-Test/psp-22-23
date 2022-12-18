@@ -10,8 +10,8 @@ public class PSP_UA3_Tarea2Cliente {
 
 
  
-        String Host = "localhost";
-          int Puerto = 6000;// Puerto
+        String Host = "192.168.1.28";
+          int Puerto = 10000;// Puerto
     
         Socket Cliente = new Socket(Host, Puerto);
         InetAddress i = Cliente.getInetAddress();
