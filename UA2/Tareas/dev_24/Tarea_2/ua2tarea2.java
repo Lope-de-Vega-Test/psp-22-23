@@ -102,33 +102,3 @@ class Hilos extends Thread{
         cuenta.resultado(getName());
     }
 }
-public class ua2tarea2 {
-    
-    public static void main(String[] args) {
-        
-        CuentaCorriente cuenta=new CuentaCorriente(30);
-        
-        Hilos hilo1=new Hilos("Hilo1", 60, cuenta);
-        Hilos hilo2=new Hilos("Hilo2", 200, cuenta);
-        Hilos hilo3=new Hilos("Hilo3", 300, cuenta);
-        Hilos hilo4=new Hilos("Hilo4", 56, cuenta);
-        Hilos hilo5=new Hilos("Hilo5", 100, cuenta);
-       
-        hilo1.start();
-        hilo2.start();
-        hilo3.start();
-        hilo4.start();
-        hilo5.start();
-        
-        try{
-            hilo1.join();
-            hilo2.join();
-            hilo3.join();
-            hilo4.join();
-            hilo5.join();
-        }
-        catch(InterruptedException e){}
-        
-        System.out.println("El saldo final es: "+cuenta.saldo+" €");
-    }
-}
