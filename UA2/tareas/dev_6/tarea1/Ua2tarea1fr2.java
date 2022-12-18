@@ -29,11 +29,11 @@ public class Ua2tarea1fr2 {
         h5.start();
 
         try {
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
+            h1.join();
+            h2.join();
+            h3.join();
+            h4.join();
+            h5.join();
 
         } catch (InterruptedException e) {
             // Nothing to do here ...
