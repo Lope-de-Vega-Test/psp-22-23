@@ -7,9 +7,9 @@ import java.net.*;
  */
 public class PSP_UA3_Tarea2Server {
   public static void main(String[] arg) throws IOException {
-	int Puerto = 6000;// Puerto
+	int Puerto = 10000;// Puerto
 
-    InetAddress direccion = InetAddress.getByName("10.2.0.11");
+    InetAddress direccion = InetAddress.getByName("127.0.0.1");
 	ServerSocket Servidor = new ServerSocket(Puerto,50,direccion);
     System.out.println("Escuchando en " + Servidor.getLocalPort());
 
