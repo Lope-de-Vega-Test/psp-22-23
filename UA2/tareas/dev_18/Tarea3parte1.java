@@ -1,13 +1,9 @@
 package paquete;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+class ExecutionTimer {
 
-class ExecutionTimer {  //medir tiempo de ejecucuin
     private long startTime = 0;
     private long endTime = 0;
     private long timeElapsed = 0;
@@ -25,39 +21,64 @@ class ExecutionTimer {  //medir tiempo de ejecucuin
     }
 
     public void printElapsedTime() {
+
         elapsedTime();
         System.out.println("Execution time in nanoseconds: " + timeElapsed);
         System.out.println("Execution time in milliseconds: " + timeElapsed / 1000000);
+
+    }
+
+}
+
+class crearhilo extends Thread {
+
+    String[] args;
+    int numero = 0;
+
+    public crearhilo(String[] args, int numero) {
+        this.args = args;
+        this.numero = numero;
+
+    }
+
+    public void run() {
+        int linea = 0;
+        try {
+            FileReader file = new FileReader(args[numero]);
+            while (file.read() != -1) {
+                linea++;
+            }
+        } catch (Exception e) {
+
+        }
+        System.out.println("Numero de lineas: " + linea);
+
     }
 }
 
-public class ua2tarea3fr1 {
+public class ua2tarea3fr2 {
 
     public static void main(String[] args) {
+
         ExecutionTimer timer = new ExecutionTimer();
         timer.start();
-        try { // arry
-            FileReader file1 = new FileReader(args[0]);
-            FileReader file2 = new FileReader(args[1]);
+        crearhilo primerhilo = new crearhilo(args, 0);
+        crearhilo segundohilo = new crearhilo(args, 1);
 
-            int contador = 0; //contador de lineas
+        System.out.println("Los hilos son inicializados");
+        primerhilo.start();
+        segundohilo.start();
 
-            while (file1.read() != -1) {
-                contador++;
-            }
-            while (file2.read() != -1) {
-                contador++;
-            }
+        try {
+            primerhilo.join();
+            segundohilo.join();
 
-            System.out.println("Hay: " + contador+" lineas");
+        } catch (Exception e) {
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ua2tarea3fr1.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ua2tarea3fr1.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        System.out.println("Fin de los hilos");
         timer.stop();
         timer.printElapsedTime();
     }
+
 }
