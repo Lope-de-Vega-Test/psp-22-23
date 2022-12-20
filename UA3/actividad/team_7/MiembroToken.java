@@ -1,5 +1,5 @@
 /*
-* @team     48
+* @team     7
 * @author   David Bravo Fernandez       (dev_7)
 * @author   Adrián Luque Mantero        (dev_21)
 * @author   Ignacio Martinez Sanchez    (dev_22)
