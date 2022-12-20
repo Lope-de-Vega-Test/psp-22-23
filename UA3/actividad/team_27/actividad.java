@@ -1,7 +1,7 @@
 import java.net.*;
 import java.io.*;
 
-public class MiembroToken {
+public class actividad {
 
     //Creamos las variables para los argumentos
     private static int id;
