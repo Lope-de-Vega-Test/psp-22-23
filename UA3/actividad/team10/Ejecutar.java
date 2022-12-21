@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 public class Ejecutar {
     public static void main(String[] args) {       
         Scanner entrada = new Scanner(System.in);
-        System.out.print("Introduzca el numero de miembrosToken: ");
+        System.out.print("Cuantos procesos quieres ejecutar: ");
         int aux = entrada.nextInt();
-        String comando = "cmd.exe /c start "+"java MiembroToken.java";
+       String comando = "cmd.exe /c start "+"java MiembroToken.java";
         for(int i = 2; i<=aux-1;i++){
             try {
                 Process child = Runtime.getRuntime().exec(comando+" "+i+" "+(10000+i-1)+" no no");
