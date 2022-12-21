@@ -211,13 +211,13 @@ class Hilo extends Thread {
 
             // ENVIO EL SEGUNDO TOKEN HACIA DELANTE O HACIA ATRAS DEPENDIENDO DE A QUIEN LE ENVIE ANTES
             if (firstSentTo == -1) {
-                if (sendToken(selfPort - 1)) {
+                if (sendToken(selfPort + 1)) {
                     hasToken = false;
                 } else {
                     System.out.println("Miembro: " + id + ", No pudo enviar el Token ):");
                 }
             } else if (firstSentTo == 1) {
-                if (sendToken(selfPort + 1)) {
+                if (sendToken(selfPort - 1)) {
                     hasToken = false;
                 } else {
                     System.out.println("Miembro: " + id + ", No pudo enviar el Token ):");
