@@ -1,8 +1,8 @@
 import java.io.*;
 import java.net.*;
 
-public class ServerSocketjava {
-  public ServerSocketjava(int puerto) {
+public class ServerSocketjavaej2 {
+  public ServerSocketjavaej2(int puerto) {
     }
 
 public static void main(String[] arg) throws IOException {

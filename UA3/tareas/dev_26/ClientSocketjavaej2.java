@@ -1,7 +1,7 @@
 import java.io.*;
 import java.net.*;
 
-public class ClientSocketjava {
+public class ClientSocketjavaej2 {
   public static void main(String[] arg) throws IOException {
     String Host = "localhost";
 	  int Puerto = 6000;// Puerto
