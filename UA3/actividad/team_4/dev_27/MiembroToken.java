@@ -2,9 +2,9 @@ package dev_27;
 import java.net.*;
 import java.io.*;
 
-public class actividad {
+public class MiembroToken {
 
-    //Creamos las variables para los argumentos
+    //Creamos las variables para los argumxentos
     private static int id;
     private static int puerto;
     private static boolean token;
