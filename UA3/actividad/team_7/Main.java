@@ -8,7 +8,7 @@ public class Main {
         int NUM_MIEMBROS = Integer.parseInt(args[0]);
         int id = 1;
         int port = 10000;
-
+        int lastPort = port+NUM_MIEMBROS-1;
         Runtime r = Runtime.getRuntime();
         ProcessBuilder myProcess;
         Process p;
@@ -16,20 +16,20 @@ public class Main {
         // SOLO SE EJECUTA SI EL USUARIO QUIERE LANZAR 2 O MAS MIEMBROS
         if (NUM_MIEMBROS > 1) {
             // PRIMER MIEMBRO TOKEN
-            myProcess = new ProcessBuilder("java", "MiembroToken.java", "1", "10000", "yes", "no", String.valueOf(port+NUM_MIEMBROS-1));
+            myProcess = new ProcessBuilder("java", "MiembroToken.java", "1", "10000", "yes", "no", String.valueOf(lastPort));
             myProcess.redirectOutput(ProcessBuilder.Redirect.INHERIT);
             p = myProcess.start();
             // BUCLE QUE LANZA N MIEMBROS TOKEN
             if (NUM_MIEMBROS > 2) {
                 for (int i = 0; i < NUM_MIEMBROS - 2; i++) {
-                    myProcess = new ProcessBuilder("java", "MiembroToken.java", String.valueOf(++id), String.valueOf(++port), "no", "no");
+                    myProcess = new ProcessBuilder("java", "MiembroToken.java", String.valueOf(++id), String.valueOf(++port), "no", "no", String.valueOf(lastPort));
                     myProcess.redirectOutput(ProcessBuilder.Redirect.INHERIT);
                     p = myProcess.start();
                 }
             }
 
             // ULTIMO MIEMBRO TOKEN
-            myProcess = new ProcessBuilder("java", "MiembroToken.java", String.valueOf(++id), String.valueOf(++port), "no", "yes");
+            myProcess = new ProcessBuilder("java", "MiembroToken.java", String.valueOf(++id), String.valueOf(++port), "no", "yes", String.valueOf(lastPort));
             myProcess.redirectOutput(ProcessBuilder.Redirect.INHERIT);
             p = myProcess.start();
         } else if (NUM_MIEMBROS==1) {
