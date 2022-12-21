@@ -1,7 +1,7 @@
 /*
 * @team     7
 * @author   David Bravo Fernandez       (dev_7)
-* @author   Adrián Luque Mantero        (dev_21)
+* @author   AdriÃ¡n Luque Mantero        (dev_21)
 * @author   Ignacio Martinez Sanchez    (dev_22)
  */
 
@@ -211,13 +211,13 @@ class Hilo extends Thread {
 
             // ENVIO EL SEGUNDO TOKEN HACIA DELANTE O HACIA ATRAS DEPENDIENDO DE A QUIEN LE ENVIE ANTES
             if (firstSentTo == -1) {
-                if (sendToken(selfPort - 1)) {
+                if (sendToken(selfPort + 1)) {
                     hasToken = false;
                 } else {
                     System.out.println("Miembro: " + id + ", No pudo enviar el Token ):");
                 }
             } else if (firstSentTo == 1) {
-                if (sendToken(selfPort + 1)) {
+                if (sendToken(selfPort - 1)) {
                     hasToken = false;
                 } else {
                     System.out.println("Miembro: " + id + ", No pudo enviar el Token ):");
