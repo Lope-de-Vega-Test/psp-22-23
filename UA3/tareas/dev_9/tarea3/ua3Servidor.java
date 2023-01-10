@@ -15,5 +15,6 @@ public class ua3Servidor {
         enviar.println(mensajeEnviado);
         System.out.println("El mensaje ha sido mandado");
         Cliente.close();
+        socketServidor.close();
     }
 }
