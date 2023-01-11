@@ -1,0 +1,30 @@
+Nombre: Francisco Javier Valverde Luque
+
+
+ClienteChat.java 	    Programa (interfaz runnable) 	3
+
+1º Rellenar -> PRINT DEL MENSAJE QUE ESCRIBES EN CONSOLA (fentrada.readUTF())
+
+2º Rellenar -> (s, nombre)
+
+3º Rellenar -> bufferedReader.readLine()
+
+
+HiloServidorChat.java 	Hilo 	                        3
+
+1º Rellenar -> socket.getInputStream()
+
+2º Rellenar -> comun.getACTUALES() - 1
+
+3º Rellenar -> String texto
+
+
+ServidorChat.java 	    Programa 	                    4
+
+1º Rellenar -> 44444
+
+2º Rellenar -> ComunHilos
+
+3º Rellenar -> servidor.accept()
+
+4º Rellenar -> start()
