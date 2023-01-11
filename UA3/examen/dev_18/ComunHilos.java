@@ -1,75 +1,52 @@
-import java.io.;
-import java.net.;
+import java.net.Socket;
 
-public class HiloServidorChat extends Thread {
-    DataInputStream fentrada;
-    Socket socket = null;
-    ComunHilos comun;
+public class ComunHilos {
+     int CONEXIONES; //NUMERO DE CONEXIONES TOTALES, OCUPADAS EN EL ARRAY
+     int ACTUALES;   //NUMERO DE CONEXIONES ACTUALES
+     int MAXIMO;     //MAXIMO DE CONEXIONES PERMITIDAS
+     Socket tabla[] = new Socket[MAXIMO];// SOCKETS CONECTADOS
+     String mensajes; //MENSAJES DEL CHAT
+     String ultimo; //ULTIMO MENSAJE DEL CHAT
 
-    public HiloServidorChat(Socket s, ComunHilos comun) {
-        this.socket = s;
-        this.comun = comun;
-        try {
-            // CREO FLUJO DE entrada para leer los mensajes
-            fentrada = new DataInputStream(/* RELLENAR /);
-        } catch (IOException e) {
-            System.out.println("ERROR DE E/S");
-            e.printStackTrace();
-        }
-    }// ..
+    public ComunHilos(int maximo, int actuales, int conexiones, Socket[] tabla) {
+        MAXIMO = maximo;
+        ACTUALES = actuales;
+        CONEXIONES = conexiones;
+        this.tabla = tabla;
+        mensajes="";
+        ultimo="";
+    }
 
-    public void run() {
-        System.out.println("NUMERO DE CONEXIONES ACTUALES: " + comun.getACTUALES());
+    public ComunHilos() { super(); }
 
-        // NADA MAS CONECTARSE LE ENVIO TODOS LOS MENSAJES
-        String texto = comun.getMensajes();
-        EnviarMensajesaTodos(texto);
+     public int getMAXIMO() { return MAXIMO;    }
+    public void setMAXIMO(int maximo) { MAXIMO = maximo;}
 
-        while (true) {
-            String cadena = "";
-            try {
-                cadena = fentrada.readUTF();
-                if (cadena.trim().equals("")) {// EL CLIENTE SE DESCONECTA
-                    comun.setACTUALES(comun.getACTUALES() - 1);
-                    System.out.println("NUMERO DE CONEXIONES ACTUALES: " + comun.getACTUALES());
-                }
 
-                comun.setUltimo(cadena);
-                EnviarMensajesaTodos(comun.getUltimo());
+    public int getCONEXIONES() { return CONEXIONES;    }
+    public synchronized void  setCONEXIONES(int conexiones) {
+        CONEXIONES = conexiones;
+    }
 
-            } catch (Exception e) {// EL CLIENTE SE DESCONECTA A LO BRUTO Ctrl+C o similar
-                comun.setACTUALES(/* RELLENAR /);
-                System.out.println("NUMERO DE CONEXIONES ACTUALES: " + comun.getACTUALES());
-                System.out.println("ERROR: " + e.getMessage());
-                break;
-            }
-        } // fin while
+    public String getMensajes() { return mensajes; }
+    public synchronized void setMensajes(String mensajes) {
+        this.mensajes = mensajes;
+    }
 
-        // se cierra el socket del cliente
-        try {
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String getUltimo() { return ultimo; }
+    public synchronized void setUltimo(String ultimo) {
+        this.ultimo = ultimo;
+        this.setMensajes(this.getMensajes() + ultimo + "\n");
+    }
 
-    }// run
+    public int getACTUALES() { return ACTUALES; }
+    public synchronized void setACTUALES(int actuales) {
+        ACTUALES = actuales;
+    }
 
-    // ENVIA LOS MENSAJES DEL CHAT A LOS CLIENTES
-    private void EnviarMensajesaTodos(/ RELLENAR */) {
-        int i;
-        // recorremos tabla de sockets para enviarles los mensajes
-        for (i = 0; i < comun.getCONEXIONES(); i++) {
-            Socket s1 = comun.getElementoTabla(i);
-            if (!s1.isClosed()) {
-                try {
-                    DataOutputStream fsalida = new DataOutputStream(s1.getOutputStream());
-                    fsalida.writeUTF(texto);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } // for
+    public synchronized void addTabla(Socket s, int i) {
+        tabla[i] = s;
+    }
+    public Socket getElementoTabla(int i) { return tabla[i]; }
 
-    }// EnviarMensajesaTodos
-
-}// ..HiloServidorChat
+}//ComunHilos
