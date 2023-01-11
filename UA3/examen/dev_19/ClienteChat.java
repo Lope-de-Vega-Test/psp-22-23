@@ -30,7 +30,7 @@ public class ClienteChat implements Runnable {
 		String texto = "";
 		while (repetir) {
 			try {
-				texto = /* RELLENAR */
+				texto = fentrada.readUTF();
 				System.out.println(texto);
 
 			} catch (IOException e) {
@@ -64,7 +64,7 @@ public class ClienteChat implements Runnable {
 
 		try {
 			s = new Socket("localhost", puerto);
-			cliente = /* RELLENAR */
+			cliente = new ClienteChat(s, nombre);
 			new Thread(cliente).start();
 
 		} catch (IOException e) {
@@ -73,7 +73,7 @@ public class ClienteChat implements Runnable {
 
 		while(repetir)
 		{
-			String texto = /* RELLENAR */
+			String texto = "";
 			if(texto.length()>0)
 			{
 				if(texto.equals("*"))
