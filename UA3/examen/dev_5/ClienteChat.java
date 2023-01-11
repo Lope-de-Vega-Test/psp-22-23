@@ -7,6 +7,7 @@
  import java.io.*;
  import java.net.*;
  
+ 
  public class ClienteChat implements Runnable {
      Socket socket = null;
      // streams
@@ -36,7 +37,7 @@
          String texto = "";
          while (repetir) {
              try {
-                 texto = /* RELLENAR */
+                 texto = fentrada.readUTF();/*RELLENAMOS*/
                  System.out.println(texto);
  
              } catch (IOException e) {
@@ -70,7 +71,7 @@
  
          try {
              s = new Socket("localhost", puerto);
-             cliente = /* RELLENAR */
+             cliente = new ClienteChat(s, nombre);/*RELLENAMOS*/
              new Thread(cliente).start();
  
          } catch (IOException e) {
@@ -79,7 +80,7 @@
  
          while(repetir)
          {
-             String texto = /* RELLENAR */
+             String texto = bufferedReader.readLine();/*RELLENAMOS*/
              if(texto.length()>0)
              {
                  if(texto.equals("*"))
