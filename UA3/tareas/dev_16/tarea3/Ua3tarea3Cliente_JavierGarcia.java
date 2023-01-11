@@ -1,4 +1,3 @@
-package ua3tarea3cliente_javiergarcia;
 
 import java.io.*;
 import java.net.*;
