@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 /**
  *
- * @author Lucía Luna
+ * @author LucÃ­a Luna
  */
 
 
@@ -56,13 +56,13 @@ public class ClienteChat implements Runnable {
 		String nombre = bufferedReader.readLine();
 
 		if (nombre.trim().length() == 0) {
-			System.out.println("El nombre está vacío....");
+			System.out.println("El nombre estÃ¡ vacÃ­o....");
 			return;
 		}
 
 		try {
 			s = new Socket("localhost", puerto);
-			cliente = null ; /* RELLENAR */
+			cliente = new ClienteChat(s, nombre); /* RELLENAR */
 			new Thread(cliente).start();
 
 		} catch (IOException e) {
