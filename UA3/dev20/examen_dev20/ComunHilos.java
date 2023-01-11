@@ -2,7 +2,7 @@ import java.net.Socket;
 
 /**
  *
- * @author Lucía Luna
+ * @author LucÃ­a Luna
  */
 
 public class ComunHilos {
