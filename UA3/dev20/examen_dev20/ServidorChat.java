@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 /**
  *
- * @author Lucía Luna
+ * @author LucÃ­a Luna
  */
 
 public class ServidorChat
@@ -27,7 +27,7 @@ public class ServidorChat
 			comun.setCONEXIONES(comun.getCONEXIONES() + 1);
 
 			HiloServidorChat hilo = new HiloServidorChat(socket, comun);
-			hilo.close();/* RELLENAR */
+			hilo.start();/* RELLENAR */
 		}
 		servidor.close();
 	}//main
