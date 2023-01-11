@@ -27,7 +27,7 @@ public class ServidorChat
 
 			HiloServidorChat hilo = new HiloServidorChat(socket, comun);
 			// hilo./* RELLENAR */;
-			hilo.run();
+			hilo.start();
 		}
 		servidor.close();
 	}//main

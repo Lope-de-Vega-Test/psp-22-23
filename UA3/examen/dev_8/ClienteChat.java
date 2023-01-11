@@ -21,11 +21,14 @@ public class ClienteChat implements Runnable {
 		System.out.println("CONEXION DEL CLIENTE CHAT: " + nombre);
 		socket = s;
 		this.nombre = nombre;
+		// System.out.println("Entra aqui 1");
 		try {
+			// System.out.println("Entra aqui 2");
 			fentrada = new DataInputStream(socket.getInputStream());
 			fsalida = new DataOutputStream(socket.getOutputStream());
 			String texto = " > Entra en el Chat ... " + nombre;
 			fsalida.writeUTF(texto);
+			// System.out.println("Entra aqui 3 ");
 		} catch (IOException e) {
 			System.out.println("ERROR DE E/S");
 			e.printStackTrace();
@@ -37,8 +40,10 @@ public class ClienteChat implements Runnable {
 		String texto = "";
 		while (repetir) {
 			try {
+				System.out.println("Entra en run 1");
+
 				// texto = /* RELLENAR */
-				texto = "Recibiendo del SERVIDOR: \n\t" + fentrada.readUTF();
+				texto = fentrada.readUTF();
 				System.out.println(texto);
 
 			} catch (IOException e) {
@@ -80,7 +85,7 @@ public class ClienteChat implements Runnable {
 		}
 
 		while (repetir) {
-			String texto = ""; /* RELLENAR */
+			String texto = bufferedReader.readLine(); /* RELLENAR */
 			if (texto.length() > 0) {
 				if (texto.equals("*")) {
 					repetir = false;
