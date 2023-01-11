@@ -1,7 +1,7 @@
 /*
  * Basado en el Trabajo:
- * 		ProgramaciÃ³n de servicios y procesos - TÃ©cnico Superior en DAM.
- *		MÂª JesÃºs Ramos MartÃ­n. Editorial Garceta. 2Âª EdiciÃ³n. 2018. ISBN: 978-84-1728-931-7. *
+ * 		Programación de servicios y procesos - Técnico Superior en DAM.
+ *		Mª Jesús Ramos Martín. Editorial Garceta. 2ª Edición. 2018. ISBN: 978-84-1728-931-7. *
  */
 
 import java.io.*;
@@ -32,14 +32,14 @@ public class ClienteChat implements Runnable {
 		}
 	}// fin constructor
 
-	public void run() {
+	public void run() { 
 		String texto = "";
 		while (repetir) {
 			try {
-				texto = /* RELLENAR */
+				texto = fentrada.readUTF();
 				System.out.println(texto);
 
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// este error sale cuando el servidor se cierra
 				System.out.println("IMPOSIBLE CONECTAR CON EL SERVIDOR\n" + e.getMessage());
 				repetir = false;
@@ -64,13 +64,13 @@ public class ClienteChat implements Runnable {
 		String nombre = bufferedReader.readLine();
 
 		if (nombre.trim().length() == 0) {
-			System.out.println("El nombre estÃ¡ vacÃ­o....");
+			System.out.println("El nombre está vacío....");
 			return;
 		}
 
 		try {
 			s = new Socket("localhost", puerto);
-			cliente = /* RELLENAR */
+			cliente = new ClienteChat(s,nombre);
 			new Thread(cliente).start();
 
 		} catch (IOException e) {
@@ -79,7 +79,7 @@ public class ClienteChat implements Runnable {
 
 		while(repetir)
 		{
-			String texto = /* RELLENAR */
+			String texto = bufferedReader.readLine();
 			if(texto.length()>0)
 			{
 				if(texto.equals("*"))
@@ -92,6 +92,7 @@ public class ClienteChat implements Runnable {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+                                        System.exit(0);
 				}
 				else
 				{
