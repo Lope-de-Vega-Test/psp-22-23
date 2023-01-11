@@ -6,7 +6,6 @@
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class ClienteChat implements Runnable {
 	Socket socket = null;
@@ -33,12 +32,11 @@ public class ClienteChat implements Runnable {
 		}
 	}// fin constructor
 
-	public void run() {
-                BufferedReader bufferedReader = new BufferedReader (new InputStreamReader(System.in));
+	public void run() { 
 		String texto = "";
 		while (repetir) {
 			try {
-				texto = bufferedReader.readLine();
+				texto = fentrada.readUTF();
 				System.out.println(texto);
 
 			} catch (Exception e) {
@@ -94,6 +92,7 @@ public class ClienteChat implements Runnable {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+                                        System.exit(0);
 				}
 				else
 				{
