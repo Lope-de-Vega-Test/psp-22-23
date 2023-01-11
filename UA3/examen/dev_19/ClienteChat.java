@@ -73,7 +73,7 @@ public class ClienteChat implements Runnable {
 
 		while(repetir)
 		{
-			String texto = "";
+			String texto = bufferedReader.readLine();
 			if(texto.length()>0)
 			{
 				if(texto.equals("*"))
