@@ -16,6 +16,7 @@ public class tarea5servidor {
         System.out.println("Numero recibido: " + base);
 
         long cuadrado, cubo;
+       
         cuadrado = base * base;
         cubo = cuadrado * base;
 
