@@ -1,4 +1,3 @@
-package ua3tarea5cliente_javiergarcia;
 
 import java.util.Scanner;
 import java.net.*;
