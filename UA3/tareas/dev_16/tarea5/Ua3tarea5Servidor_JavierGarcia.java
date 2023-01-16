@@ -1,4 +1,3 @@
-package ua3tarea5servidor_javiergarcia;
 
 import java.io.*;
 import java.net.*;
