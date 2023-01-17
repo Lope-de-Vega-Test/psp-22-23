@@ -1,0 +1,29 @@
+package ua3tarea4cliente_joseramon;
+import java.io.*;
+import java.net.*;
+
+
+/**
+ *
+ * @author JRC
+ */
+public class Ua3tarea4Server_JoseRamon {
+
+    public static void main(String[] args) throws IOException{
+        ServerSocket socket = new ServerSocket(5000);
+        Socket socketCliente = socket.accept();
+        BufferedReader recibido = new BufferedReader(new InputStreamReader(socketCliente.getInputStream()));
+        String MensajeCliente = recibido.readLine();
+        System.out.println("Mensaje del Cliente: " + MensajeCliente);
+
+        PrintWriter enviar = new PrintWriter(socketCliente.getOutputStream(), true);
+        String MensajeServidor = MensajeCliente.toUpperCase();
+        enviar.println(MensajeServidor);
+
+        System.out.println("Mensaje del Servidor: " + MensajeServidor);
+
+        socket.close();
+    }
+    
+}
+    
