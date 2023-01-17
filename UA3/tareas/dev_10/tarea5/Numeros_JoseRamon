@@ -1,0 +1,55 @@
+package ua3tarea5cliente_joseramon;
+
+/**
+ *
+ * @author JRC
+ */
+class Numeros {
+    int Base;
+    long Numcuadrado;
+    long Numcubo;
+
+    public Numeros(int Base, long Numcuadrado, long Numcubo) {
+        this.Base = Base;
+        this.Numcuadrado = Numcuadrado;
+        this.Numcubo = Numcubo;
+    }
+    
+    public Numeros() {
+        Base = 0;
+        Numcuadrado = 0;
+        Numcubo = 0;
+    }
+
+    public int getNumBase() {
+        return Base;
+    }
+
+    public long getCuadrado() {
+        return Numcuadrado;
+    }
+
+    public long getCubo() {
+        return Numcubo;
+    }
+
+    public void setNumBase(int Base) {
+        this.Base = Base;
+    }
+
+    public void setCuadrado(long Numcuadrado) {
+        this.Numcuadrado = Numcuadrado;
+    }
+
+    public void setCubo(long cubo) {
+        this.Numcubo = Numcubo;
+    }
+
+    @Override
+    public String toString() {
+        return "Numeros{" + "numBase=" + Base + ", cuadrado=" + Numcuadrado + ", cubo=" + Numcubo + '}';
+    }
+    
+}
+
+
