@@ -1,0 +1,44 @@
+package ua3tarea4cliente_joseramon;
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+/**
+ *
+ * @author JRC
+ */
+public class Ua3tarea4Cliente_JoseRamon {   
+    public static void main(String[] args) throws IOException{
+        Scanner sca = new Scanner(System.in);
+        
+        Socket socket = new Socket("localhost", 5000);
+        
+        boolean fin = false;
+        String letra = "";
+        String enviado = "";
+        String cliente = "";
+        
+        System.out.println("Introduce el mensaje:");
+        while(!letra.equals("*")){
+            letra = sca.next();
+            if(!letra.equals("*")){
+                cliente += letra;
+            }
+        }
+        PrintWriter envio = new PrintWriter(socket.getOutputStream(), true);
+        envio.println(cliente);
+
+        System.out.println("El mensaje ha sido enviado con éxito");
+
+        BufferedReader recibo = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        String MensajeServidor = recibo.readLine();
+
+        System.out.println("Mensaje del servidor: " + MensajeServidor);
+
+        socket.close();
+    }
+    
+}
+       
+    
+    
+
