@@ -1,4 +1,4 @@
-public class numeros {
+public class Numeros {
     
     int numerobase;
     long cuadrado;
@@ -12,7 +12,7 @@ public class numeros {
       
     }
     
-    public bumeros() {
+    public numeros() {
       
         numerobase = 0;
         cuadrado  =0;
