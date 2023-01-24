@@ -12,7 +12,7 @@ public class Numeros {
       
     }
     
-    public numeros() {
+    public Numeros() {
       
         numerobase = 0;
         cuadrado  =0;
