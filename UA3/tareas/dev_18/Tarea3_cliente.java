@@ -2,10 +2,9 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
     
-public class tarea3cliente {
+public class Tarea3_cliente {
     
         public static void main(String[] args) throws IOException {
-            
             
             Scanner escanner = new Scanner(System.in);
             Socket cliente = new Socket("localhost", 2000);
