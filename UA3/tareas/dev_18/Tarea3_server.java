@@ -1,7 +1,7 @@
 import java.io.*;
 import java.net.*;
 
-public class tarea3server {
+public class Tarea3_server {
 
     public static void main(String[] args) throws IOException{
        
