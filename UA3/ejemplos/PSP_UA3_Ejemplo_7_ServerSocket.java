@@ -8,7 +8,8 @@ public class PSP_UA3_Ejemplo_7_ServerSocket {
 
     public static void main(String[] arg) throws IOException {
         int Puerto = 6000;// Puerto
-        ServerSocket Servidor = new ServerSocket(Puerto);
+        ServerSocket Servidor;
+        Servidor = new ServerSocket(Puerto);
         System.out.println("Port: " + Servidor.getLocalPort());
 
         Socket c;
