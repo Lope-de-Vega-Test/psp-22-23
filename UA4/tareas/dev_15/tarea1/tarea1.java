@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.event.*;
 import org.apache.commons.net.PrintCommandListener;
@@ -9,13 +10,11 @@ import java.awt.event.*;
 public class tarea1 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-    static JOptionPane ser= new JOptionPane();
-    
     //campos de cabecera parte superior
     static JTextField cab = new JTextField();
 	static JTextField cab2 = new JTextField();
 	static JTextField cab3 = new JTextField();
-   
+	static JTextField ser= new JTextField();
 
     //campos de mensajes parte inferior
 	private static JTextField campo = new JTextField();
@@ -37,7 +36,7 @@ public class tarea1 extends JFrame {
 	
     //Datos del servidor FTP
 	static FTPClient cliente = new FTPClient();//cliente FTP
-	static String servidor = JOptionPane.showInputDialog("hola");
+	String servidor =JOptionPane.showInputDialog("Introduce el servidor");
 	String user = "usuario";
 	String pasw = "usuario";
 	boolean login;
@@ -49,10 +48,9 @@ public class tarea1 extends JFrame {
 	
 	// constructor
 	public tarea1() throws IOException {
-		super("CLIENTE B�SICO FTP");	
-       	add(ser);
+		super("CLIENTE B�SICO FTP");		
 		System.out.println("Conectandose a " + servidor);
-		
+		add(ser);
 		cliente.addProtocolCommandListener(new PrintCommandListener (new PrintWriter (System.out) )); 
 		cliente.connect(servidor);
 		cliente.enterLocalPassiveMode();
@@ -103,8 +101,7 @@ public class tarea1 extends JFrame {
 		JScrollPane barraDesplazamiento = new JScrollPane(listaDirec);
 		barraDesplazamiento.setPreferredSize(new Dimension(335, 420));
 		barraDesplazamiento.setBounds(new Rectangle(5, 65, 335, 420));
-        
-        c.add(barraDesplazamiento);
+		c.add(barraDesplazamiento);
 		c.setLayout(null);		
 
 		c.add(campo); campo.setEditable(false);
@@ -427,7 +424,8 @@ public class tarea1 extends JFrame {
 	// main---------------------------------------------------------------------
 	public static void main(String[] args) throws IOException {
 		new tarea1();
-        
-        System.out.println(servidor);
-	}
-}// ..FIN main
+		System.out.println(ser);
+      
+	}// ..FIN main
+
+}// .fin clase

@@ -1,0 +1,10 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "c:\\Users\\lucia\\OneDrive\\Escritorio\\DAM2\\programaciondeprocesosyservicios\\2º trimestre\\commons-net-3.9.0.jar"
+        ]
+    }
+}
