@@ -1,11 +1,11 @@
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ua2servidor {
+public class ua3tarea2servidor {
     ServerSocket server;
     Socket cliente;
 
-    public ua2servidor(int port) {
+    public ua3tarea2servidor(int port) {
         try{
             server = new ServerSocket(port);
             System.out.println("Servidor en marcha!");
@@ -33,6 +33,6 @@ public class ua2servidor {
     }
 
     public static void main(String[] args) {
-        new ua2servidor(6000);
+        new ua3tarea2servidor(6000);
     }
 }
