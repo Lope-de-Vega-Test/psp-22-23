@@ -1,6 +1,9 @@
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.PortUnreachableException;
+import java.net.SocketException;
 import java.util.Scanner;
 
 public class ua3tarea4servidor {
@@ -16,8 +19,8 @@ public class ua3tarea4servidor {
     public ua3tarea4servidor(int selfPort) {
         try{
             socket = new DatagramSocket(selfPort);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SocketException e1) {
+            System.out.println("El puerto " +selfPort + " ya esta en uso.");
             System.exit(1);
         }
     }
@@ -56,9 +59,11 @@ public class ua3tarea4servidor {
         prepareDatagramPacket(msg);
         try{
             socket.send(packet); // Envio datagrama
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
+        } catch (PortUnreachableException e2) {
+            System.out.println("El datagrama no pudo ser enviado. Motivo: el cliente termino la conexion");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+
         }
     }
 
@@ -82,9 +87,10 @@ public class ua3tarea4servidor {
             returnMsg(transformMsg(getPacketMsg()));
             System.out.println("Datagrama devuelto");
             System.out.println("\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            System.out.println("El datagrama se perdio. Motivo: " + e1.getCause().toString());
+            
         }
     }
 

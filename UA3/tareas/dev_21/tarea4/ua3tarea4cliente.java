@@ -1,6 +1,11 @@
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.PortUnreachableException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class ua3tarea4cliente {
@@ -16,8 +21,10 @@ public class ua3tarea4cliente {
     public ua3tarea4cliente(int selfPort) {
         try{
             socket = new DatagramSocket(selfPort);
-        } catch (Exception e) {
-            e.printStackTrace();
+            socket.setSoTimeout(5000);
+        } catch (SocketException e1) {
+            System.out.println("El puerto " +selfPort + " ya esta en uso.");
+            System.exit(1);
         }
     }
     
@@ -25,8 +32,9 @@ public class ua3tarea4cliente {
     public void setDestinationAddress(String address) {
         try{
             destinationAddress = InetAddress.getByName(address);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (UnknownHostException e1) {
+            System.out.println("No se encontro la direccion proporcionada.");
+            System.exit(1);
         }
         
     }
@@ -52,14 +60,19 @@ public class ua3tarea4cliente {
 
     public void receive() {
         try {
+            Thread.sleep(1000);
             prepareDatagramPacket();
             socket.receive(packet);
             System.out.println("Paquete transformado retornado. Contenido: ");
             System.out.println("> " + getPacketMsg());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            System.out.println("El datagrama no ha llegado. Motivo: el servidor termino la conexion.");
             System.exit(1);
+        } catch (InterruptedException e2) {
+            e2.printStackTrace();
         }
+
     }
 
     // Sending
@@ -78,8 +91,11 @@ public class ua3tarea4cliente {
         prepareDatagramPacket(msg);
         try{
             socket.send(packet); // Envio datagrama
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SocketTimeoutException e1) {
+            System.out.println("El datagrama no llego a su destino.");
+            System.exit(1);
+        } catch (IOException e2) {
+            System.out.println("El datagrama no llego a su destino. Motivo: el servidor termino la conexion");
             System.exit(1);
         }
     }
@@ -130,6 +146,7 @@ public class ua3tarea4cliente {
         // Pido al usuario el mensaje a enviar
         // Cuando el usuario introduzca un asterisco dejo de pedir mensaje
         do {
+            System.out.println("");
             System.out.print("Introduce el mensaje a enviar: ");
             msg = sca.nextLine();
             if(!msg.equals("*")) {

@@ -1,11 +1,20 @@
 <html>
 	<body>
 		<form action="vernombre.php" method="post">
-			<p>Escribe tu nombre: 
-				<input name="nombre" type="text" size="15"></p>
-			<p>Escribe tus apellidos:
-				<input name="apellidos" type="text" size="15"></p>
-				<input type="submit" name="ver" value="Ver">
+		<table>
+			<tr>
+				<td><label>Nombre: </label></td>
+				<td><input name="nombre" type="text" size="15"></td>
+			</tr>
+			<tr>
+				<td><label>Apellidos: </label></td>
+				<td><input name="apellidos" type="text" size="15"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" name="btnSubmit" value="Ver"></td>
+			</tr>
+
+		</table>
 		</form>
 	</body>
 </html>
