@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\emeendez\\Desktop\\commons-net-3.9.0.jar"
+    ],
+    "java.project.sourcePaths": [
+        "tareas\\dev_5\\tarea1"
+    ]
+}
