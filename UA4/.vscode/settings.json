@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/avilnec/Downloads/commons-net-3.9-2.0/commons-net-3.9.0.jar"
+    ]
+}
