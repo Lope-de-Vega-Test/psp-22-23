@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Licensed to the Apache Software Foundation (ASF) under one or more<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * contributor license agreements.  See the NOTICE file distributed with<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * this work for additional information regarding copyright ownership.<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * The ASF licenses this file to You under the Apache License, Version 2.0<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * (the "License"); you may not use this file except in compliance with<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * the License.  You may obtain a copy of the License at<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *      http://www.apache.org/licenses/LICENSE-2.0<a name="line.9"></a>
+<span class="sourceLineNo">010</span> *<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * Unless required by applicable law or agreed to in writing, software<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * See the License for the specific language governing permissions and<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> */<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>package org.apache.commons.net.ftp.parser;<a name="line.18"></a>
+<span class="sourceLineNo">019</span><a name="line.19"></a>
+<span class="sourceLineNo">020</span>import java.text.ParseException;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import java.util.List;<a name="line.21"></a>
+<span class="sourceLineNo">022</span><a name="line.22"></a>
+<span class="sourceLineNo">023</span>import org.apache.commons.net.ftp.FTPClientConfig;<a name="line.23"></a>
+<span class="sourceLineNo">024</span>import org.apache.commons.net.ftp.FTPFile;<a name="line.24"></a>
+<span class="sourceLineNo">025</span><a name="line.25"></a>
+<span class="sourceLineNo">026</span>/**<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * Implementation FTPFileEntryParser and FTPFileListParser for standard Unix Systems.<a name="line.27"></a>
+<span class="sourceLineNo">028</span> *<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * This class is based on the logic of Daniel Savarese's DefaultFTPListParser, but adapted to use regular expressions and to fit the new FTPFileEntryParser<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * interface.<a name="line.30"></a>
+<span class="sourceLineNo">031</span> *<a name="line.31"></a>
+<span class="sourceLineNo">032</span> * @see org.apache.commons.net.ftp.FTPFileEntryParser FTPFileEntryParser (for usage instructions)<a name="line.32"></a>
+<span class="sourceLineNo">033</span> */<a name="line.33"></a>
+<span class="sourceLineNo">034</span>public class UnixFTPEntryParser extends ConfigurableFTPFileEntryParserImpl {<a name="line.34"></a>
+<span class="sourceLineNo">035</span><a name="line.35"></a>
+<span class="sourceLineNo">036</span>    static final String DEFAULT_DATE_FORMAT = "MMM d yyyy"; // Nov 9 2001<a name="line.36"></a>
+<span class="sourceLineNo">037</span><a name="line.37"></a>
+<span class="sourceLineNo">038</span>    static final String DEFAULT_RECENT_DATE_FORMAT = "MMM d HH:mm"; // Nov 9 20:06<a name="line.38"></a>
+<span class="sourceLineNo">039</span><a name="line.39"></a>
+<span class="sourceLineNo">040</span>    static final String NUMERIC_DATE_FORMAT = "yyyy-MM-dd HH:mm"; // 2001-11-09 20:06<a name="line.40"></a>
+<span class="sourceLineNo">041</span><a name="line.41"></a>
+<span class="sourceLineNo">042</span>    // Suffixes used in Japanese listings after the numeric values<a name="line.42"></a>
+<span class="sourceLineNo">043</span>    private static final String JA_MONTH = "\u6708";<a name="line.43"></a>
+<span class="sourceLineNo">044</span>    private static final String JA_DAY = "\u65e5";<a name="line.44"></a>
+<span class="sourceLineNo">045</span>    private static final String JA_YEAR = "\u5e74";<a name="line.45"></a>
+<span class="sourceLineNo">046</span><a name="line.46"></a>
+<span class="sourceLineNo">047</span>    private static final String DEFAULT_DATE_FORMAT_JA = "M'" + JA_MONTH + "' d'" + JA_DAY + "' yyyy'" + JA_YEAR + "'"; // 6月 3日 2003年<a name="line.47"></a>
+<span class="sourceLineNo">048</span><a name="line.48"></a>
+<span class="sourceLineNo">049</span>    private static final String DEFAULT_RECENT_DATE_FORMAT_JA = "M'" + JA_MONTH + "' d'" + JA_DAY + "' HH:mm"; // 8月 17日 20:10<a name="line.49"></a>
+<span class="sourceLineNo">050</span><a name="line.50"></a>
+<span class="sourceLineNo">051</span>    /**<a name="line.51"></a>
+<span class="sourceLineNo">052</span>     * Some Linux distributions are now shipping an FTP server which formats file listing dates in an all-numeric format: &lt;code&gt;"yyyy-MM-dd HH:mm&lt;/code&gt;. This<a name="line.52"></a>
+<span class="sourceLineNo">053</span>     * is a very welcome development, and hopefully it will soon become the standard. However, since it is so new, for now, and possibly forever, we merely<a name="line.53"></a>
+<span class="sourceLineNo">054</span>     * accomodate it, but do not make it the default.<a name="line.54"></a>
+<span class="sourceLineNo">055</span>     * &lt;p&gt;<a name="line.55"></a>
+<span class="sourceLineNo">056</span>     * For now end users may specify this format only via &lt;code&gt;UnixFTPEntryParser(FTPClientConfig)&lt;/code&gt;. Steve Cohen - 2005-04-17<a name="line.56"></a>
+<span class="sourceLineNo">057</span>     */<a name="line.57"></a>
+<span class="sourceLineNo">058</span>    public static final FTPClientConfig NUMERIC_DATE_CONFIG = new FTPClientConfig(FTPClientConfig.SYST_UNIX, NUMERIC_DATE_FORMAT, null);<a name="line.58"></a>
+<span class="sourceLineNo">059</span><a name="line.59"></a>
+<span class="sourceLineNo">060</span>    /**<a name="line.60"></a>
+<span class="sourceLineNo">061</span>     * this is the regular expression used by this parser.<a name="line.61"></a>
+<span class="sourceLineNo">062</span>     *<a name="line.62"></a>
+<span class="sourceLineNo">063</span>     * Permissions: r the file is readable w the file is writable x the file is executable - the indicated permission is not granted L mandatory locking occurs<a name="line.63"></a>
+<span class="sourceLineNo">064</span>     * during access (the set-group-ID bit is on and the group execution bit is off) s the set-user-ID or set-group-ID bit is on, and the corresponding user or<a name="line.64"></a>
+<span class="sourceLineNo">065</span>     * group execution bit is also on S undefined bit-state (the set-user-ID bit is on and the user execution bit is off) t the 1000 (octal) bit, or sticky bit,<a name="line.65"></a>
+<span class="sourceLineNo">066</span>     * is on [see chmod(1)], and execution is on T the 1000 bit is turned on, and execution is off (undefined bit- state) e z/OS external link bit Final letter<a name="line.66"></a>
+<span class="sourceLineNo">067</span>     * may be appended: + file has extended security attributes (e.g. ACL) Note: local listings on MacOSX also use '@'; this is not allowed for here as does not<a name="line.67"></a>
+<span class="sourceLineNo">068</span>     * appear to be shown by FTP servers {@code @} file has extended attributes<a name="line.68"></a>
+<span class="sourceLineNo">069</span>     */<a name="line.69"></a>
+<span class="sourceLineNo">070</span>    private static final String REGEX = "([bcdelfmpSs-])" // file type<a name="line.70"></a>
+<span class="sourceLineNo">071</span>            + "(((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-]))((r|-)(w|-)([xsStTL-])))\\+?" // permissions<a name="line.71"></a>
+<span class="sourceLineNo">072</span><a name="line.72"></a>
+<span class="sourceLineNo">073</span>            + "\\s*" // separator TODO why allow it to be omitted??<a name="line.73"></a>
+<span class="sourceLineNo">074</span><a name="line.74"></a>
+<span class="sourceLineNo">075</span>            + "(\\d+)" // link count<a name="line.75"></a>
+<span class="sourceLineNo">076</span><a name="line.76"></a>
+<span class="sourceLineNo">077</span>            + "\\s+" // separator<a name="line.77"></a>
+<span class="sourceLineNo">078</span><a name="line.78"></a>
+<span class="sourceLineNo">079</span>            + "(?:(\\S+(?:\\s\\S+)*?)\\s+)?" // owner name (optional spaces)<a name="line.79"></a>
+<span class="sourceLineNo">080</span>            + "(?:(\\S+(?:\\s\\S+)*)\\s+)?" // group name (optional spaces)<a name="line.80"></a>
+<span class="sourceLineNo">081</span>            + "(\\d+(?:,\\s*\\d+)?)" // size or n,m<a name="line.81"></a>
+<span class="sourceLineNo">082</span><a name="line.82"></a>
+<span class="sourceLineNo">083</span>            + "\\s+" // separator<a name="line.83"></a>
+<span class="sourceLineNo">084</span><a name="line.84"></a>
+<span class="sourceLineNo">085</span>            /*<a name="line.85"></a>
+<span class="sourceLineNo">086</span>             * numeric or standard format date: yyyy-mm-dd (expecting hh:mm to follow) MMM [d]d [d]d MMM N.B. use non-space for MMM to allow for languages such<a name="line.86"></a>
+<span class="sourceLineNo">087</span>             * as German which use diacritics (e.g. umlaut) in some abbreviations. Japanese uses numeric day and month with suffixes to distinguish them [d]dXX<a name="line.87"></a>
+<span class="sourceLineNo">088</span>             * [d]dZZ<a name="line.88"></a>
+<span class="sourceLineNo">089</span>             */<a name="line.89"></a>
+<span class="sourceLineNo">090</span>            + "(" + "(?:\\d+[-/]\\d+[-/]\\d+)" + // yyyy-mm-dd<a name="line.90"></a>
+<span class="sourceLineNo">091</span>            "|(?:\\S{3}\\s+\\d{1,2})" + // MMM [d]d<a name="line.91"></a>
+<span class="sourceLineNo">092</span>            "|(?:\\d{1,2}\\s+\\S{3})" + // [d]d MMM<a name="line.92"></a>
+<span class="sourceLineNo">093</span>            "|(?:\\d{1,2}" + JA_MONTH + "\\s+\\d{1,2}" + JA_DAY + ")" + ")"<a name="line.93"></a>
+<span class="sourceLineNo">094</span><a name="line.94"></a>
+<span class="sourceLineNo">095</span>            + "\\s+" // separator<a name="line.95"></a>
+<span class="sourceLineNo">096</span><a name="line.96"></a>
+<span class="sourceLineNo">097</span>            /*<a name="line.97"></a>
+<span class="sourceLineNo">098</span>             * year (for non-recent standard format) - yyyy or time (for numeric or recent standard format) [h]h:mm or Japanese year - yyyyXX<a name="line.98"></a>
+<span class="sourceLineNo">099</span>             */<a name="line.99"></a>
+<span class="sourceLineNo">100</span>            + "((?:\\d+(?::\\d+)?)|(?:\\d{4}" + JA_YEAR + "))" // (20)<a name="line.100"></a>
+<span class="sourceLineNo">101</span><a name="line.101"></a>
+<span class="sourceLineNo">102</span>            + "\\s" // separator<a name="line.102"></a>
+<span class="sourceLineNo">103</span><a name="line.103"></a>
+<span class="sourceLineNo">104</span>            + "(.*)"; // the rest (21)<a name="line.104"></a>
+<span class="sourceLineNo">105</span><a name="line.105"></a>
+<span class="sourceLineNo">106</span>    // if true, leading spaces are trimmed from file names<a name="line.106"></a>
+<span class="sourceLineNo">107</span>    // this was the case for the original implementation<a name="line.107"></a>
+<span class="sourceLineNo">108</span>    final boolean trimLeadingSpaces; // package protected for access from test code<a name="line.108"></a>
+<span class="sourceLineNo">109</span><a name="line.109"></a>
+<span class="sourceLineNo">110</span>    /**<a name="line.110"></a>
+<span class="sourceLineNo">111</span>     * The default constructor for a UnixFTPEntryParser object.<a name="line.111"></a>
+<span class="sourceLineNo">112</span>     *<a name="line.112"></a>
+<span class="sourceLineNo">113</span>     * @throws IllegalArgumentException Thrown if the regular expression is unparseable. Should not be seen under normal conditions. It it is seen, this is a<a name="line.113"></a>
+<span class="sourceLineNo">114</span>     *                                  sign that &lt;code&gt;REGEX&lt;/code&gt; is not a valid regular expression.<a name="line.114"></a>
+<span class="sourceLineNo">115</span>     */<a name="line.115"></a>
+<span class="sourceLineNo">116</span>    public UnixFTPEntryParser() {<a name="line.116"></a>
+<span class="sourceLineNo">117</span>        this(null);<a name="line.117"></a>
+<span class="sourceLineNo">118</span>    }<a name="line.118"></a>
+<span class="sourceLineNo">119</span><a name="line.119"></a>
+<span class="sourceLineNo">120</span>    /**<a name="line.120"></a>
+<span class="sourceLineNo">121</span>     * This constructor allows the creation of a UnixFTPEntryParser object with something other than the default configuration.<a name="line.121"></a>
+<span class="sourceLineNo">122</span>     *<a name="line.122"></a>
+<span class="sourceLineNo">123</span>     * @param config The {@link FTPClientConfig configuration} object used to configure this parser.<a name="line.123"></a>
+<span class="sourceLineNo">124</span>     * @throws IllegalArgumentException Thrown if the regular expression is unparseable. Should not be seen under normal conditions. It it is seen, this is a<a name="line.124"></a>
+<span class="sourceLineNo">125</span>     *                                  sign that &lt;code&gt;REGEX&lt;/code&gt; is not a valid regular expression.<a name="line.125"></a>
+<span class="sourceLineNo">126</span>     * @since 1.4<a name="line.126"></a>
+<span class="sourceLineNo">127</span>     */<a name="line.127"></a>
+<span class="sourceLineNo">128</span>    public UnixFTPEntryParser(final FTPClientConfig config) {<a name="line.128"></a>
+<span class="sourceLineNo">129</span>        this(config, false);<a name="line.129"></a>
+<span class="sourceLineNo">130</span>    }<a name="line.130"></a>
+<span class="sourceLineNo">131</span><a name="line.131"></a>
+<span class="sourceLineNo">132</span>    /**<a name="line.132"></a>
+<span class="sourceLineNo">133</span>     * This constructor allows the creation of a UnixFTPEntryParser object with something other than the default configuration.<a name="line.133"></a>
+<span class="sourceLineNo">134</span>     *<a name="line.134"></a>
+<span class="sourceLineNo">135</span>     * @param config            The {@link FTPClientConfig configuration} object used to configure this parser.<a name="line.135"></a>
+<span class="sourceLineNo">136</span>     * @param trimLeadingSpaces if {@code true}, trim leading spaces from file names<a name="line.136"></a>
+<span class="sourceLineNo">137</span>     * @throws IllegalArgumentException Thrown if the regular expression is unparseable. Should not be seen under normal conditions. It it is seen, this is a<a name="line.137"></a>
+<span class="sourceLineNo">138</span>     *                                  sign that &lt;code&gt;REGEX&lt;/code&gt; is not a valid regular expression.<a name="line.138"></a>
+<span class="sourceLineNo">139</span>     * @since 3.4<a name="line.139"></a>
+<span class="sourceLineNo">140</span>     */<a name="line.140"></a>
+<span class="sourceLineNo">141</span>    public UnixFTPEntryParser(final FTPClientConfig config, final boolean trimLeadingSpaces) {<a name="line.141"></a>
+<span class="sourceLineNo">142</span>        super(REGEX);<a name="line.142"></a>
+<span class="sourceLineNo">143</span>        configure(config);<a name="line.143"></a>
+<span class="sourceLineNo">144</span>        this.trimLeadingSpaces = trimLeadingSpaces;<a name="line.144"></a>
+<span class="sourceLineNo">145</span>    }<a name="line.145"></a>
+<span class="sourceLineNo">146</span><a name="line.146"></a>
+<span class="sourceLineNo">147</span>    /**<a name="line.147"></a>
+<span class="sourceLineNo">148</span>     * Defines a default configuration to be used when this class is instantiated without a {@link FTPClientConfig FTPClientConfig} parameter being specified.<a name="line.148"></a>
+<span class="sourceLineNo">149</span>     *<a name="line.149"></a>
+<span class="sourceLineNo">150</span>     * @return the default configuration for this parser.<a name="line.150"></a>
+<span class="sourceLineNo">151</span>     */<a name="line.151"></a>
+<span class="sourceLineNo">152</span>    @Override<a name="line.152"></a>
+<span class="sourceLineNo">153</span>    protected FTPClientConfig getDefaultConfiguration() {<a name="line.153"></a>
+<span class="sourceLineNo">154</span>        return new FTPClientConfig(FTPClientConfig.SYST_UNIX, DEFAULT_DATE_FORMAT, DEFAULT_RECENT_DATE_FORMAT);<a name="line.154"></a>
+<span class="sourceLineNo">155</span>    }<a name="line.155"></a>
+<span class="sourceLineNo">156</span><a name="line.156"></a>
+<span class="sourceLineNo">157</span>    /**<a name="line.157"></a>
+<span class="sourceLineNo">158</span>     * Parses a line of a unix (standard) FTP server file listing and converts it into a usable format in the form of an &lt;code&gt; FTPFile &lt;/code&gt; instance. If the<a name="line.158"></a>
+<span class="sourceLineNo">159</span>     * file listing line doesn't describe a file, &lt;code&gt; null &lt;/code&gt; is returned, otherwise a &lt;code&gt; FTPFile &lt;/code&gt; instance representing the files in the<a name="line.159"></a>
+<span class="sourceLineNo">160</span>     * directory is returned.<a name="line.160"></a>
+<span class="sourceLineNo">161</span>     *<a name="line.161"></a>
+<span class="sourceLineNo">162</span>     * @param entry A line of text from the file listing<a name="line.162"></a>
+<span class="sourceLineNo">163</span>     * @return An FTPFile instance corresponding to the supplied entry<a name="line.163"></a>
+<span class="sourceLineNo">164</span>     */<a name="line.164"></a>
+<span class="sourceLineNo">165</span>    @Override<a name="line.165"></a>
+<span class="sourceLineNo">166</span>    public FTPFile parseFTPEntry(final String entry) {<a name="line.166"></a>
+<span class="sourceLineNo">167</span>        final FTPFile file = new FTPFile();<a name="line.167"></a>
+<span class="sourceLineNo">168</span>        file.setRawListing(entry);<a name="line.168"></a>
+<span class="sourceLineNo">169</span>        final int type;<a name="line.169"></a>
+<span class="sourceLineNo">170</span>        boolean isDevice = false;<a name="line.170"></a>
+<span class="sourceLineNo">171</span><a name="line.171"></a>
+<span class="sourceLineNo">172</span>        if (matches(entry)) {<a name="line.172"></a>
+<span class="sourceLineNo">173</span>            final String typeStr = group(1);<a name="line.173"></a>
+<span class="sourceLineNo">174</span>            final String hardLinkCount = group(15);<a name="line.174"></a>
+<span class="sourceLineNo">175</span>            final String usr = group(16);<a name="line.175"></a>
+<span class="sourceLineNo">176</span>            final String grp = group(17);<a name="line.176"></a>
+<span class="sourceLineNo">177</span>            final String filesize = group(18);<a name="line.177"></a>
+<span class="sourceLineNo">178</span>            final String datestr = group(19) + " " + group(20);<a name="line.178"></a>
+<span class="sourceLineNo">179</span>            String name = group(21);<a name="line.179"></a>
+<span class="sourceLineNo">180</span>            if (trimLeadingSpaces) {<a name="line.180"></a>
+<span class="sourceLineNo">181</span>                name = name.replaceFirst("^\\s+", "");<a name="line.181"></a>
+<span class="sourceLineNo">182</span>            }<a name="line.182"></a>
+<span class="sourceLineNo">183</span><a name="line.183"></a>
+<span class="sourceLineNo">184</span>            try {<a name="line.184"></a>
+<span class="sourceLineNo">185</span>                if (group(19).contains(JA_MONTH)) { // special processing for Japanese format<a name="line.185"></a>
+<span class="sourceLineNo">186</span>                    final FTPTimestampParserImpl jaParser = new FTPTimestampParserImpl();<a name="line.186"></a>
+<span class="sourceLineNo">187</span>                    jaParser.configure(new FTPClientConfig(FTPClientConfig.SYST_UNIX, DEFAULT_DATE_FORMAT_JA, DEFAULT_RECENT_DATE_FORMAT_JA));<a name="line.187"></a>
+<span class="sourceLineNo">188</span>                    file.setTimestamp(jaParser.parseTimestamp(datestr));<a name="line.188"></a>
+<span class="sourceLineNo">189</span>                } else {<a name="line.189"></a>
+<span class="sourceLineNo">190</span>                    file.setTimestamp(super.parseTimestamp(datestr));<a name="line.190"></a>
+<span class="sourceLineNo">191</span>                }<a name="line.191"></a>
+<span class="sourceLineNo">192</span>            } catch (final ParseException e) {<a name="line.192"></a>
+<span class="sourceLineNo">193</span>                // intentionally do nothing<a name="line.193"></a>
+<span class="sourceLineNo">194</span>            }<a name="line.194"></a>
+<span class="sourceLineNo">195</span><a name="line.195"></a>
+<span class="sourceLineNo">196</span>            // A 'whiteout' file is an ARTIFICIAL entry in any of several types of<a name="line.196"></a>
+<span class="sourceLineNo">197</span>            // 'translucent' filesystems, of which a 'union' filesystem is one.<a name="line.197"></a>
+<span class="sourceLineNo">198</span><a name="line.198"></a>
+<span class="sourceLineNo">199</span>            // bcdelfmpSs-<a name="line.199"></a>
+<span class="sourceLineNo">200</span>            switch (typeStr.charAt(0)) {<a name="line.200"></a>
+<span class="sourceLineNo">201</span>            case 'd':<a name="line.201"></a>
+<span class="sourceLineNo">202</span>                type = FTPFile.DIRECTORY_TYPE;<a name="line.202"></a>
+<span class="sourceLineNo">203</span>                break;<a name="line.203"></a>
+<span class="sourceLineNo">204</span>            case 'e': // NET-39 =&gt; z/OS external link<a name="line.204"></a>
+<span class="sourceLineNo">205</span>                type = FTPFile.SYMBOLIC_LINK_TYPE;<a name="line.205"></a>
+<span class="sourceLineNo">206</span>                break;<a name="line.206"></a>
+<span class="sourceLineNo">207</span>            case 'l':<a name="line.207"></a>
+<span class="sourceLineNo">208</span>                type = FTPFile.SYMBOLIC_LINK_TYPE;<a name="line.208"></a>
+<span class="sourceLineNo">209</span>                break;<a name="line.209"></a>
+<span class="sourceLineNo">210</span>            case 'b':<a name="line.210"></a>
+<span class="sourceLineNo">211</span>            case 'c':<a name="line.211"></a>
+<span class="sourceLineNo">212</span>                isDevice = true;<a name="line.212"></a>
+<span class="sourceLineNo">213</span>                type = FTPFile.FILE_TYPE; // TODO change this if DEVICE_TYPE implemented<a name="line.213"></a>
+<span class="sourceLineNo">214</span>                break;<a name="line.214"></a>
+<span class="sourceLineNo">215</span>            case 'f':<a name="line.215"></a>
+<span class="sourceLineNo">216</span>            case '-':<a name="line.216"></a>
+<span class="sourceLineNo">217</span>                type = FTPFile.FILE_TYPE;<a name="line.217"></a>
+<span class="sourceLineNo">218</span>                break;<a name="line.218"></a>
+<span class="sourceLineNo">219</span>            default: // e.g. ? and w = whiteout<a name="line.219"></a>
+<span class="sourceLineNo">220</span>                type = FTPFile.UNKNOWN_TYPE;<a name="line.220"></a>
+<span class="sourceLineNo">221</span>            }<a name="line.221"></a>
+<span class="sourceLineNo">222</span><a name="line.222"></a>
+<span class="sourceLineNo">223</span>            file.setType(type);<a name="line.223"></a>
+<span class="sourceLineNo">224</span><a name="line.224"></a>
+<span class="sourceLineNo">225</span>            int g = 4;<a name="line.225"></a>
+<span class="sourceLineNo">226</span>            for (int access = 0; access &lt; 3; access++, g += 4) {<a name="line.226"></a>
+<span class="sourceLineNo">227</span>                // Use != '-' to avoid having to check for suid and sticky bits<a name="line.227"></a>
+<span class="sourceLineNo">228</span>                file.setPermission(access, FTPFile.READ_PERMISSION, !group(g).equals("-"));<a name="line.228"></a>
+<span class="sourceLineNo">229</span>                file.setPermission(access, FTPFile.WRITE_PERMISSION, !group(g + 1).equals("-"));<a name="line.229"></a>
+<span class="sourceLineNo">230</span><a name="line.230"></a>
+<span class="sourceLineNo">231</span>                final String execPerm = group(g + 2);<a name="line.231"></a>
+<span class="sourceLineNo">232</span>                file.setPermission(access, FTPFile.EXECUTE_PERMISSION, !execPerm.equals("-") &amp;&amp; !Character.isUpperCase(execPerm.charAt(0)));<a name="line.232"></a>
+<span class="sourceLineNo">233</span>            }<a name="line.233"></a>
+<span class="sourceLineNo">234</span><a name="line.234"></a>
+<span class="sourceLineNo">235</span>            if (!isDevice) {<a name="line.235"></a>
+<span class="sourceLineNo">236</span>                try {<a name="line.236"></a>
+<span class="sourceLineNo">237</span>                    file.setHardLinkCount(Integer.parseInt(hardLinkCount));<a name="line.237"></a>
+<span class="sourceLineNo">238</span>                } catch (final NumberFormatException e) {<a name="line.238"></a>
+<span class="sourceLineNo">239</span>                    // intentionally do nothing<a name="line.239"></a>
+<span class="sourceLineNo">240</span>                }<a name="line.240"></a>
+<span class="sourceLineNo">241</span>            }<a name="line.241"></a>
+<span class="sourceLineNo">242</span><a name="line.242"></a>
+<span class="sourceLineNo">243</span>            file.setUser(usr);<a name="line.243"></a>
+<span class="sourceLineNo">244</span>            file.setGroup(grp);<a name="line.244"></a>
+<span class="sourceLineNo">245</span><a name="line.245"></a>
+<span class="sourceLineNo">246</span>            try {<a name="line.246"></a>
+<span class="sourceLineNo">247</span>                file.setSize(Long.parseLong(filesize));<a name="line.247"></a>
+<span class="sourceLineNo">248</span>            } catch (final NumberFormatException e) {<a name="line.248"></a>
+<span class="sourceLineNo">249</span>                // intentionally do nothing<a name="line.249"></a>
+<span class="sourceLineNo">250</span>            }<a name="line.250"></a>
+<span class="sourceLineNo">251</span><a name="line.251"></a>
+<span class="sourceLineNo">252</span>            // oddball cases like symbolic links, file names<a name="line.252"></a>
+<span class="sourceLineNo">253</span>            // with spaces in them.<a name="line.253"></a>
+<span class="sourceLineNo">254</span>            if (type == FTPFile.SYMBOLIC_LINK_TYPE) {<a name="line.254"></a>
+<span class="sourceLineNo">255</span><a name="line.255"></a>
+<span class="sourceLineNo">256</span>                final int end = name.indexOf(" -&gt; ");<a name="line.256"></a>
+<span class="sourceLineNo">257</span>                // Give up if no link indicator is present<a name="line.257"></a>
+<span class="sourceLineNo">258</span>                if (end == -1) {<a name="line.258"></a>
+<span class="sourceLineNo">259</span>                    file.setName(name);<a name="line.259"></a>
+<span class="sourceLineNo">260</span>                } else {<a name="line.260"></a>
+<span class="sourceLineNo">261</span>                    file.setName(name.substring(0, end));<a name="line.261"></a>
+<span class="sourceLineNo">262</span>                    file.setLink(name.substring(end + 4));<a name="line.262"></a>
+<span class="sourceLineNo">263</span>                }<a name="line.263"></a>
+<span class="sourceLineNo">264</span><a name="line.264"></a>
+<span class="sourceLineNo">265</span>            } else {<a name="line.265"></a>
+<span class="sourceLineNo">266</span>                file.setName(name);<a name="line.266"></a>
+<span class="sourceLineNo">267</span>            }<a name="line.267"></a>
+<span class="sourceLineNo">268</span>            return file;<a name="line.268"></a>
+<span class="sourceLineNo">269</span>        }<a name="line.269"></a>
+<span class="sourceLineNo">270</span>        return null;<a name="line.270"></a>
+<span class="sourceLineNo">271</span>    }<a name="line.271"></a>
+<span class="sourceLineNo">272</span><a name="line.272"></a>
+<span class="sourceLineNo">273</span>    /**<a name="line.273"></a>
+<span class="sourceLineNo">274</span>     * Preparse the list to discard "total nnn" lines<a name="line.274"></a>
+<span class="sourceLineNo">275</span>     */<a name="line.275"></a>
+<span class="sourceLineNo">276</span>    @Override<a name="line.276"></a>
+<span class="sourceLineNo">277</span>    public List&lt;String&gt; preParse(final List&lt;String&gt; original) {<a name="line.277"></a>
+<span class="sourceLineNo">278</span>        // NET-389<a name="line.278"></a>
+<span class="sourceLineNo">279</span>        original.removeIf(entry -&gt; entry.matches("^total \\d+$"));<a name="line.279"></a>
+<span class="sourceLineNo">280</span>        return original;<a name="line.280"></a>
+<span class="sourceLineNo">281</span>    }<a name="line.281"></a>
+<span class="sourceLineNo">282</span><a name="line.282"></a>
+<span class="sourceLineNo">283</span>}<a name="line.283"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

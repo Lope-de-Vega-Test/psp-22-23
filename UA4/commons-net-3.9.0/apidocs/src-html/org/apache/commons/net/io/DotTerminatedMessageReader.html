@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Licensed to the Apache Software Foundation (ASF) under one or more<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * contributor license agreements.  See the NOTICE file distributed with<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * this work for additional information regarding copyright ownership.<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * The ASF licenses this file to You under the Apache License, Version 2.0<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * (the "License"); you may not use this file except in compliance with<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * the License.  You may obtain a copy of the License at<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *      http://www.apache.org/licenses/LICENSE-2.0<a name="line.9"></a>
+<span class="sourceLineNo">010</span> *<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * Unless required by applicable law or agreed to in writing, software<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * See the License for the specific language governing permissions and<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> */<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>package org.apache.commons.net.io;<a name="line.18"></a>
+<span class="sourceLineNo">019</span><a name="line.19"></a>
+<span class="sourceLineNo">020</span>import java.io.BufferedReader;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import java.io.IOException;<a name="line.21"></a>
+<span class="sourceLineNo">022</span>import java.io.Reader;<a name="line.22"></a>
+<span class="sourceLineNo">023</span><a name="line.23"></a>
+<span class="sourceLineNo">024</span>import org.apache.commons.net.util.NetConstants;<a name="line.24"></a>
+<span class="sourceLineNo">025</span><a name="line.25"></a>
+<span class="sourceLineNo">026</span>/**<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * DotTerminatedMessageReader is a class used to read messages from a server that are terminated by a single dot followed by a &amp;lt;CR&amp;gt;&amp;lt;LF&amp;gt; sequence and<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * with double dots appearing at the begining of lines which do not signal end of message yet start with a dot. Various Internet protocols such as NNTP and POP3<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * produce messages of this type.<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * &lt;p&gt;<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * This class handles stripping of the duplicate period at the beginning of lines starting with a period, and ensures you cannot read past the end of the<a name="line.31"></a>
+<span class="sourceLineNo">032</span> * message.<a name="line.32"></a>
+<span class="sourceLineNo">033</span> * &lt;p&gt;<a name="line.33"></a>
+<span class="sourceLineNo">034</span> * Note: versions since 3.0 extend BufferedReader rather than Reader, and no longer change the CRLF into the local EOL. Also only DOT CR LF acts as EOF.<a name="line.34"></a>
+<span class="sourceLineNo">035</span> */<a name="line.35"></a>
+<span class="sourceLineNo">036</span>public final class DotTerminatedMessageReader extends BufferedReader {<a name="line.36"></a>
+<span class="sourceLineNo">037</span>    private static final char LF = '\n';<a name="line.37"></a>
+<span class="sourceLineNo">038</span>    private static final char CR = '\r';<a name="line.38"></a>
+<span class="sourceLineNo">039</span>    private static final int DOT = '.';<a name="line.39"></a>
+<span class="sourceLineNo">040</span><a name="line.40"></a>
+<span class="sourceLineNo">041</span>    private boolean atBeginning;<a name="line.41"></a>
+<span class="sourceLineNo">042</span>    private boolean eof;<a name="line.42"></a>
+<span class="sourceLineNo">043</span>    private boolean seenCR; // was last character CR?<a name="line.43"></a>
+<span class="sourceLineNo">044</span><a name="line.44"></a>
+<span class="sourceLineNo">045</span>    /**<a name="line.45"></a>
+<span class="sourceLineNo">046</span>     * Creates a DotTerminatedMessageReader that wraps an existing Reader input source.<a name="line.46"></a>
+<span class="sourceLineNo">047</span>     *<a name="line.47"></a>
+<span class="sourceLineNo">048</span>     * @param reader The Reader input source containing the message.<a name="line.48"></a>
+<span class="sourceLineNo">049</span>     */<a name="line.49"></a>
+<span class="sourceLineNo">050</span>    public DotTerminatedMessageReader(final Reader reader) {<a name="line.50"></a>
+<span class="sourceLineNo">051</span>        super(reader);<a name="line.51"></a>
+<span class="sourceLineNo">052</span>        // Assumes input is at start of message<a name="line.52"></a>
+<span class="sourceLineNo">053</span>        atBeginning = true;<a name="line.53"></a>
+<span class="sourceLineNo">054</span>        eof = false;<a name="line.54"></a>
+<span class="sourceLineNo">055</span>    }<a name="line.55"></a>
+<span class="sourceLineNo">056</span><a name="line.56"></a>
+<span class="sourceLineNo">057</span>    /**<a name="line.57"></a>
+<span class="sourceLineNo">058</span>     * Closes the message for reading. This doesn't actually close the underlying stream. The underlying stream may still be used for communicating with the<a name="line.58"></a>
+<span class="sourceLineNo">059</span>     * server and therefore is not closed.<a name="line.59"></a>
+<span class="sourceLineNo">060</span>     * &lt;p&gt;<a name="line.60"></a>
+<span class="sourceLineNo">061</span>     * If the end of the message has not yet been reached, this method will read the remainder of the message until it reaches the end, so that the underlying<a name="line.61"></a>
+<span class="sourceLineNo">062</span>     * stream may continue to be used properly for communicating with the server. If you do not fully read a message, you MUST close it, otherwise your program<a name="line.62"></a>
+<span class="sourceLineNo">063</span>     * will likely hang or behave improperly.<a name="line.63"></a>
+<span class="sourceLineNo">064</span>     *<a name="line.64"></a>
+<span class="sourceLineNo">065</span>     * @throws IOException If an error occurs while reading the underlying stream.<a name="line.65"></a>
+<span class="sourceLineNo">066</span>     */<a name="line.66"></a>
+<span class="sourceLineNo">067</span>    @Override<a name="line.67"></a>
+<span class="sourceLineNo">068</span>    public void close() throws IOException {<a name="line.68"></a>
+<span class="sourceLineNo">069</span>        synchronized (lock) {<a name="line.69"></a>
+<span class="sourceLineNo">070</span>            if (!eof) {<a name="line.70"></a>
+<span class="sourceLineNo">071</span>                while (read() != -1) {<a name="line.71"></a>
+<span class="sourceLineNo">072</span>                    // read to EOF<a name="line.72"></a>
+<span class="sourceLineNo">073</span>                }<a name="line.73"></a>
+<span class="sourceLineNo">074</span>            }<a name="line.74"></a>
+<span class="sourceLineNo">075</span>            eof = true;<a name="line.75"></a>
+<span class="sourceLineNo">076</span>            atBeginning = false;<a name="line.76"></a>
+<span class="sourceLineNo">077</span>        }<a name="line.77"></a>
+<span class="sourceLineNo">078</span>    }<a name="line.78"></a>
+<span class="sourceLineNo">079</span><a name="line.79"></a>
+<span class="sourceLineNo">080</span>    /**<a name="line.80"></a>
+<span class="sourceLineNo">081</span>     * Reads and returns the next character in the message. If the end of the message has been reached, returns -1. Note that a call to this method may result<a name="line.81"></a>
+<span class="sourceLineNo">082</span>     * in multiple reads from the underlying input stream to decode the message properly (removing doubled dots and so on). All of this is transparent to the<a name="line.82"></a>
+<span class="sourceLineNo">083</span>     * programmer and is only mentioned for completeness.<a name="line.83"></a>
+<span class="sourceLineNo">084</span>     *<a name="line.84"></a>
+<span class="sourceLineNo">085</span>     * @return The next character in the message. Returns -1 if the end of the message has been reached.<a name="line.85"></a>
+<span class="sourceLineNo">086</span>     * @throws IOException If an error occurs while reading the underlying stream.<a name="line.86"></a>
+<span class="sourceLineNo">087</span>     */<a name="line.87"></a>
+<span class="sourceLineNo">088</span>    @Override<a name="line.88"></a>
+<span class="sourceLineNo">089</span>    public int read() throws IOException {<a name="line.89"></a>
+<span class="sourceLineNo">090</span>        synchronized (lock) {<a name="line.90"></a>
+<span class="sourceLineNo">091</span>            if (eof) {<a name="line.91"></a>
+<span class="sourceLineNo">092</span>                return NetConstants.EOS; // Don't allow read past EOF<a name="line.92"></a>
+<span class="sourceLineNo">093</span>            }<a name="line.93"></a>
+<span class="sourceLineNo">094</span>            int chint = super.read();<a name="line.94"></a>
+<span class="sourceLineNo">095</span>            if (chint == NetConstants.EOS) { // True EOF<a name="line.95"></a>
+<span class="sourceLineNo">096</span>                eof = true;<a name="line.96"></a>
+<span class="sourceLineNo">097</span>                return NetConstants.EOS;<a name="line.97"></a>
+<span class="sourceLineNo">098</span>            }<a name="line.98"></a>
+<span class="sourceLineNo">099</span>            if (atBeginning) {<a name="line.99"></a>
+<span class="sourceLineNo">100</span>                atBeginning = false;<a name="line.100"></a>
+<span class="sourceLineNo">101</span>                if (chint == DOT) { // Have DOT<a name="line.101"></a>
+<span class="sourceLineNo">102</span>                    mark(2); // need to check for CR LF or DOT<a name="line.102"></a>
+<span class="sourceLineNo">103</span>                    chint = super.read();<a name="line.103"></a>
+<span class="sourceLineNo">104</span>                    switch (chint) {<a name="line.104"></a>
+<span class="sourceLineNo">105</span>                    case NetConstants.EOS:<a name="line.105"></a>
+<span class="sourceLineNo">106</span>                        // new Throwable("Trailing DOT").printStackTrace();<a name="line.106"></a>
+<span class="sourceLineNo">107</span>                        eof = true;<a name="line.107"></a>
+<span class="sourceLineNo">108</span>                        return DOT; // return the trailing DOT<a name="line.108"></a>
+<span class="sourceLineNo">109</span>                    case DOT:<a name="line.109"></a>
+<span class="sourceLineNo">110</span>                        // no need to reset as we want to lose the first DOT<a name="line.110"></a>
+<span class="sourceLineNo">111</span>                        return chint; // i.e. DOT<a name="line.111"></a>
+<span class="sourceLineNo">112</span>                    case CR:<a name="line.112"></a>
+<span class="sourceLineNo">113</span>                        chint = super.read();<a name="line.113"></a>
+<span class="sourceLineNo">114</span>                        if (chint == NetConstants.EOS) { // Still only DOT CR - should not happen<a name="line.114"></a>
+<span class="sourceLineNo">115</span>                            // new Throwable("Trailing DOT CR").printStackTrace();<a name="line.115"></a>
+<span class="sourceLineNo">116</span>                            reset(); // So CR is picked up next time<a name="line.116"></a>
+<span class="sourceLineNo">117</span>                            return DOT; // return the trailing DOT<a name="line.117"></a>
+<span class="sourceLineNo">118</span>                        }<a name="line.118"></a>
+<span class="sourceLineNo">119</span>                        if (chint == LF) { // DOT CR LF<a name="line.119"></a>
+<span class="sourceLineNo">120</span>                            atBeginning = true;<a name="line.120"></a>
+<span class="sourceLineNo">121</span>                            eof = true;<a name="line.121"></a>
+<span class="sourceLineNo">122</span>                            // Do we need to clear the mark somehow?<a name="line.122"></a>
+<span class="sourceLineNo">123</span>                            return NetConstants.EOS;<a name="line.123"></a>
+<span class="sourceLineNo">124</span>                        }<a name="line.124"></a>
+<span class="sourceLineNo">125</span>                        break;<a name="line.125"></a>
+<span class="sourceLineNo">126</span>                    default:<a name="line.126"></a>
+<span class="sourceLineNo">127</span>                        break;<a name="line.127"></a>
+<span class="sourceLineNo">128</span>                    }<a name="line.128"></a>
+<span class="sourceLineNo">129</span>                    // Should not happen - lone DOT at beginning<a name="line.129"></a>
+<span class="sourceLineNo">130</span>                    // new Throwable("Lone DOT followed by "+(char)chint).printStackTrace();<a name="line.130"></a>
+<span class="sourceLineNo">131</span>                    reset();<a name="line.131"></a>
+<span class="sourceLineNo">132</span>                    return DOT;<a name="line.132"></a>
+<span class="sourceLineNo">133</span>                } // have DOT<a name="line.133"></a>
+<span class="sourceLineNo">134</span>            } // atBeginning<a name="line.134"></a>
+<span class="sourceLineNo">135</span><a name="line.135"></a>
+<span class="sourceLineNo">136</span>            // Handle CRLF in normal flow<a name="line.136"></a>
+<span class="sourceLineNo">137</span>            if (seenCR) {<a name="line.137"></a>
+<span class="sourceLineNo">138</span>                seenCR = false;<a name="line.138"></a>
+<span class="sourceLineNo">139</span>                if (chint == LF) {<a name="line.139"></a>
+<span class="sourceLineNo">140</span>                    atBeginning = true;<a name="line.140"></a>
+<span class="sourceLineNo">141</span>                }<a name="line.141"></a>
+<span class="sourceLineNo">142</span>            }<a name="line.142"></a>
+<span class="sourceLineNo">143</span>            if (chint == CR) {<a name="line.143"></a>
+<span class="sourceLineNo">144</span>                seenCR = true;<a name="line.144"></a>
+<span class="sourceLineNo">145</span>            }<a name="line.145"></a>
+<span class="sourceLineNo">146</span>            return chint;<a name="line.146"></a>
+<span class="sourceLineNo">147</span>        }<a name="line.147"></a>
+<span class="sourceLineNo">148</span>    }<a name="line.148"></a>
+<span class="sourceLineNo">149</span><a name="line.149"></a>
+<span class="sourceLineNo">150</span>    /**<a name="line.150"></a>
+<span class="sourceLineNo">151</span>     * Reads the next characters from the message into an array and returns the number of characters read. Returns -1 if the end of the message has been<a name="line.151"></a>
+<span class="sourceLineNo">152</span>     * reached.<a name="line.152"></a>
+<span class="sourceLineNo">153</span>     *<a name="line.153"></a>
+<span class="sourceLineNo">154</span>     * @param buffer The character array in which to store the characters.<a name="line.154"></a>
+<span class="sourceLineNo">155</span>     * @return The number of characters read. Returns -1 if the end of the message has been reached.<a name="line.155"></a>
+<span class="sourceLineNo">156</span>     * @throws IOException If an error occurs in reading the underlying stream.<a name="line.156"></a>
+<span class="sourceLineNo">157</span>     */<a name="line.157"></a>
+<span class="sourceLineNo">158</span>    @Override<a name="line.158"></a>
+<span class="sourceLineNo">159</span>    public int read(final char[] buffer) throws IOException {<a name="line.159"></a>
+<span class="sourceLineNo">160</span>        return read(buffer, 0, buffer.length);<a name="line.160"></a>
+<span class="sourceLineNo">161</span>    }<a name="line.161"></a>
+<span class="sourceLineNo">162</span><a name="line.162"></a>
+<span class="sourceLineNo">163</span>    /**<a name="line.163"></a>
+<span class="sourceLineNo">164</span>     * Reads the next characters from the message into an array and returns the number of characters read. Returns -1 if the end of the message has been<a name="line.164"></a>
+<span class="sourceLineNo">165</span>     * reached. The characters are stored in the array starting from the given offset and up to the length specified.<a name="line.165"></a>
+<span class="sourceLineNo">166</span>     *<a name="line.166"></a>
+<span class="sourceLineNo">167</span>     * @param buffer The character array in which to store the characters.<a name="line.167"></a>
+<span class="sourceLineNo">168</span>     * @param offset The offset into the array at which to start storing characters.<a name="line.168"></a>
+<span class="sourceLineNo">169</span>     * @param length The number of characters to read.<a name="line.169"></a>
+<span class="sourceLineNo">170</span>     * @return The number of characters read. Returns -1 if the end of the message has been reached.<a name="line.170"></a>
+<span class="sourceLineNo">171</span>     * @throws IOException If an error occurs in reading the underlying stream.<a name="line.171"></a>
+<span class="sourceLineNo">172</span>     */<a name="line.172"></a>
+<span class="sourceLineNo">173</span>    @Override<a name="line.173"></a>
+<span class="sourceLineNo">174</span>    public int read(final char[] buffer, int offset, int length) throws IOException {<a name="line.174"></a>
+<span class="sourceLineNo">175</span>        if (length &lt; 1) {<a name="line.175"></a>
+<span class="sourceLineNo">176</span>            return 0;<a name="line.176"></a>
+<span class="sourceLineNo">177</span>        }<a name="line.177"></a>
+<span class="sourceLineNo">178</span>        int ch;<a name="line.178"></a>
+<span class="sourceLineNo">179</span>        synchronized (lock) {<a name="line.179"></a>
+<span class="sourceLineNo">180</span>            if ((ch = read()) == -1) {<a name="line.180"></a>
+<span class="sourceLineNo">181</span>                return NetConstants.EOS;<a name="line.181"></a>
+<span class="sourceLineNo">182</span>            }<a name="line.182"></a>
+<span class="sourceLineNo">183</span><a name="line.183"></a>
+<span class="sourceLineNo">184</span>            final int off = offset;<a name="line.184"></a>
+<span class="sourceLineNo">185</span><a name="line.185"></a>
+<span class="sourceLineNo">186</span>            do {<a name="line.186"></a>
+<span class="sourceLineNo">187</span>                buffer[offset++] = (char) ch;<a name="line.187"></a>
+<span class="sourceLineNo">188</span>            } while (--length &gt; 0 &amp;&amp; (ch = read()) != -1);<a name="line.188"></a>
+<span class="sourceLineNo">189</span><a name="line.189"></a>
+<span class="sourceLineNo">190</span>            return offset - off;<a name="line.190"></a>
+<span class="sourceLineNo">191</span>        }<a name="line.191"></a>
+<span class="sourceLineNo">192</span>    }<a name="line.192"></a>
+<span class="sourceLineNo">193</span><a name="line.193"></a>
+<span class="sourceLineNo">194</span>    /**<a name="line.194"></a>
+<span class="sourceLineNo">195</span>     * Read a line of text. A line is considered to be terminated by carriage return followed immediately by a linefeed. This contrasts with BufferedReader<a name="line.195"></a>
+<span class="sourceLineNo">196</span>     * which also allows other combinations.<a name="line.196"></a>
+<span class="sourceLineNo">197</span>     *<a name="line.197"></a>
+<span class="sourceLineNo">198</span>     * @since 3.0<a name="line.198"></a>
+<span class="sourceLineNo">199</span>     */<a name="line.199"></a>
+<span class="sourceLineNo">200</span>    @Override<a name="line.200"></a>
+<span class="sourceLineNo">201</span>    public String readLine() throws IOException {<a name="line.201"></a>
+<span class="sourceLineNo">202</span>        final StringBuilder sb = new StringBuilder();<a name="line.202"></a>
+<span class="sourceLineNo">203</span>        int intch;<a name="line.203"></a>
+<span class="sourceLineNo">204</span>        synchronized (lock) { // make thread-safe (hopefully!)<a name="line.204"></a>
+<span class="sourceLineNo">205</span>            while ((intch = read()) != NetConstants.EOS) {<a name="line.205"></a>
+<span class="sourceLineNo">206</span>                if (intch == LF &amp;&amp; atBeginning) {<a name="line.206"></a>
+<span class="sourceLineNo">207</span>                    return sb.substring(0, sb.length() - 1);<a name="line.207"></a>
+<span class="sourceLineNo">208</span>                }<a name="line.208"></a>
+<span class="sourceLineNo">209</span>                sb.append((char) intch);<a name="line.209"></a>
+<span class="sourceLineNo">210</span>            }<a name="line.210"></a>
+<span class="sourceLineNo">211</span>        }<a name="line.211"></a>
+<span class="sourceLineNo">212</span>        final String string = sb.toString();<a name="line.212"></a>
+<span class="sourceLineNo">213</span>        if (string.isEmpty()) { // immediate EOF<a name="line.213"></a>
+<span class="sourceLineNo">214</span>            return null;<a name="line.214"></a>
+<span class="sourceLineNo">215</span>        }<a name="line.215"></a>
+<span class="sourceLineNo">216</span>        // Should not happen - EOF without CRLF<a name="line.216"></a>
+<span class="sourceLineNo">217</span>        // new Throwable(string).printStackTrace();<a name="line.217"></a>
+<span class="sourceLineNo">218</span>        return string;<a name="line.218"></a>
+<span class="sourceLineNo">219</span>    }<a name="line.219"></a>
+<span class="sourceLineNo">220</span>}<a name="line.220"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

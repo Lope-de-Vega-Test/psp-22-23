@@ -1,0 +1,447 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Licensed to the Apache Software Foundation (ASF) under one or more<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * contributor license agreements.  See the NOTICE file distributed with<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * this work for additional information regarding copyright ownership.<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * The ASF licenses this file to You under the Apache License, Version 2.0<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * (the "License"); you may not use this file except in compliance with<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * the License.  You may obtain a copy of the License at<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *      http://www.apache.org/licenses/LICENSE-2.0<a name="line.9"></a>
+<span class="sourceLineNo">010</span> *<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * Unless required by applicable law or agreed to in writing, software<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * See the License for the specific language governing permissions and<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> */<a name="line.16"></a>
+<span class="sourceLineNo">017</span>package org.apache.commons.net.util;<a name="line.17"></a>
+<span class="sourceLineNo">018</span><a name="line.18"></a>
+<span class="sourceLineNo">019</span>import java.util.regex.Matcher;<a name="line.19"></a>
+<span class="sourceLineNo">020</span>import java.util.regex.Pattern;<a name="line.20"></a>
+<span class="sourceLineNo">021</span><a name="line.21"></a>
+<span class="sourceLineNo">022</span>/**<a name="line.22"></a>
+<span class="sourceLineNo">023</span> * Performs some subnet calculations given a network address and a subnet mask.<a name="line.23"></a>
+<span class="sourceLineNo">024</span> *<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * @see "http://www.faqs.org/rfcs/rfc1519.html"<a name="line.25"></a>
+<span class="sourceLineNo">026</span> * @since 2.0<a name="line.26"></a>
+<span class="sourceLineNo">027</span> */<a name="line.27"></a>
+<span class="sourceLineNo">028</span>public class SubnetUtils {<a name="line.28"></a>
+<span class="sourceLineNo">029</span><a name="line.29"></a>
+<span class="sourceLineNo">030</span>    /**<a name="line.30"></a>
+<span class="sourceLineNo">031</span>     * Convenience container for subnet summary information.<a name="line.31"></a>
+<span class="sourceLineNo">032</span>     */<a name="line.32"></a>
+<span class="sourceLineNo">033</span>    public final class SubnetInfo {<a name="line.33"></a>
+<span class="sourceLineNo">034</span><a name="line.34"></a>
+<span class="sourceLineNo">035</span>        /** Mask to convert unsigned int to a long (i.e. keep 32 bits). */<a name="line.35"></a>
+<span class="sourceLineNo">036</span>        private static final long UNSIGNED_INT_MASK = 0x0FFFFFFFFL;<a name="line.36"></a>
+<span class="sourceLineNo">037</span><a name="line.37"></a>
+<span class="sourceLineNo">038</span>        private SubnetInfo() {<a name="line.38"></a>
+<span class="sourceLineNo">039</span>        }<a name="line.39"></a>
+<span class="sourceLineNo">040</span><a name="line.40"></a>
+<span class="sourceLineNo">041</span>        public int asInteger(final String address) {<a name="line.41"></a>
+<span class="sourceLineNo">042</span>            return toInteger(address);<a name="line.42"></a>
+<span class="sourceLineNo">043</span>        }<a name="line.43"></a>
+<span class="sourceLineNo">044</span><a name="line.44"></a>
+<span class="sourceLineNo">045</span>        private long broadcastLong() {<a name="line.45"></a>
+<span class="sourceLineNo">046</span>            return broadcast &amp; UNSIGNED_INT_MASK;<a name="line.46"></a>
+<span class="sourceLineNo">047</span>        }<a name="line.47"></a>
+<span class="sourceLineNo">048</span><a name="line.48"></a>
+<span class="sourceLineNo">049</span>        /**<a name="line.49"></a>
+<span class="sourceLineNo">050</span>         * Converts a 4-element array into dotted decimal format.<a name="line.50"></a>
+<span class="sourceLineNo">051</span>         */<a name="line.51"></a>
+<span class="sourceLineNo">052</span>        private String format(final int[] octets) {<a name="line.52"></a>
+<span class="sourceLineNo">053</span>            final int last = octets.length - 1;<a name="line.53"></a>
+<span class="sourceLineNo">054</span>            final StringBuilder builder = new StringBuilder();<a name="line.54"></a>
+<span class="sourceLineNo">055</span>            for (int i = 0;; i++) {<a name="line.55"></a>
+<span class="sourceLineNo">056</span>                builder.append(octets[i]);<a name="line.56"></a>
+<span class="sourceLineNo">057</span>                if (i == last) {<a name="line.57"></a>
+<span class="sourceLineNo">058</span>                    return builder.toString();<a name="line.58"></a>
+<span class="sourceLineNo">059</span>                }<a name="line.59"></a>
+<span class="sourceLineNo">060</span>                builder.append('.');<a name="line.60"></a>
+<span class="sourceLineNo">061</span>            }<a name="line.61"></a>
+<span class="sourceLineNo">062</span>        }<a name="line.62"></a>
+<span class="sourceLineNo">063</span><a name="line.63"></a>
+<span class="sourceLineNo">064</span>        public String getAddress() {<a name="line.64"></a>
+<span class="sourceLineNo">065</span>            return format(toArray(address));<a name="line.65"></a>
+<span class="sourceLineNo">066</span>        }<a name="line.66"></a>
+<span class="sourceLineNo">067</span><a name="line.67"></a>
+<span class="sourceLineNo">068</span>        /**<a name="line.68"></a>
+<span class="sourceLineNo">069</span>         * Gets the count of available addresses. Will be zero for CIDR/31 and CIDR/32 if the inclusive flag is false.<a name="line.69"></a>
+<span class="sourceLineNo">070</span>         *<a name="line.70"></a>
+<span class="sourceLineNo">071</span>         * @return the count of addresses, may be zero.<a name="line.71"></a>
+<span class="sourceLineNo">072</span>         * @throws RuntimeException if the correct count is greater than {@code Integer.MAX_VALUE}<a name="line.72"></a>
+<span class="sourceLineNo">073</span>         * @deprecated (3.4) use {@link #getAddressCountLong()} instead<a name="line.73"></a>
+<span class="sourceLineNo">074</span>         */<a name="line.74"></a>
+<span class="sourceLineNo">075</span>        @Deprecated<a name="line.75"></a>
+<span class="sourceLineNo">076</span>        public int getAddressCount() {<a name="line.76"></a>
+<span class="sourceLineNo">077</span>            final long countLong = getAddressCountLong();<a name="line.77"></a>
+<span class="sourceLineNo">078</span>            if (countLong &gt; Integer.MAX_VALUE) {<a name="line.78"></a>
+<span class="sourceLineNo">079</span>                throw new RuntimeException("Count is larger than an integer: " + countLong);<a name="line.79"></a>
+<span class="sourceLineNo">080</span>            }<a name="line.80"></a>
+<span class="sourceLineNo">081</span>            // Cannot be negative here<a name="line.81"></a>
+<span class="sourceLineNo">082</span>            return (int) countLong;<a name="line.82"></a>
+<span class="sourceLineNo">083</span>        }<a name="line.83"></a>
+<span class="sourceLineNo">084</span><a name="line.84"></a>
+<span class="sourceLineNo">085</span>        /**<a name="line.85"></a>
+<span class="sourceLineNo">086</span>         * Gets the count of available addresses. Will be zero for CIDR/31 and CIDR/32 if the inclusive flag is false.<a name="line.86"></a>
+<span class="sourceLineNo">087</span>         *<a name="line.87"></a>
+<span class="sourceLineNo">088</span>         * @return the count of addresses, may be zero.<a name="line.88"></a>
+<span class="sourceLineNo">089</span>         * @since 3.4<a name="line.89"></a>
+<span class="sourceLineNo">090</span>         */<a name="line.90"></a>
+<span class="sourceLineNo">091</span>        public long getAddressCountLong() {<a name="line.91"></a>
+<span class="sourceLineNo">092</span>            final long b = broadcastLong();<a name="line.92"></a>
+<span class="sourceLineNo">093</span>            final long n = networkLong();<a name="line.93"></a>
+<span class="sourceLineNo">094</span>            final long count = b - n + (isInclusiveHostCount() ? 1 : -1);<a name="line.94"></a>
+<span class="sourceLineNo">095</span>            return count &lt; 0 ? 0 : count;<a name="line.95"></a>
+<span class="sourceLineNo">096</span>        }<a name="line.96"></a>
+<span class="sourceLineNo">097</span><a name="line.97"></a>
+<span class="sourceLineNo">098</span>        public String[] getAllAddresses() {<a name="line.98"></a>
+<span class="sourceLineNo">099</span>            final int ct = getAddressCount();<a name="line.99"></a>
+<span class="sourceLineNo">100</span>            final String[] addresses = new String[ct];<a name="line.100"></a>
+<span class="sourceLineNo">101</span>            if (ct == 0) {<a name="line.101"></a>
+<span class="sourceLineNo">102</span>                return addresses;<a name="line.102"></a>
+<span class="sourceLineNo">103</span>            }<a name="line.103"></a>
+<span class="sourceLineNo">104</span>            for (int add = low(), j = 0; add &lt;= high(); ++add, ++j) {<a name="line.104"></a>
+<span class="sourceLineNo">105</span>                addresses[j] = format(toArray(add));<a name="line.105"></a>
+<span class="sourceLineNo">106</span>            }<a name="line.106"></a>
+<span class="sourceLineNo">107</span>            return addresses;<a name="line.107"></a>
+<span class="sourceLineNo">108</span>        }<a name="line.108"></a>
+<span class="sourceLineNo">109</span><a name="line.109"></a>
+<span class="sourceLineNo">110</span>        public String getBroadcastAddress() {<a name="line.110"></a>
+<span class="sourceLineNo">111</span>            return format(toArray(broadcast));<a name="line.111"></a>
+<span class="sourceLineNo">112</span>        }<a name="line.112"></a>
+<span class="sourceLineNo">113</span><a name="line.113"></a>
+<span class="sourceLineNo">114</span>        public String getCidrSignature() {<a name="line.114"></a>
+<span class="sourceLineNo">115</span>            return format(toArray(address)) + "/" + Integer.bitCount(netmask);<a name="line.115"></a>
+<span class="sourceLineNo">116</span>        }<a name="line.116"></a>
+<span class="sourceLineNo">117</span><a name="line.117"></a>
+<span class="sourceLineNo">118</span>        /**<a name="line.118"></a>
+<span class="sourceLineNo">119</span>         * Gets the high address as a dotted IP address. Will be zero for CIDR/31 and CIDR/32 if the inclusive flag is false.<a name="line.119"></a>
+<span class="sourceLineNo">120</span>         *<a name="line.120"></a>
+<span class="sourceLineNo">121</span>         * @return the IP address in dotted format, may be "0.0.0.0" if there is no valid address<a name="line.121"></a>
+<span class="sourceLineNo">122</span>         */<a name="line.122"></a>
+<span class="sourceLineNo">123</span>        public String getHighAddress() {<a name="line.123"></a>
+<span class="sourceLineNo">124</span>            return format(toArray(high()));<a name="line.124"></a>
+<span class="sourceLineNo">125</span>        }<a name="line.125"></a>
+<span class="sourceLineNo">126</span><a name="line.126"></a>
+<span class="sourceLineNo">127</span>        /**<a name="line.127"></a>
+<span class="sourceLineNo">128</span>         * Gets the low address as a dotted IP address. Will be zero for CIDR/31 and CIDR/32 if the inclusive flag is false.<a name="line.128"></a>
+<span class="sourceLineNo">129</span>         *<a name="line.129"></a>
+<span class="sourceLineNo">130</span>         * @return the IP address in dotted format, may be "0.0.0.0" if there is no valid address<a name="line.130"></a>
+<span class="sourceLineNo">131</span>         */<a name="line.131"></a>
+<span class="sourceLineNo">132</span>        public String getLowAddress() {<a name="line.132"></a>
+<span class="sourceLineNo">133</span>            return format(toArray(low()));<a name="line.133"></a>
+<span class="sourceLineNo">134</span>        }<a name="line.134"></a>
+<span class="sourceLineNo">135</span><a name="line.135"></a>
+<span class="sourceLineNo">136</span>        public String getNetmask() {<a name="line.136"></a>
+<span class="sourceLineNo">137</span>            return format(toArray(netmask));<a name="line.137"></a>
+<span class="sourceLineNo">138</span>        }<a name="line.138"></a>
+<span class="sourceLineNo">139</span><a name="line.139"></a>
+<span class="sourceLineNo">140</span>        public String getNetworkAddress() {<a name="line.140"></a>
+<span class="sourceLineNo">141</span>            return format(toArray(network));<a name="line.141"></a>
+<span class="sourceLineNo">142</span>        }<a name="line.142"></a>
+<span class="sourceLineNo">143</span><a name="line.143"></a>
+<span class="sourceLineNo">144</span>        public String getNextAddress() {<a name="line.144"></a>
+<span class="sourceLineNo">145</span>            return format(toArray(address + 1));<a name="line.145"></a>
+<span class="sourceLineNo">146</span>        }<a name="line.146"></a>
+<span class="sourceLineNo">147</span><a name="line.147"></a>
+<span class="sourceLineNo">148</span>        public String getPreviousAddress() {<a name="line.148"></a>
+<span class="sourceLineNo">149</span>            return format(toArray(address - 1));<a name="line.149"></a>
+<span class="sourceLineNo">150</span>        }<a name="line.150"></a>
+<span class="sourceLineNo">151</span><a name="line.151"></a>
+<span class="sourceLineNo">152</span>        private int high() {<a name="line.152"></a>
+<span class="sourceLineNo">153</span>            return isInclusiveHostCount() ? broadcast : broadcastLong() - networkLong() &gt; 1 ? broadcast - 1 : 0;<a name="line.153"></a>
+<span class="sourceLineNo">154</span>        }<a name="line.154"></a>
+<span class="sourceLineNo">155</span><a name="line.155"></a>
+<span class="sourceLineNo">156</span>        /**<a name="line.156"></a>
+<span class="sourceLineNo">157</span>         * Tests if the parameter &lt;code&gt;address&lt;/code&gt; is in the range of usable endpoint addresses for this subnet. This excludes the network and broadcast<a name="line.157"></a>
+<span class="sourceLineNo">158</span>         * addresses by default. Use {@link SubnetUtils#setInclusiveHostCount(boolean)} to change this.<a name="line.158"></a>
+<span class="sourceLineNo">159</span>         *<a name="line.159"></a>
+<span class="sourceLineNo">160</span>         * @param address the address to check<a name="line.160"></a>
+<span class="sourceLineNo">161</span>         * @return true if it is in range<a name="line.161"></a>
+<span class="sourceLineNo">162</span>         * @since 3.4 (made public)<a name="line.162"></a>
+<span class="sourceLineNo">163</span>         */<a name="line.163"></a>
+<span class="sourceLineNo">164</span>        public boolean isInRange(final int address) {<a name="line.164"></a>
+<span class="sourceLineNo">165</span>            if (address == 0) { // cannot ever be in range; rejecting now avoids problems with CIDR/31,32<a name="line.165"></a>
+<span class="sourceLineNo">166</span>                return false;<a name="line.166"></a>
+<span class="sourceLineNo">167</span>            }<a name="line.167"></a>
+<span class="sourceLineNo">168</span>            final long addLong = address &amp; UNSIGNED_INT_MASK;<a name="line.168"></a>
+<span class="sourceLineNo">169</span>            final long lowLong = low() &amp; UNSIGNED_INT_MASK;<a name="line.169"></a>
+<span class="sourceLineNo">170</span>            final long highLong = high() &amp; UNSIGNED_INT_MASK;<a name="line.170"></a>
+<span class="sourceLineNo">171</span>            return addLong &gt;= lowLong &amp;&amp; addLong &lt;= highLong;<a name="line.171"></a>
+<span class="sourceLineNo">172</span>        }<a name="line.172"></a>
+<span class="sourceLineNo">173</span><a name="line.173"></a>
+<span class="sourceLineNo">174</span>        /**<a name="line.174"></a>
+<span class="sourceLineNo">175</span>         * Tests if the parameter &lt;code&gt;address&lt;/code&gt; is in the range of usable endpoint addresses for this subnet. This excludes the network and broadcast<a name="line.175"></a>
+<span class="sourceLineNo">176</span>         * addresses. Use {@link SubnetUtils#setInclusiveHostCount(boolean)} to change this.<a name="line.176"></a>
+<span class="sourceLineNo">177</span>         *<a name="line.177"></a>
+<span class="sourceLineNo">178</span>         * @param address A dot-delimited IPv4 address, e.g. "192.168.0.1"<a name="line.178"></a>
+<span class="sourceLineNo">179</span>         * @return True if in range, false otherwise<a name="line.179"></a>
+<span class="sourceLineNo">180</span>         */<a name="line.180"></a>
+<span class="sourceLineNo">181</span>        public boolean isInRange(final String address) {<a name="line.181"></a>
+<span class="sourceLineNo">182</span>            return isInRange(toInteger(address));<a name="line.182"></a>
+<span class="sourceLineNo">183</span>        }<a name="line.183"></a>
+<span class="sourceLineNo">184</span><a name="line.184"></a>
+<span class="sourceLineNo">185</span>        private int low() {<a name="line.185"></a>
+<span class="sourceLineNo">186</span>            return isInclusiveHostCount() ? network : broadcastLong() - networkLong() &gt; 1 ? network + 1 : 0;<a name="line.186"></a>
+<span class="sourceLineNo">187</span>        }<a name="line.187"></a>
+<span class="sourceLineNo">188</span><a name="line.188"></a>
+<span class="sourceLineNo">189</span>        /** long versions of the values (as unsigned int) which are more suitable for range checking. */<a name="line.189"></a>
+<span class="sourceLineNo">190</span>        private long networkLong() {<a name="line.190"></a>
+<span class="sourceLineNo">191</span>            return network &amp; UNSIGNED_INT_MASK;<a name="line.191"></a>
+<span class="sourceLineNo">192</span>        }<a name="line.192"></a>
+<span class="sourceLineNo">193</span><a name="line.193"></a>
+<span class="sourceLineNo">194</span>        /**<a name="line.194"></a>
+<span class="sourceLineNo">195</span>         * Converts a packed integer address into a 4-element array<a name="line.195"></a>
+<span class="sourceLineNo">196</span>         */<a name="line.196"></a>
+<span class="sourceLineNo">197</span>        private int[] toArray(final int val) {<a name="line.197"></a>
+<span class="sourceLineNo">198</span>            final int ret[] = new int[4];<a name="line.198"></a>
+<span class="sourceLineNo">199</span>            for (int j = 3; j &gt;= 0; --j) {<a name="line.199"></a>
+<span class="sourceLineNo">200</span>                ret[j] |= val &gt;&gt;&gt; 8 * (3 - j) &amp; 0xff;<a name="line.200"></a>
+<span class="sourceLineNo">201</span>            }<a name="line.201"></a>
+<span class="sourceLineNo">202</span>            return ret;<a name="line.202"></a>
+<span class="sourceLineNo">203</span>        }<a name="line.203"></a>
+<span class="sourceLineNo">204</span><a name="line.204"></a>
+<span class="sourceLineNo">205</span>        /**<a name="line.205"></a>
+<span class="sourceLineNo">206</span>         * {@inheritDoc}<a name="line.206"></a>
+<span class="sourceLineNo">207</span>         *<a name="line.207"></a>
+<span class="sourceLineNo">208</span>         * @since 2.2<a name="line.208"></a>
+<span class="sourceLineNo">209</span>         */<a name="line.209"></a>
+<span class="sourceLineNo">210</span>        @Override<a name="line.210"></a>
+<span class="sourceLineNo">211</span>        public String toString() {<a name="line.211"></a>
+<span class="sourceLineNo">212</span>            final StringBuilder buf = new StringBuilder();<a name="line.212"></a>
+<span class="sourceLineNo">213</span>            // @formatter:off<a name="line.213"></a>
+<span class="sourceLineNo">214</span>            buf.append("CIDR Signature:\t[").append(getCidrSignature()).append("]\n")<a name="line.214"></a>
+<span class="sourceLineNo">215</span>                .append("  Netmask: [").append(getNetmask()).append("]\n")<a name="line.215"></a>
+<span class="sourceLineNo">216</span>                .append("  Network: [").append(getNetworkAddress()).append("]\n")<a name="line.216"></a>
+<span class="sourceLineNo">217</span>                .append("  Broadcast: [").append(getBroadcastAddress()).append("]\n")<a name="line.217"></a>
+<span class="sourceLineNo">218</span>                .append("  First address: [").append(getLowAddress()).append("]\n")<a name="line.218"></a>
+<span class="sourceLineNo">219</span>                .append("  Last address: [").append(getHighAddress()).append("]\n")<a name="line.219"></a>
+<span class="sourceLineNo">220</span>                .append("  Address Count: [").append(getAddressCountLong()).append("]\n");<a name="line.220"></a>
+<span class="sourceLineNo">221</span>            // @formatter:on<a name="line.221"></a>
+<span class="sourceLineNo">222</span>            return buf.toString();<a name="line.222"></a>
+<span class="sourceLineNo">223</span>        }<a name="line.223"></a>
+<span class="sourceLineNo">224</span>    }<a name="line.224"></a>
+<span class="sourceLineNo">225</span><a name="line.225"></a>
+<span class="sourceLineNo">226</span>    private static final String IP_ADDRESS = "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})";<a name="line.226"></a>
+<span class="sourceLineNo">227</span>    private static final String SLASH_FORMAT = IP_ADDRESS + "/(\\d{1,2})"; // 0 -&gt; 32<a name="line.227"></a>
+<span class="sourceLineNo">228</span>    private static final Pattern ADDRESS_PATTERN = Pattern.compile(IP_ADDRESS);<a name="line.228"></a>
+<span class="sourceLineNo">229</span>    private static final Pattern CIDR_PATTERN = Pattern.compile(SLASH_FORMAT);<a name="line.229"></a>
+<span class="sourceLineNo">230</span><a name="line.230"></a>
+<span class="sourceLineNo">231</span>    private static final int NBITS = 32;<a name="line.231"></a>
+<span class="sourceLineNo">232</span><a name="line.232"></a>
+<span class="sourceLineNo">233</span>    private static final String PARSE_FAIL = "Could not parse [%s]";<a name="line.233"></a>
+<span class="sourceLineNo">234</span><a name="line.234"></a>
+<span class="sourceLineNo">235</span>    /*<a name="line.235"></a>
+<span class="sourceLineNo">236</span>     * Extracts the components of a dotted decimal address and pack into an integer using a regex match<a name="line.236"></a>
+<span class="sourceLineNo">237</span>     */<a name="line.237"></a>
+<span class="sourceLineNo">238</span>    private static int matchAddress(final Matcher matcher) {<a name="line.238"></a>
+<span class="sourceLineNo">239</span>        int addr = 0;<a name="line.239"></a>
+<span class="sourceLineNo">240</span>        for (int i = 1; i &lt;= 4; ++i) {<a name="line.240"></a>
+<span class="sourceLineNo">241</span>            final int n = rangeCheck(Integer.parseInt(matcher.group(i)), 0, 255);<a name="line.241"></a>
+<span class="sourceLineNo">242</span>            addr |= (n &amp; 0xff) &lt;&lt; 8 * (4 - i);<a name="line.242"></a>
+<span class="sourceLineNo">243</span>        }<a name="line.243"></a>
+<span class="sourceLineNo">244</span>        return addr;<a name="line.244"></a>
+<span class="sourceLineNo">245</span>    }<a name="line.245"></a>
+<span class="sourceLineNo">246</span><a name="line.246"></a>
+<span class="sourceLineNo">247</span>    /*<a name="line.247"></a>
+<span class="sourceLineNo">248</span>     * Checks integer boundaries. Checks if a value x is in the range [begin,end]. Returns x if it is in range, throws an exception otherwise.<a name="line.248"></a>
+<span class="sourceLineNo">249</span>     */<a name="line.249"></a>
+<span class="sourceLineNo">250</span>    private static int rangeCheck(final int value, final int begin, final int end) {<a name="line.250"></a>
+<span class="sourceLineNo">251</span>        if (value &gt;= begin &amp;&amp; value &lt;= end) { // (begin,end]<a name="line.251"></a>
+<span class="sourceLineNo">252</span>            return value;<a name="line.252"></a>
+<span class="sourceLineNo">253</span>        }<a name="line.253"></a>
+<span class="sourceLineNo">254</span>        throw new IllegalArgumentException("Value [" + value + "] not in range [" + begin + "," + end + "]");<a name="line.254"></a>
+<span class="sourceLineNo">255</span>    }<a name="line.255"></a>
+<span class="sourceLineNo">256</span><a name="line.256"></a>
+<span class="sourceLineNo">257</span>    /*<a name="line.257"></a>
+<span class="sourceLineNo">258</span>     * Converts a dotted decimal format address to a packed integer format<a name="line.258"></a>
+<span class="sourceLineNo">259</span>     */<a name="line.259"></a>
+<span class="sourceLineNo">260</span>    private static int toInteger(final String address) {<a name="line.260"></a>
+<span class="sourceLineNo">261</span>        final Matcher matcher = ADDRESS_PATTERN.matcher(address);<a name="line.261"></a>
+<span class="sourceLineNo">262</span>        if (matcher.matches()) {<a name="line.262"></a>
+<span class="sourceLineNo">263</span>            return matchAddress(matcher);<a name="line.263"></a>
+<span class="sourceLineNo">264</span>        }<a name="line.264"></a>
+<span class="sourceLineNo">265</span>        throw new IllegalArgumentException(String.format(PARSE_FAIL, address));<a name="line.265"></a>
+<span class="sourceLineNo">266</span>    }<a name="line.266"></a>
+<span class="sourceLineNo">267</span><a name="line.267"></a>
+<span class="sourceLineNo">268</span>    private final int netmask;<a name="line.268"></a>
+<span class="sourceLineNo">269</span><a name="line.269"></a>
+<span class="sourceLineNo">270</span>    private final int address;<a name="line.270"></a>
+<span class="sourceLineNo">271</span><a name="line.271"></a>
+<span class="sourceLineNo">272</span>    private final int network;<a name="line.272"></a>
+<span class="sourceLineNo">273</span><a name="line.273"></a>
+<span class="sourceLineNo">274</span>    private final int broadcast;<a name="line.274"></a>
+<span class="sourceLineNo">275</span><a name="line.275"></a>
+<span class="sourceLineNo">276</span>    /** Whether the broadcast/network address are included in host count */<a name="line.276"></a>
+<span class="sourceLineNo">277</span>    private boolean inclusiveHostCount;<a name="line.277"></a>
+<span class="sourceLineNo">278</span><a name="line.278"></a>
+<span class="sourceLineNo">279</span>    /**<a name="line.279"></a>
+<span class="sourceLineNo">280</span>     * Constructs an instance from a CIDR-notation string, e.g. "192.168.0.1/16"<a name="line.280"></a>
+<span class="sourceLineNo">281</span>     *<a name="line.281"></a>
+<span class="sourceLineNo">282</span>     * @param cidrNotation A CIDR-notation string, e.g. "192.168.0.1/16"<a name="line.282"></a>
+<span class="sourceLineNo">283</span>     * @throws IllegalArgumentException if the parameter is invalid, i.e. does not match n.n.n.n/m where n=1-3 decimal digits, m = 1-2 decimal digits in range<a name="line.283"></a>
+<span class="sourceLineNo">284</span>     *                                  0-32<a name="line.284"></a>
+<span class="sourceLineNo">285</span>     */<a name="line.285"></a>
+<span class="sourceLineNo">286</span>    public SubnetUtils(final String cidrNotation) {<a name="line.286"></a>
+<span class="sourceLineNo">287</span>        final Matcher matcher = CIDR_PATTERN.matcher(cidrNotation);<a name="line.287"></a>
+<span class="sourceLineNo">288</span><a name="line.288"></a>
+<span class="sourceLineNo">289</span>        if (!matcher.matches()) {<a name="line.289"></a>
+<span class="sourceLineNo">290</span>            throw new IllegalArgumentException(String.format(PARSE_FAIL, cidrNotation));<a name="line.290"></a>
+<span class="sourceLineNo">291</span>        }<a name="line.291"></a>
+<span class="sourceLineNo">292</span>        this.address = matchAddress(matcher);<a name="line.292"></a>
+<span class="sourceLineNo">293</span><a name="line.293"></a>
+<span class="sourceLineNo">294</span>        // Create a binary netmask from the number of bits specification /x<a name="line.294"></a>
+<span class="sourceLineNo">295</span><a name="line.295"></a>
+<span class="sourceLineNo">296</span>        final int trailingZeroes = NBITS - rangeCheck(Integer.parseInt(matcher.group(5)), 0, NBITS);<a name="line.296"></a>
+<span class="sourceLineNo">297</span><a name="line.297"></a>
+<span class="sourceLineNo">298</span>        //<a name="line.298"></a>
+<span class="sourceLineNo">299</span>        // An IPv4 netmask consists of 32 bits, a contiguous sequence<a name="line.299"></a>
+<span class="sourceLineNo">300</span>        // of the specified number of ones followed by all zeros.<a name="line.300"></a>
+<span class="sourceLineNo">301</span>        // So, it can be obtained by shifting an unsigned integer (32 bits) to the left by<a name="line.301"></a>
+<span class="sourceLineNo">302</span>        // the number of trailing zeros which is (32 - the # bits specification).<a name="line.302"></a>
+<span class="sourceLineNo">303</span>        // Note that there is no unsigned left shift operator, so we have to use<a name="line.303"></a>
+<span class="sourceLineNo">304</span>        // a long to ensure that the left-most bit is shifted out correctly.<a name="line.304"></a>
+<span class="sourceLineNo">305</span>        //<a name="line.305"></a>
+<span class="sourceLineNo">306</span>        this.netmask = (int) (0x0FFFFFFFFL &lt;&lt; trailingZeroes);<a name="line.306"></a>
+<span class="sourceLineNo">307</span><a name="line.307"></a>
+<span class="sourceLineNo">308</span>        // Calculate base network address<a name="line.308"></a>
+<span class="sourceLineNo">309</span>        this.network = address &amp; netmask;<a name="line.309"></a>
+<span class="sourceLineNo">310</span><a name="line.310"></a>
+<span class="sourceLineNo">311</span>        // Calculate broadcast address<a name="line.311"></a>
+<span class="sourceLineNo">312</span>        this.broadcast = network | ~netmask;<a name="line.312"></a>
+<span class="sourceLineNo">313</span>    }<a name="line.313"></a>
+<span class="sourceLineNo">314</span><a name="line.314"></a>
+<span class="sourceLineNo">315</span>    /**<a name="line.315"></a>
+<span class="sourceLineNo">316</span>     * Constructs an instance from a dotted decimal address and a dotted decimal mask.<a name="line.316"></a>
+<span class="sourceLineNo">317</span>     *<a name="line.317"></a>
+<span class="sourceLineNo">318</span>     * @param address An IP address, e.g. "192.168.0.1"<a name="line.318"></a>
+<span class="sourceLineNo">319</span>     * @param mask    A dotted decimal netmask e.g. "255.255.0.0"<a name="line.319"></a>
+<span class="sourceLineNo">320</span>     * @throws IllegalArgumentException if the address or mask is invalid, i.e. does not match n.n.n.n where n=1-3 decimal digits and the mask is not all zeros<a name="line.320"></a>
+<span class="sourceLineNo">321</span>     */<a name="line.321"></a>
+<span class="sourceLineNo">322</span>    public SubnetUtils(final String address, final String mask) {<a name="line.322"></a>
+<span class="sourceLineNo">323</span>        this.address = toInteger(address);<a name="line.323"></a>
+<span class="sourceLineNo">324</span>        this.netmask = toInteger(mask);<a name="line.324"></a>
+<span class="sourceLineNo">325</span><a name="line.325"></a>
+<span class="sourceLineNo">326</span>        if ((this.netmask &amp; -this.netmask) - 1 != ~this.netmask) {<a name="line.326"></a>
+<span class="sourceLineNo">327</span>            throw new IllegalArgumentException(String.format(PARSE_FAIL, mask));<a name="line.327"></a>
+<span class="sourceLineNo">328</span>        }<a name="line.328"></a>
+<span class="sourceLineNo">329</span><a name="line.329"></a>
+<span class="sourceLineNo">330</span>        // Calculate base network address<a name="line.330"></a>
+<span class="sourceLineNo">331</span>        this.network = this.address &amp; this.netmask;<a name="line.331"></a>
+<span class="sourceLineNo">332</span><a name="line.332"></a>
+<span class="sourceLineNo">333</span>        // Calculate broadcast address<a name="line.333"></a>
+<span class="sourceLineNo">334</span>        this.broadcast = this.network | ~this.netmask;<a name="line.334"></a>
+<span class="sourceLineNo">335</span>    }<a name="line.335"></a>
+<span class="sourceLineNo">336</span><a name="line.336"></a>
+<span class="sourceLineNo">337</span>    /**<a name="line.337"></a>
+<span class="sourceLineNo">338</span>     * Gets a {@link SubnetInfo} instance that contains subnet-specific statistics<a name="line.338"></a>
+<span class="sourceLineNo">339</span>     *<a name="line.339"></a>
+<span class="sourceLineNo">340</span>     * @return new instance<a name="line.340"></a>
+<span class="sourceLineNo">341</span>     */<a name="line.341"></a>
+<span class="sourceLineNo">342</span>    public final SubnetInfo getInfo() {<a name="line.342"></a>
+<span class="sourceLineNo">343</span>        return new SubnetInfo();<a name="line.343"></a>
+<span class="sourceLineNo">344</span>    }<a name="line.344"></a>
+<span class="sourceLineNo">345</span><a name="line.345"></a>
+<span class="sourceLineNo">346</span>    public SubnetUtils getNext() {<a name="line.346"></a>
+<span class="sourceLineNo">347</span>        return new SubnetUtils(getInfo().getNextAddress(), getInfo().getNetmask());<a name="line.347"></a>
+<span class="sourceLineNo">348</span>    }<a name="line.348"></a>
+<span class="sourceLineNo">349</span><a name="line.349"></a>
+<span class="sourceLineNo">350</span>    public SubnetUtils getPrevious() {<a name="line.350"></a>
+<span class="sourceLineNo">351</span>        return new SubnetUtils(getInfo().getPreviousAddress(), getInfo().getNetmask());<a name="line.351"></a>
+<span class="sourceLineNo">352</span>    }<a name="line.352"></a>
+<span class="sourceLineNo">353</span><a name="line.353"></a>
+<span class="sourceLineNo">354</span>    /**<a name="line.354"></a>
+<span class="sourceLineNo">355</span>     * Tests if the return value of {@link SubnetInfo#getAddressCount()} includes the network and broadcast addresses.<a name="line.355"></a>
+<span class="sourceLineNo">356</span>     *<a name="line.356"></a>
+<span class="sourceLineNo">357</span>     * @since 2.2<a name="line.357"></a>
+<span class="sourceLineNo">358</span>     * @return true if the host count includes the network and broadcast addresses<a name="line.358"></a>
+<span class="sourceLineNo">359</span>     */<a name="line.359"></a>
+<span class="sourceLineNo">360</span>    public boolean isInclusiveHostCount() {<a name="line.360"></a>
+<span class="sourceLineNo">361</span>        return inclusiveHostCount;<a name="line.361"></a>
+<span class="sourceLineNo">362</span>    }<a name="line.362"></a>
+<span class="sourceLineNo">363</span><a name="line.363"></a>
+<span class="sourceLineNo">364</span>    /**<a name="line.364"></a>
+<span class="sourceLineNo">365</span>     * Sets to &lt;code&gt;true&lt;/code&gt; if you want the return value of {@link SubnetInfo#getAddressCount()} to include the network and broadcast addresses. This also<a name="line.365"></a>
+<span class="sourceLineNo">366</span>     * applies to {@link SubnetInfo#isInRange(int)}<a name="line.366"></a>
+<span class="sourceLineNo">367</span>     *<a name="line.367"></a>
+<span class="sourceLineNo">368</span>     * @param inclusiveHostCount true if network and broadcast addresses are to be included<a name="line.368"></a>
+<span class="sourceLineNo">369</span>     * @since 2.2<a name="line.369"></a>
+<span class="sourceLineNo">370</span>     */<a name="line.370"></a>
+<span class="sourceLineNo">371</span>    public void setInclusiveHostCount(final boolean inclusiveHostCount) {<a name="line.371"></a>
+<span class="sourceLineNo">372</span>        this.inclusiveHostCount = inclusiveHostCount;<a name="line.372"></a>
+<span class="sourceLineNo">373</span>    }<a name="line.373"></a>
+<span class="sourceLineNo">374</span><a name="line.374"></a>
+<span class="sourceLineNo">375</span>}<a name="line.375"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

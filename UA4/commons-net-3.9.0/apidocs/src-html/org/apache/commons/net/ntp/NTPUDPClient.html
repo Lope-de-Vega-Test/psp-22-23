@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Licensed to the Apache Software Foundation (ASF) under one or more<a name="line.2"></a>
+<span class="sourceLineNo">003</span> * contributor license agreements.  See the NOTICE file distributed with<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * this work for additional information regarding copyright ownership.<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * The ASF licenses this file to You under the Apache License, Version 2.0<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * (the "License"); you may not use this file except in compliance with<a name="line.6"></a>
+<span class="sourceLineNo">007</span> * the License.  You may obtain a copy of the License at<a name="line.7"></a>
+<span class="sourceLineNo">008</span> *<a name="line.8"></a>
+<span class="sourceLineNo">009</span> *      http://www.apache.org/licenses/LICENSE-2.0<a name="line.9"></a>
+<span class="sourceLineNo">010</span> *<a name="line.10"></a>
+<span class="sourceLineNo">011</span> * Unless required by applicable law or agreed to in writing, software<a name="line.11"></a>
+<span class="sourceLineNo">012</span> * distributed under the License is distributed on an "AS IS" BASIS,<a name="line.12"></a>
+<span class="sourceLineNo">013</span> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<a name="line.13"></a>
+<span class="sourceLineNo">014</span> * See the License for the specific language governing permissions and<a name="line.14"></a>
+<span class="sourceLineNo">015</span> * limitations under the License.<a name="line.15"></a>
+<span class="sourceLineNo">016</span> */<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>package org.apache.commons.net.ntp;<a name="line.18"></a>
+<span class="sourceLineNo">019</span><a name="line.19"></a>
+<span class="sourceLineNo">020</span>import java.io.IOException;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import java.net.DatagramPacket;<a name="line.21"></a>
+<span class="sourceLineNo">022</span>import java.net.InetAddress;<a name="line.22"></a>
+<span class="sourceLineNo">023</span><a name="line.23"></a>
+<span class="sourceLineNo">024</span>import org.apache.commons.net.DatagramSocketClient;<a name="line.24"></a>
+<span class="sourceLineNo">025</span><a name="line.25"></a>
+<span class="sourceLineNo">026</span>/**<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * The NTPUDPClient class is a UDP implementation of a client for the Network Time Protocol (NTP) described in RFC 1305 as well as the Simple Network Time<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * Protocol (SNTP) in RFC-2030. To use the class, merely open a local datagram socket with &lt;a href="#open"&gt; open &lt;/a&gt; and call &lt;a href="#getTime"&gt; getTime &lt;/a&gt;<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * to retrieve the time. Then call &lt;a href="org.apache.commons.net.DatagramSocketClient.html#close"&gt; close &lt;/a&gt; to close the connection properly. Successive<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * calls to &lt;a href="#getTime"&gt; getTime &lt;/a&gt; are permitted without re-establishing a connection. That is because UDP is a connectionless protocol and the<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * Network Time Protocol is stateless.<a name="line.31"></a>
+<span class="sourceLineNo">032</span> *<a name="line.32"></a>
+<span class="sourceLineNo">033</span> */<a name="line.33"></a>
+<span class="sourceLineNo">034</span><a name="line.34"></a>
+<span class="sourceLineNo">035</span>public final class NTPUDPClient extends DatagramSocketClient {<a name="line.35"></a>
+<span class="sourceLineNo">036</span>    /** The default NTP port. It is set to 123 according to RFC 1305. */<a name="line.36"></a>
+<span class="sourceLineNo">037</span>    public static final int DEFAULT_PORT = 123;<a name="line.37"></a>
+<span class="sourceLineNo">038</span><a name="line.38"></a>
+<span class="sourceLineNo">039</span>    private int version = NtpV3Packet.VERSION_3;<a name="line.39"></a>
+<span class="sourceLineNo">040</span><a name="line.40"></a>
+<span class="sourceLineNo">041</span>    /**<a name="line.41"></a>
+<span class="sourceLineNo">042</span>     * Retrieves the time information from the specified server on the default NTP port and returns it. The time is the number of miliiseconds since 00:00<a name="line.42"></a>
+<span class="sourceLineNo">043</span>     * (midnight) 1 January 1900 UTC, as specified by RFC 1305. This method reads the raw NTP packet and constructs a &lt;i&gt;TimeInfo&lt;/i&gt; object that allows access<a name="line.43"></a>
+<span class="sourceLineNo">044</span>     * to all the fields of the NTP message header.<a name="line.44"></a>
+<span class="sourceLineNo">045</span>     * &lt;p&gt;<a name="line.45"></a>
+<span class="sourceLineNo">046</span>     *<a name="line.46"></a>
+<span class="sourceLineNo">047</span>     * @param host The address of the server.<a name="line.47"></a>
+<span class="sourceLineNo">048</span>     * @return The time value retrieved from the server.<a name="line.48"></a>
+<span class="sourceLineNo">049</span>     * @throws IOException If an error occurs while retrieving the time.<a name="line.49"></a>
+<span class="sourceLineNo">050</span>     */<a name="line.50"></a>
+<span class="sourceLineNo">051</span>    public TimeInfo getTime(final InetAddress host) throws IOException {<a name="line.51"></a>
+<span class="sourceLineNo">052</span>        return getTime(host, NtpV3Packet.NTP_PORT);<a name="line.52"></a>
+<span class="sourceLineNo">053</span>    }<a name="line.53"></a>
+<span class="sourceLineNo">054</span><a name="line.54"></a>
+<span class="sourceLineNo">055</span>    /**<a name="line.55"></a>
+<span class="sourceLineNo">056</span>     * Retrieves the time information from the specified server and port and returns it. The time is the number of miliiseconds since 00:00 (midnight) 1 January<a name="line.56"></a>
+<span class="sourceLineNo">057</span>     * 1900 UTC, as specified by RFC 1305. This method reads the raw NTP packet and constructs a &lt;i&gt;TimeInfo&lt;/i&gt; object that allows access to all the fields of<a name="line.57"></a>
+<span class="sourceLineNo">058</span>     * the NTP message header.<a name="line.58"></a>
+<span class="sourceLineNo">059</span>     * &lt;p&gt;<a name="line.59"></a>
+<span class="sourceLineNo">060</span>     *<a name="line.60"></a>
+<span class="sourceLineNo">061</span>     * @param host The address of the server.<a name="line.61"></a>
+<span class="sourceLineNo">062</span>     * @param port The port of the service.<a name="line.62"></a>
+<span class="sourceLineNo">063</span>     * @return The time value retrieved from the server.<a name="line.63"></a>
+<span class="sourceLineNo">064</span>     * @throws IOException If an error occurs while retrieving the time or if received packet does not match the request.<a name="line.64"></a>
+<span class="sourceLineNo">065</span>     */<a name="line.65"></a>
+<span class="sourceLineNo">066</span>    public TimeInfo getTime(final InetAddress host, final int port) throws IOException {<a name="line.66"></a>
+<span class="sourceLineNo">067</span>        // if not connected then open to next available UDP port<a name="line.67"></a>
+<span class="sourceLineNo">068</span>        if (!isOpen()) {<a name="line.68"></a>
+<span class="sourceLineNo">069</span>            open();<a name="line.69"></a>
+<span class="sourceLineNo">070</span>        }<a name="line.70"></a>
+<span class="sourceLineNo">071</span><a name="line.71"></a>
+<span class="sourceLineNo">072</span>        final NtpV3Packet message = new NtpV3Impl();<a name="line.72"></a>
+<span class="sourceLineNo">073</span>        message.setMode(NtpV3Packet.MODE_CLIENT);<a name="line.73"></a>
+<span class="sourceLineNo">074</span>        message.setVersion(version);<a name="line.74"></a>
+<span class="sourceLineNo">075</span>        final DatagramPacket sendPacket = message.getDatagramPacket();<a name="line.75"></a>
+<span class="sourceLineNo">076</span>        sendPacket.setAddress(host);<a name="line.76"></a>
+<span class="sourceLineNo">077</span>        sendPacket.setPort(port);<a name="line.77"></a>
+<span class="sourceLineNo">078</span><a name="line.78"></a>
+<span class="sourceLineNo">079</span>        final NtpV3Packet recMessage = new NtpV3Impl();<a name="line.79"></a>
+<span class="sourceLineNo">080</span>        final DatagramPacket receivePacket = recMessage.getDatagramPacket();<a name="line.80"></a>
+<span class="sourceLineNo">081</span><a name="line.81"></a>
+<span class="sourceLineNo">082</span>        /*<a name="line.82"></a>
+<span class="sourceLineNo">083</span>         * Must minimize the time between getting the current time, timestamping the packet, and sending it out which introduces an error in the delay time. No<a name="line.83"></a>
+<span class="sourceLineNo">084</span>         * extraneous logging and initializations here !!!<a name="line.84"></a>
+<span class="sourceLineNo">085</span>         */<a name="line.85"></a>
+<span class="sourceLineNo">086</span>        final TimeStamp now = TimeStamp.getCurrentTime();<a name="line.86"></a>
+<span class="sourceLineNo">087</span><a name="line.87"></a>
+<span class="sourceLineNo">088</span>        // Note that if you do not set the transmit time field then originating time<a name="line.88"></a>
+<span class="sourceLineNo">089</span>        // in server response is all 0's which is "Thu Feb 07 01:28:16 EST 2036".<a name="line.89"></a>
+<span class="sourceLineNo">090</span>        message.setTransmitTime(now);<a name="line.90"></a>
+<span class="sourceLineNo">091</span><a name="line.91"></a>
+<span class="sourceLineNo">092</span>        _socket_.send(sendPacket);<a name="line.92"></a>
+<span class="sourceLineNo">093</span>        _socket_.receive(receivePacket);<a name="line.93"></a>
+<span class="sourceLineNo">094</span><a name="line.94"></a>
+<span class="sourceLineNo">095</span>        final long returnTimeMillis = System.currentTimeMillis();<a name="line.95"></a>
+<span class="sourceLineNo">096</span><a name="line.96"></a>
+<span class="sourceLineNo">097</span>        // Prevent invalid time information if response does not match request<a name="line.97"></a>
+<span class="sourceLineNo">098</span>        if (!now.equals(recMessage.getOriginateTimeStamp())) {<a name="line.98"></a>
+<span class="sourceLineNo">099</span>            throw new IOException("Originate time does not match the request");<a name="line.99"></a>
+<span class="sourceLineNo">100</span>        }<a name="line.100"></a>
+<span class="sourceLineNo">101</span><a name="line.101"></a>
+<span class="sourceLineNo">102</span>        // create TimeInfo message container but don't pre-compute the details yet<a name="line.102"></a>
+<span class="sourceLineNo">103</span>        return new TimeInfo(recMessage, returnTimeMillis, false);<a name="line.103"></a>
+<span class="sourceLineNo">104</span>    }<a name="line.104"></a>
+<span class="sourceLineNo">105</span><a name="line.105"></a>
+<span class="sourceLineNo">106</span>    /**<a name="line.106"></a>
+<span class="sourceLineNo">107</span>     * Returns the NTP protocol version number that client sets on request packet that is sent to remote host (e.g. 3=NTP v3, 4=NTP v4, etc.)<a name="line.107"></a>
+<span class="sourceLineNo">108</span>     *<a name="line.108"></a>
+<span class="sourceLineNo">109</span>     * @return the NTP protocol version number that client sets on request packet.<a name="line.109"></a>
+<span class="sourceLineNo">110</span>     * @see #setVersion(int)<a name="line.110"></a>
+<span class="sourceLineNo">111</span>     */<a name="line.111"></a>
+<span class="sourceLineNo">112</span>    public int getVersion() {<a name="line.112"></a>
+<span class="sourceLineNo">113</span>        return version;<a name="line.113"></a>
+<span class="sourceLineNo">114</span>    }<a name="line.114"></a>
+<span class="sourceLineNo">115</span><a name="line.115"></a>
+<span class="sourceLineNo">116</span>    /**<a name="line.116"></a>
+<span class="sourceLineNo">117</span>     * Sets the NTP protocol version number that client sets on request packet communicate with remote host.<a name="line.117"></a>
+<span class="sourceLineNo">118</span>     *<a name="line.118"></a>
+<span class="sourceLineNo">119</span>     * @param version the NTP protocol version number<a name="line.119"></a>
+<span class="sourceLineNo">120</span>     */<a name="line.120"></a>
+<span class="sourceLineNo">121</span>    public void setVersion(final int version) {<a name="line.121"></a>
+<span class="sourceLineNo">122</span>        this.version = version;<a name="line.122"></a>
+<span class="sourceLineNo">123</span>    }<a name="line.123"></a>
+<span class="sourceLineNo">124</span><a name="line.124"></a>
+<span class="sourceLineNo">125</span>}<a name="line.125"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>
