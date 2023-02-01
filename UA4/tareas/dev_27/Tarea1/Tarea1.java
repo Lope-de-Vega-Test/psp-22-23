@@ -38,7 +38,7 @@ public class Tarea1 extends JFrame {
     //Datos del servidor FTP
 	static FTPClient cliente = new FTPClient();//cliente FTP
     //Añadimos la variable String Servidor, para que muestre una ventana solicitandolo
-	String servidor =JOptionPane.showInputDialog("Introduce el servidor");
+	String servidor =JOptionPane.showInputDialog("Indique el servidor FTP");
 	String user = "usuario";
 	String pasw = "usuario";
 	boolean login;
