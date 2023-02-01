@@ -426,7 +426,7 @@ public class Tarea1 extends JFrame {
 		
 	// main---------------------------------------------------------------------
 	public static void main(String[] args) throws IOException {
-		new clienteFTPBasico();
+		new Tarea1();
 
         //
 		//System.out.println(serveFTP);
