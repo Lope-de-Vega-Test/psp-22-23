@@ -28,8 +28,9 @@ public class DataStore {
 	public void deletePerson(String name){
 		personMap.remove(name);
 	}
-
+	//eliminamos la persona que queremos modificar y la creamos de nuevo, con los nuevos datos
 	public void modificarPeron(String name, Person updatePerson){
+		personMap.remove(name);
 		personMap.put(name, updatePerson);
 	}
 }
