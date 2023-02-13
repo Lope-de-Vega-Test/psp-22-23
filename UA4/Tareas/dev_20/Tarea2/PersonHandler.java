@@ -32,7 +32,7 @@ class PersonHandler extends BasicHandler {
              * responseString = jsonObject.toString();
              */
 
-            // Erro 404 cuando está vacío
+            // Error 404 cuando está vacío
             if (person == null) {
                 responseString += "Info not found";
                 responseString += "}";
