@@ -32,6 +32,7 @@ class PersonHandler extends BasicHandler {
              * responseString = jsonObject.toString();
              */
 
+            // Erro 404 cuando está vacío
             if (person == null) {
                 responseString += "Info not found";
                 responseString += "}";
@@ -52,20 +53,20 @@ class PersonHandler extends BasicHandler {
 
         } else if ("POST".equals(exchange.getRequestMethod())) {
             String responseString = "{";
-            // 1. obtengo los datos de la persona de la URL
+            // Aquí me hago con los datos de la persona
             Map<String, String> params = queryToMap(exchange.getRequestURI().getQuery());
             String personaNombre = params.get("name");
             String personaInformacion = params.get("about");
             int personaNacimiento = Integer.parseInt(params.get("birthYear"));
-            // 2. creo el objeto persona
+            // Creamos el obejto que en este caso es persona
             Person persona = new Person(personaNombre, personaInformacion, personaNacimiento);
             responseString += "\"name\": \"" + persona.getName() + "\",";
             responseString += "\"about\": \"" + persona.getAbout() + "\",";
             responseString += "\"birthYear\": " + persona.getBirthYear() + "";
             responseString += "}";
-            // 3. Guardo la nueva persona en el almacen
+            // Almaceno a la nueva persona
             store.putPerson(persona);
-            // 4. Devuelvo 200 OK
+            // Devuelvo 200 OK
             exchange.sendResponseHeaders(200, responseString.getBytes().length);
             OutputStream output1 = exchange.getResponseBody();
             output1.write(responseString.getBytes());
