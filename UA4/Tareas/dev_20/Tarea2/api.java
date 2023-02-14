@@ -38,7 +38,7 @@ public class api {
                 output.write(responseText.getBytes());
                 output.flush();
             } else {
-                exchange.sendResponseHeaders(405, -1);// 405 Method Not Allowed
+                exchange.sendResponseHeaders(405, -1); // 405 Method Not Allowed
             }
             exchange.close();
         }));
