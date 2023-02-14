@@ -14,7 +14,7 @@ public class api {
     public static void main(String[] args) throws IOException {
         DataStore store = new DataStore();
 
-        HttpServer server = HttpServer.create(new InetSocketAddress("192.168.190.1", 8080), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress("10.2.0.171", 8080), 0);
         
         server.createContext("/api/greeting", (exchange -> {
 
