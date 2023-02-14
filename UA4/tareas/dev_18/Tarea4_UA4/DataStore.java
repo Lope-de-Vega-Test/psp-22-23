@@ -24,4 +24,8 @@ public class DataStore {
     public void putPerson(Person person) {
         personMap.put(person.getName(), person);
     }
+
+    public void deletePerson(String name) {
+        personMap.remove(name);
+    }
 }
