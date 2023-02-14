@@ -32,7 +32,7 @@ class PersonHandler extends BasicHandler {
              * responseString = jsonObject.toString();
              */
 
-            // Error 404 cuando está vacío
+            // Si está vacío devolvemos el error 404 y nos dice que no encoentra nada
             if (person == null) {
                 responseString += "Info not found";
                 responseString += "}";
@@ -41,6 +41,7 @@ class PersonHandler extends BasicHandler {
                 output.write(responseString.getBytes());
                 output.flush();
             } else {
+                // En el caso contrario mostrará la información
                 responseString += "\"name\": \"" + person.getName() + "\",";
                 responseString += "\"about\": \"" + person.getAbout() + "\",";
                 responseString += "\"birthYear\": " + person.getBirthYear() + "";
@@ -53,20 +54,20 @@ class PersonHandler extends BasicHandler {
 
         } else if ("POST".equals(exchange.getRequestMethod())) {
             String responseString = "{";
-            // Aquí me hago con los datos de la persona
+            // Coguemos los datos de la persona
             Map<String, String> params = queryToMap(exchange.getRequestURI().getQuery());
             String personaNombre = params.get("name");
             String personaInformacion = params.get("about");
             int personaNacimiento = Integer.parseInt(params.get("birthYear"));
-            // Creamos el obejto que en este caso es persona
+            // Creamos la clase persona
             Person persona = new Person(personaNombre, personaInformacion, personaNacimiento);
             responseString += "\"name\": \"" + persona.getName() + "\",";
             responseString += "\"about\": \"" + persona.getAbout() + "\",";
             responseString += "\"birthYear\": " + persona.getBirthYear() + "";
             responseString += "}";
-            // Almaceno a la nueva persona
+            // Almacenamos a la nueva persona
             store.putPerson(persona);
-            // Devuelvo 200 OK
+            // Devolvemos el mensaje 200 OK
             exchange.sendResponseHeaders(200, responseString.getBytes().length);
             OutputStream output1 = exchange.getResponseBody();
             output1.write(responseString.getBytes());
@@ -93,7 +94,7 @@ class PersonHandler extends BasicHandler {
             output1.flush();
 
         } else if ("DELETE".equals(exchange.getRequestMethod())) {
-
+            // Para borrar
             String responseString = "";
             Map<String, String> params = queryToMap(exchange.getRequestURI().getQuery());
             String personaNombre = params.get("name");
