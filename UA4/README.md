@@ -108,7 +108,7 @@ Fecha de Entrega: 15/02/2023 - 14:45
 - Las 9 primeras se corresponden con la parte de buscar a las personas con nombre y la última es para buscar la persona por ID.  
 - El miércoles os daré unos minutos para explicar de nuevo el proceso y que actualicéis el código en el repositorio y pasaré a ejecutar los tests y presentéis/defendáis el código planteado, problemas, etc.
 - [Postman API Tests Documentation](https://documenter.getpostman.com/view/25845189/2s935vmLQc)
-- [Postman API Tests EXPORT](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA4/tareas/dev_0/tarea_2/2_dam_psp_ua4_tarea_2.postman_collection)
+- [Postman API Tests EXPORT](https://github.com/Lope-de-Vega-Test/psp-22-23/blob/main/UA4/tareas/dev_0/tarea_2/2_dam_psp_ua4_tarea_2.postman_collection.json)
 
 
 ### **Tarea 3 - Servicios en Red (III)**
