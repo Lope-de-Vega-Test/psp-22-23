@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Example DataStore class that provides access to user data.
  * Pretend this class accesses a database.
@@ -22,6 +21,7 @@ public class DataStore {
 
 	/**
 	 * Returns a Person object for the given key value
+	 * 
 	 * @param key - int
 	 * @return Person - Person object
 	 */
@@ -31,22 +31,28 @@ public class DataStore {
 
 	/**
 	 * Returns a List of Person objects which names match with the given name
+	 * 
 	 * @param name - String
 	 * @return persons - ArrayList<Person>
 	 */
 	public ArrayList<Person> getPersonsByName(String name) {
 		ArrayList<Person> persons = new ArrayList<Person>();
-		Person person = new Person();
+		Person person = null;
 		for (int i = 0; i < personMap.size(); i++) {
-			if ((person = getPerson(i)).getName().equals(name)) {
-				persons.add(person);
+			person = getPerson(i);
+			if (person != null) {
+				if (person.getName().equals(name)) {
+					persons.add(person);
+				}
 			}
 		}
 		return persons;
 	}
 
 	/**
-	 * Returns a List of Person objects which birth years match with the given birth year
+	 * Returns a List of Person objects which birth years match with the given birth
+	 * year
+	 * 
 	 * @param birthYear - int
 	 * @return persons - ArrayList<Person>
 	 */
@@ -63,6 +69,7 @@ public class DataStore {
 
 	/**
 	 * Adds a Person to the Person Map and increases the ID count
+	 * 
 	 * @param person - Person object
 	 */
 	public void addPerson(Person person) {
@@ -72,7 +79,8 @@ public class DataStore {
 
 	/**
 	 * Modifies a Person in the Person Map
-	 * @param key - int
+	 * 
+	 * @param key    - int
 	 * @param person - Person objects
 	 */
 	public void modifyPerson(int key, Person person) {
@@ -81,6 +89,7 @@ public class DataStore {
 
 	/**
 	 * Deletes a Person from the Person Map
+	 * 
 	 * @param key - int
 	 */
 	public void deletePerson(int key) {
