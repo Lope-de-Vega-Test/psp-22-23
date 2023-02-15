@@ -30,7 +30,7 @@ public class DataStore {
         personMap.remove(name);
     }
 
-	public void ModificarPerson(String name, Person putPerson){
+	public void modificarPeron(String name, Person putPerson){
 		personMap.remove(name);
 		personMap.put(name, putPerson);
 	}

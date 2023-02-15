@@ -60,13 +60,13 @@ class PersonHandler extends BasicHandler
            String PersonAbout = params.get("about");
            String PersonBirtYear=params.get("birthYear");
            
-           // AQUI HE CREADO A LA PERSONA MANOLO.
+           
            Person personaNueva= new Person(PersonaName, PersonAbout, Integer.parseInt(PersonBirtYear));
-           responseString += "\"name\": \"" + persona.getName() + "\",";
-           responseString += "\"about\": \"" + persona.getAbout() + "\",";
-           responseString += "\"birthYear\": " + persona.getBirthYear() + "";
+           responseString += "\"name\": \"" + personaNueva.getName() + "\",";
+           responseString += "\"about\": \"" + personaNueva.getAbout() + "\",";
+           responseString += "\"birthYear\": " + personaNueva.getBirthYear() + "";
            responseString += "}";
-           //HEMOS GUARDADO LA PERSONA MANOLO
+
            store.putPerson(personaNueva);
            exchange.sendResponseHeaders(200, responseString.getBytes().length); 
            OutputStream output1 = exchange.getResponseBody();
@@ -110,7 +110,7 @@ class PersonHandler extends BasicHandler
             
             Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
             String PersonaName = params.get("name");
-            store.ModificarPerson(PersonaName);
+            store.ModificarPeron(PersonaName );
 
             exchange.sendResponseHeaders(200, responseString.getBytes().length); 
             OutputStream output = exchange.getResponseBody();
