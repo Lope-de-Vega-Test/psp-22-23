@@ -1,118 +1,72 @@
-<<<<<<< HEAD
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class api {
-    public static String welcomeMessage = "Hello World! from our framework-less REST API";
-    public static String byebyeMessage = "BYE! from our framework-less REST API";
+    public static String response;
 
     public static void main(String[] args) throws IOException {
         DataStore store = new DataStore();
+        HttpServer server;
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            server = HttpServer.create(new InetSocketAddress(socket.getLocalAddress().getHostAddress(), 8080), 0);
+          }
 
-        HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
-        
+        // GREETING CONTEXT
         server.createContext("/api/greeting", (exchange -> {
+            // GET
+            if ((exchange.getRequestMethod()).equals("GET")) {
+                response = "{\"code\": 200, \"message:\": \"ok\", \"custom_message\": \"Greetings!\"}";
+                exchange.sendResponseHeaders(200, response.getBytes().length);
 
-            if ("GET".equals(exchange.getRequestMethod())) {
-                String responseText = welcomeMessage;
-                exchange.sendResponseHeaders(200, responseText.getBytes().length);
-                OutputStream output = exchange.getResponseBody();
-                output.write(responseText.getBytes());
-                output.flush();
-            } 
-            else
-            {
-                exchange.sendResponseHeaders(405, -1);// 405 Method Not Allowed
             }
+            // ANY OTHER METHOD
+            else {
+                response = "{\"code\": 405, \"message:\": \"method not allowed\"}";
+                exchange.sendResponseHeaders(405, response.getBytes().length);
+            }
+
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.flush();
+            os.close();
+            exchange.close();
+
+        }));
+
+        // FAREWELL CONTEXT
+        server.createContext("/api/farewell", (exchange -> {
+            // GET
+            if ((exchange.getRequestMethod()).equals("GET")) {
+                response = "{\"code\": 200, \"message:\": \"ok\", \"custom_message\": \"Goodbye!\"}";
+                exchange.sendResponseHeaders(200, response.getBytes().length);
+            }
+            // ANY OTHER METHOD
+            else {
+                response = "{\"code\": 405, \"message:\": \"method not allowed\"}";
+                exchange.sendResponseHeaders(405, response.getBytes().length);
+            }
+
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.flush();
+            os.close();
             exchange.close();
         }));
 
-        server.createContext("/api/bye", (exchange -> {
+        // PERSON
+        server.createContext("/api/person", new PersonHandler(store));
 
-            if ("GET".equals(exchange.getRequestMethod())) {
-                String responseText = "bye bye! from our framework-less REST API\n";
-                exchange.sendResponseHeaders(200, responseText.getBytes().length);
-                OutputStream output = exchange.getResponseBody();
-                output.write(responseText.getBytes());
-                output.flush();
-            } 
-            else
-            {
-                exchange.sendResponseHeaders(405, -1);// 405 Method Not Allowed
-            }
-            exchange.close();
-        }));
-               
-        server.createContext("/api/person", new PersonHandler(store));       
-
-        // All contexts has been created
+        // All contexts have been created
         server.setExecutor(null); // creates a default executor
         server.start();
-        System.out.println("The framework-less REST API server is listening on " + server.getAddress().getAddress() + ":" + server.getAddress().getPort());
+        System.out.println("The framework-less REST API server is listening on " + server.getAddress().getAddress()
+                + ":" + server.getAddress().getPort());
     }
-=======
-import com.sun.net.httpserver.HttpServer;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
-import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Map;
-
-
-public class api {
-    public static String welcomeMessage = "Hello World! from our framework-less REST API";
-    public static String byebyeMessage = "BYE! from our framework-less REST API";
-
-    public static void main(String[] args) throws IOException {
-        DataStore store = new DataStore();
-
-        HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
-        
-        server.createContext("/api/greeting", (exchange -> {
-
-            if ("GET".equals(exchange.getRequestMethod())) {
-                String responseText = welcomeMessage;
-                exchange.sendResponseHeaders(200, responseText.getBytes().length);
-                OutputStream output = exchange.getResponseBody();
-                output.write(responseText.getBytes());
-                output.flush();
-            } 
-            else
-            {
-                exchange.sendResponseHeaders(405, -1);// 405 Method Not Allowed
-            }
-            exchange.close();
-        }));
-
-        server.createContext("/api/bye", (exchange -> {
-
-            if ("GET".equals(exchange.getRequestMethod())) {
-                String responseText = "bye bye! from our framework-less REST API\n";
-                exchange.sendResponseHeaders(200, responseText.getBytes().length);
-                OutputStream output = exchange.getResponseBody();
-                output.write(responseText.getBytes());
-                output.flush();
-            } 
-            else
-            {
-                exchange.sendResponseHeaders(405, -1);// 405 Method Not Allowed
-            }
-            exchange.close();
-        }));
-               
-        server.createContext("/api/person", new PersonHandler(store));       
-
-        // All contexts has been created
-        server.setExecutor(null); // creates a default executor
-        server.start();
-        System.out.println("The framework-less REST API server is listening on " + server.getAddress().getAddress() + ":" + server.getAddress().getPort());
-    }
->>>>>>> 66dadf1 (UA4 Assigment)
 }
