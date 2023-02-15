@@ -64,7 +64,7 @@ class PersonHandler extends BasicHandler {
 
         else if ("POST".equals(exchange.getRequestMethod())) {
 
-            String responseString = "Persona creada correctamente";
+            String responseString = "{";
             Map<String, String> params = queryToMap(exchange.getRequestURI().getQuery());
             String name;
             String about;
@@ -82,6 +82,12 @@ class PersonHandler extends BasicHandler {
 
             store.putPerson(person);
 
+            responseString += "\"id\": \"" + person.getId() + "\",";
+            responseString += "\"name\": \"" + person.getName() + "\",";
+            responseString += "\"about\": \"" + person.getAbout() + "\",";
+            responseString += "\"birthYear\": " + person.getBirthYear() + "";
+            responseString += "}";
+
             //Enviamos el string creado anteriormente y hacemos flush
             exchange.sendResponseHeaders(200, responseString.getBytes().length);
             OutputStream output = exchange.getResponseBody();
@@ -93,7 +99,7 @@ class PersonHandler extends BasicHandler {
 
         else if ("DELETE".equals(exchange.getRequestMethod())) {
 
-            String responseString = "Persona borrada";
+            String responseString = "{";
             Map<String, String> params = queryToMap(exchange.getRequestURI().getQuery());
 
             //Creamos una variable donde guardamos el nombre que queramos borrar
@@ -101,6 +107,12 @@ class PersonHandler extends BasicHandler {
 
             Person personBorrar = store.getPerson(Integer.parseInt(idBorrar));
             store.delPerson(personBorrar);
+
+            responseString += "\"id\": \"" + personBorrar.getId() + "\",";
+            responseString += "\"name\": \"" + personBorrar.getName() + "\",";
+            responseString += "\"about\": \"" + personBorrar.getAbout() + "\",";
+            responseString += "\"birthYear\": " + personBorrar.getBirthYear() + "";
+            responseString += "}";
 
             //Control de errores
             if (personBorrar == null) {
