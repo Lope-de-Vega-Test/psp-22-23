@@ -34,7 +34,7 @@ public class api {
         server.createContext("/api/bye", (exchange -> {
 
             if ("GET".equals(exchange.getRequestMethod())) {
-                String responseText = "bye bye! from our framework-less REST API\n";
+                String responseText = byebyeMessage;
                 exchange.sendResponseHeaders(200, responseText.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
                 output.write(responseText.getBytes());

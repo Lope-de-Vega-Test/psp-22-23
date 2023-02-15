@@ -28,16 +28,26 @@ class PersonHandler extends BasicHandler {
             // Busqueda por id
             if (params.get("name") == null && params.get("about") == null && params.get("birthYear") == null) {
 
-                String responseString = "{";
+                // Obtenemos la información de la url
                 System.out.println("id: " + params.get("id"));
                 int id = Integer.parseInt(params.get("id"));
                 Person person = store.getPersonById(id);
 
+                // En este caso la petición es no correcta
+                if (person == null) {
+                    exchange.sendResponseHeaders(404, -1); // Se envia un 404
+                    exchange.close();
+                    return;
+                }
+
+                // enviamos la información en JSON
+                String responseString = "{";
                 responseString += "\"name\": \"" + person.getName() + "\",";
                 responseString += "\"about\": \"" + person.getAbout() + "\",";
                 responseString += "\"birthYear\": " + person.getBirthYear() + "";
                 responseString += "}";
 
+                // En este caso la petición es correcta
                 exchange.sendResponseHeaders(200, responseString.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
                 output.write(responseString.getBytes());
@@ -57,24 +67,40 @@ class PersonHandler extends BasicHandler {
 
             Map<String, String> params = queryToMap(exchange.getRequestURI().getQuery());
 
+            // Obtenemos la información de la url
             String personName = params.get("name");
             String personAbout = params.get("about");
             int personbirthYear = Integer.parseInt(params.get("birthYear"));
-            Person person = new Person(personName, personAbout, personbirthYear);
 
-            store.putPerson(person);
+            // Validamos que no esten vacios los campos
+            if (personName == "" || personAbout == "" || personName == null || personAbout == null) {
+                // si falta algun parametro, salta error 400
+                exchange.sendResponseHeaders(400, -1);
+                exchange.close();
+                return;
+            }
+            try {
 
-            String responseString = "{";
-            responseString += "\"id\": \"" + person.getId() + "\",";
-            responseString += "\"name\": \"" + person.getName() + "\",";
-            responseString += "\"about\": \"" + person.getAbout() + "\",";
-            responseString += "\"birthYear\": " + person.getBirthYear() + "";
-            responseString += "}";
+                Person person = new Person(personName, personAbout, personbirthYear);
 
-            exchange.sendResponseHeaders(200, responseString.getBytes().length);
-            OutputStream output = exchange.getResponseBody();
-            output.write(responseString.getBytes());
-            output.flush();
+                store.putPerson(person);
+
+                String responseString = "{";
+                responseString += "\"id\": \"" + person.getId() + "\",";
+                responseString += "\"name\": \"" + person.getName() + "\",";
+                responseString += "\"about\": \"" + person.getAbout() + "\",";
+                responseString += "\"birthYear\": " + person.getBirthYear() + "";
+                responseString += "}";
+
+                exchange.sendResponseHeaders(200, responseString.getBytes().length);
+                OutputStream output = exchange.getResponseBody();
+                output.write(responseString.getBytes());
+                output.flush();
+            } catch (Exception e) {
+                // si el año no es un numero correcto, error 400
+                exchange.sendResponseHeaders(400, -1);
+                exchange.close();
+            }
 
         } else if ("PUT".equals(exchange.getRequestMethod())) {
 
