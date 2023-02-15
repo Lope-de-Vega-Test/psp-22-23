@@ -7,18 +7,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class api {
-    public static String welcomeMessage = "GOOOOOOD MORNING VIETNAM";
+    public static String welcomeMessage = "MU BUENAS";
+    public static String json1 = "{\"welcomeMessage\":\"" + welcomeMessage + "\"}";
     public static String byebyeMessage = "HASTA LUEGO CHULO!";
+    public static String json2 = "{\"byebyeMessage\":\"" + byebyeMessage + "\"}";
 
     public static void main(String[] args) throws IOException {
         DataStore store = new DataStore();
 
-        HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress("10.2.0.150", 8080), 0);
 
         server.createContext("/api/greeting", (exchange -> {
 
             if ("GET".equals(exchange.getRequestMethod())) {
-                String responseText = welcomeMessage;
+                String responseText = json1;
                 exchange.sendResponseHeaders(200, responseText.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
                 output.write(responseText.getBytes());
@@ -32,7 +34,7 @@ public class api {
         server.createContext("/api/bye", (exchange -> {
 
             if ("GET".equals(exchange.getRequestMethod())) {
-                String responseText = byebyeMessage;
+                String responseText = json2;
                 exchange.sendResponseHeaders(200, responseText.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
                 output.write(responseText.getBytes());
