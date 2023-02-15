@@ -113,12 +113,12 @@ class PersonHandler extends BasicHandler {
                     store.putPerson(nuevaPersona);
 
                     // 4. Devolver código 200
-                    responseString = " LA NUEVA PERSONA CON ID " + id + " HA SIDO INTRODUCIDA CON EXITO";
-                    responseString += "\n Los datos son:";
-                    responseString += "\n id: " + nuevaPersona.getId();
-                    responseString += "\n nombre: " + nuevaPersona.getName();
-                    responseString += "\n descripción: " + nuevaPersona.getAbout();
-                    responseString += "\n año de nacimiento: " + nuevaPersona.getBirthYear();
+                    responseString = "{";
+                    responseString += "\"id\": \"" + nuevaPersona.getId() + "\", ";
+                    responseString += "\"name\": \"" + nuevaPersona.getName() + "\", ";
+                    responseString += "\"about\": \"" + nuevaPersona.getAbout() + "\", ";
+                    responseString += "\"birthYear\": \"" + nuevaPersona.getBirthYear() + "\" ";
+                    responseString += "}";
                     exchange.sendResponseHeaders(200, responseString.getBytes().length);
                 } catch (NumberFormatException e1) {
                     responseString = "Bad Request";
@@ -194,7 +194,7 @@ class PersonHandler extends BasicHandler {
 
                         store.delPerson(Integer.parseInt(idPersona));
 
-                        responseString = " LA PERSONA CON ID " + idPersona + " HA SIDO ELIMINADA CON EXITO";
+                        responseString = "\" LA PERSONA CON ID\": \" " + idPersona + "\" HA SIDO ELIMINADA CON EXITO";
                         exchange.sendResponseHeaders(200, responseString.getBytes().length);
 
                     } else {
