@@ -20,108 +20,120 @@ class PersonHandler extends BasicHandler
 
         if ("GET".equals(exchange.getRequestMethod())) {
             String responseString = "{";
-
+           
             Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
-            String personName = params.get("name");        
+       
+            String personName = params.get("name"); 
             Person person = store.getPerson(personName);
-        
-            /* In the real world this part should be implemented this way:
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("name", person.getName());
-            jsonObject.put("about", person.getAbout());
-            jsonObject.put("birthYear", person.getBirthYear());
-            responseString = jsonObject.toString();
-            */
-
             if (person == null) {
-                //si esta vacia lanzamos error 404
+                
                 exchange.sendResponseHeaders(404, -1); // 404 Not Found
                 exchange.close();
                 return;
             
             }
-
             responseString += "\"name\": \"" + person.getName() + "\",";
             responseString += "\"about\": \"" + person.getAbout() + "\",";
             responseString += "\"birthYear\": " + person.getBirthYear() + "";
-            responseString += "}";                       
+            responseString += "}";    
             exchange.sendResponseHeaders(200, responseString.getBytes().length);            
             OutputStream output = exchange.getResponseBody();
             output.write(responseString.getBytes());
             output.flush();
-        }     
-        
-       else if(("POST".equals(exchange.getRequestMethod()))){
-
-            String responseString = "{";
-           
-        Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
-           String PersonaName = params.get("name");
-           String PersonAbout = params.get("about");
-           String PersonBirtYear=params.get("birthYear");
-           
-           
-           Person personaNueva= new Person(PersonaName, PersonAbout, Integer.parseInt(PersonBirtYear));
-           responseString += "\"name\": \"" + personaNueva.getName() + "\",";
-           responseString += "\"about\": \"" + personaNueva.getAbout() + "\",";
-           responseString += "\"birthYear\": " + personaNueva.getBirthYear() + "";
-           responseString += "}";
-
-           store.putPerson(personaNueva);
-           exchange.sendResponseHeaders(200, responseString.getBytes().length); 
-           OutputStream output1 = exchange.getResponseBody();
-           output1.write(responseString.getBytes());
-           output1.flush();
-
-       }
-        /*String responseString="Hecho";
-        Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
-        String PersonaName=params.get("name");
-        String PersonAbout=params.get("about");
-        String PersonBirtYear=params.get("birthYear");
-
-        Person personaNueva=new Person(PersonaName,PersonAbout,Integer.parseInt(PersonBirtYear));
-        store.putPerson(personaNueva);
-             
-        exchange.sendResponseHeaders(200, responseString.getBytes().length);            
-        OutputStream output = exchange.getResponseBody();
-        output.write(responseString.getBytes());
-        output.flush();
-        }*/
-
-        else if(("DELETE".equals(exchange.getRequestMethod()))){
-
-            String responseString="SE HA BORRADO";
-
-            Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
-            String PersonaName=params.get("name");
-            store.deletePerson(PersonaName);
-
-            exchange.sendResponseHeaders(200, responseString.getBytes().length); 
-            OutputStream output = exchange.getResponseBody();
-            output.write(responseString.getBytes());
-
-            output.flush();
         }
-
-       else if (("PUT".equals(exchange.getRequestMethod()))){
-
-            String responseString = "SE HA MODIFICADO";
+    
+        else if ("POST".equals(exchange.getRequestMethod())){
             
             Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
-            String PersonaName = params.get("name");
-            store.ModificarPeron(PersonaName );
+            String personName = params.get("name");
+            String personAbout = params.get("about");
+            String personBirthYear = params.get("birthYear");
 
-            exchange.sendResponseHeaders(200, responseString.getBytes().length); 
-            OutputStream output = exchange.getResponseBody();
-            output.write(responseString.getBytes());
-
-            output.flush();
-        
+            if (personName == "" || personAbout == "" || personBirthYear == null) {
+                exchange.sendResponseHeaders(400, -1);
+                exchange.close();
+                return;
+            }
+            try {
+              
+                int birthYear = Integer.parseInt(personBirthYear);
+                Person person = new Person(personName, personAbout, birthYear);
+                
+                store.putPerson(person);
+            
+                String responseString = "{";
+                responseString += "\"name\": \"" + person.getName() + "\",";
+                responseString += "\"about\": \"" + person.getAbout() + "\",";
+                responseString += "\"birthYear\": " + person.getBirthYear() + "";
+                responseString += "}";
+                exchange.sendResponseHeaders(200, responseString.getBytes().length);            
+                OutputStream output = exchange.getResponseBody();
+                output.write(responseString.getBytes());
+                output.flush();
+            } catch (NumberFormatException ex) {
+            
+            exchange.sendResponseHeaders(400, -1);
+            exchange.close();
+            return;
+}
         }
-        
+        else if("DELETE".equals(exchange.getRequestMethod())){
+            String borrar="";
+           
+            Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
+            String personName = params.get("name");
+            
+            if(store.getPerson(personName) == null){
+                borrar = "No se pudo eliminar. La persona con nombre '" + personName + "' no existe en la DataStore.";
+                exchange.sendResponseHeaders(400, borrar.getBytes().length);
+                OutputStream output = exchange.getResponseBody();
+                output.write(borrar.getBytes());
+                output.flush();
+            }else{
+               
+                String personAbout = params.get("about");
+                String personBirthYear = params.get("birthYear");
+                
+                store.deletePerson(personName);
+                String responseString = "Persona eliminada con exito.";
+                exchange.sendResponseHeaders(200, responseString.getBytes().length);            
+                OutputStream output = exchange.getResponseBody();
+                output.write(responseString.getBytes());
+                output.flush();
+            }
+
+        }
+        else if("PUT".equals(exchange.getRequestMethod())){
+            String responseString = "{";
+            Map <String,String> params = queryToMap(exchange.getRequestURI().getQuery());
+            String personName = params.get("name");
+            
+            if (store.getPerson(personName) == null) {
+                responseString = "No se pudo modificar. La persona con nombre '" + personName + "' no existe en la DataStore.";
+                exchange.sendResponseHeaders(400, responseString.getBytes().length);
+                OutputStream output = exchange.getResponseBody();
+                output.write(responseString.getBytes());
+                output.flush();
+            } else {
+                
+                String personAbout = params.get("about");
+                String personBirthYear = params.get("birthYear");
+                Person person = new Person(personName, personAbout, Integer.parseInt(personBirthYear));
+                store.modificarPeron(personName, person);
+                
+                responseString += "\"name\": \"" + person.getName() + "\",";
+                responseString += "\"about\": \"" + person.getAbout() + "\",";
+                responseString += "\"birthYear\": " + person.getBirthYear() + "";
+                responseString += "}";
+                exchange.sendResponseHeaders(200, responseString.getBytes().length);            
+                OutputStream output = exchange.getResponseBody();
+                output.write(responseString.getBytes());
+                output.flush();
+            }
+        }
         else
         {
+            
             exchange.sendResponseHeaders(405, -1); // 405 Method Not Allowed
         }
         exchange.close();
