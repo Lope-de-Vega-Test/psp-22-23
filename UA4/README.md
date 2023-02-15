@@ -44,18 +44,18 @@ La evaluación de esta unidad didáctica estará basada en la entrega de las tar
 
 | CRITERIO de EVALUACIÓN | PONDERACIÓN | INSTRUMENTOS de EVALUACIÓN|
 |------------------------|-------------|-------------|
-| a)                     |16 %       | Tareas 1,2 y 3      |
-| b)                     |16 %       | Tareas 1,2 y 3      |
-| c)                     |16 %       | Tareas 1,2 y 3      |
-| d)                     |16 %       | Tareas 1,2 y 3      |
-| e)                     |16 %       | Tareas 1,2 y 3     |
-| f)                     |10 %       | Tareas 1,2 y 3      |
-| g)                     |10 %       | Tareas 1,2 y 3      |
+| a)                     |16 %       |T1 (10%), T2 (60%) y T3 (30%)|
+| b)                     |16 %       |T1 (10%), T2 (60%) y T3 (30%)|
+| c)                     |16 %       |T1 (10%), T2 (60%) y T3 (30%)|
+| d)                     |16 %       |T1 (10%), T2 (60%) y T3 (30%)|
+| e)                     |16 %       |T1 (10%), T2 (60%) y T3 (30%)|
+| f)                     |10 %       |T1 (10%), T2 (60%) y T3 (30%)|
+| g)                     |10 %       |T1 (10%), T2 (60%) y T3 (30%)|
 |                        |**100 %**    |             |
 
 
 
-### **Tarea 1 - Servicios en Red (I)**
+### **Tarea 1 (T1) - Servicios en Red (I)**
 ##### **Criterios a), b), c), d) e), f), g), h)**
 
 Modifica el cliente FTP de ejemplo para que pueda conectarse a cualquier servidor FTP.
@@ -65,7 +65,7 @@ La opción de la interfaz gráfica permitirá sacar el 10 en esta tarea, mientra
 Fecha de Entrega: 1/02/2023 - 14:45
 ```
 
-### **Tarea 2 - Servicios en Red (II)**
+### **Tarea 2 (T2) - Servicios en Red (II)**
 ##### **Criterios a), b), c), d) e), f), g), h)**
 
 Analiza el código planteado en [UA4\tareas\dev_0\tarea_2](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA4/tareas/dev_0/tarea_2)
@@ -111,7 +111,7 @@ Fecha de Entrega: 15/02/2023 - 14:45
 - [Postman API Tests EXPORT](https://github.com/Lope-de-Vega-Test/psp-22-23/blob/main/UA4/tareas/dev_0/tarea_2/2_dam_psp_ua4_tarea_2.postman_collection.json)
 
 
-### **Tarea 3 - Servicios en Red (III)**
+### **Tarea 3 (T3) - Servicios en Red (III)**
 ##### **Criterios a), b), c), d) e), f), g), h)**
 
 ```
