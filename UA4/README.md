@@ -64,6 +64,13 @@ La opción de la interfaz gráfica permitirá sacar el 10 en esta tarea, mientra
 ```
 Fecha de Entrega: 1/02/2023 - 14:45
 ```
+<!--
+  Curso siguiente:
+    Tarea 1 (T1) - Servicios en Red (I) FTP Thin Client
+    Tarea 2 (T2) - Servicios en Red (II) Protocolo SMTP - Documentación y Configuración cliente SMTP (Thunderbird), explicando los campos, valores, etc.
+    Tarea 3 (T3) - Servicios en Red (III) Frameworkless API
+    Tarea 4 (T4) - Servicios en Red (IV) API Code Refactoring
+  -->
 
 ### **Tarea 2 (T2) - Servicios en Red (II)**
 ##### **Criterios a), b), c), d) e), f), g), h)**
