@@ -161,7 +161,7 @@ Ahora que lo tienes claro, hagamos un poco de refactorización de la práctica a
     - Valor por defecto: *N/A*
     - Tipo: *OPCIONAL*
     - [Ayuda adicional](https://www.baeldung.com/java-parse-ini-file)
-    - Crear varios ficheros de configuración basados en el de ejemplo [conf.ini](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA4/tareas/dev_0/tarea_7/conf.ini) y probarlos, cambiando los puertos, hostname, etc.
+    - Crear varios ficheros de configuración basados en el de ejemplo [conf.ini](https://github.com/Lope-de-Vega-Test/psp-22-23/tree/main/UA4/tareas/dev_0/tarea_3/conf.ini) y probarlos, cambiando los puertos, hostname, etc.
 
 Podéis leer este [artículo](https://lightrun.com/java-tutorial-java-command-line-arguments/) sobre librerías para gestionar argumentos en línea de comandos y si lo veis necesario utilizar alguna de las librerías recomendadas.
 
