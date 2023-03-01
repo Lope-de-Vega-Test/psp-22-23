@@ -145,13 +145,10 @@ Ahora que lo tienes claro, hagamos un poco de refactorización de la práctica a
 }
 ```
 
-- **EndPoints**: para mejorar la sostenibilidad del código, puede ser interesante mover la creación de los endpoints a una clase o al menos una función independiente.  Tened en cuenta que habrá que añadir más endpoints.  
-
-Os recomiendo crear un único manejador por cada endpoint, es decir:
-
-  - */api/greeting* >> GreetingHandler
-  - */api/bye* >> ByeHandler
-  - */api/person* >> PersonHandler
+- **EndPoints**: para mejorar la sostenibilidad del código, puede ser interesante mover la creación de los endpoints a una clase o al menos una función independiente.  Tened en cuenta que habrá que añadir más endpoints.  Os recomiendo crear un único manejador por cada endpoint, es decir:
+  - /api/greeting >> GreetingHandler
+  - /api/bye >> ByeHandler
+  - /api/person >> PersonHandler
 
 - **Gestión de Datos**: hasta ahora hemos utilizado una clase genérica para simular un almacenamiento persistente de información, que por cierto, el nombre es incorrecto, no es una tienda de datos, sino un almacén, por lo que para hacer el sistema más flexible:
   - Renombra correctamente la clase DataStore (tienda de datos) para que represente un *Almacén de Datos*.
