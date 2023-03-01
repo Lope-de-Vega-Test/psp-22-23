@@ -12,7 +12,7 @@ import org.apache.commons.net.ftp.*;
  ftp.udc.es
  ftp.dit.upm.es
  ftp.freenet.de
- 
+
  */
 public class ClienteFTP1 {
 	public static void main(String[] args) throws SocketException, IOException {
@@ -24,20 +24,20 @@ public class ClienteFTP1 {
 
 		// respuesta del servidor FTP
 		System.out.print(cliente.getReplyString());
-		// c�digo de respuesta
+		// código de respuesta
 		int respuesta = cliente.getReplyCode();
 
 		System.out.println("Respuesta: "+respuesta);
-		
-		// comprobaci�n del c�digo de respuesta
+
+		// comprobación del código de respuesta
 		if (!FTPReply.isPositiveCompletion(respuesta)) {
 			cliente.disconnect();
-			System.out.println("Conexi�n rechazada: " + respuesta);
+			System.out.println("Conexión rechazada: " + respuesta);
 			System.exit(0);
 		}
-		// desconexi�n del servidor FTP
+		// desconexión del servidor FTP
 		cliente.disconnect();
-		System.out.println("Conexi�n finalizada.");
+		System.out.println("Conexión finalizada.");
 	}
 
 }// ..

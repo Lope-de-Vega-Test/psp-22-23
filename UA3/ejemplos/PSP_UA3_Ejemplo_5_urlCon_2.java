@@ -24,12 +24,12 @@ public class PSP_UA3_Ejemplo_5_urlCon_2 {
 
       String cadena ="nombre=Paco&apellidos=Pil Pil";
 
-      //ESCRIBIR EN LA URL � stream de salida
+      //ESCRIBIR EN LA URL - stream de salida
       PrintWriter output = new PrintWriter(conexion.getOutputStream());
       output.write(cadena);
 	    output.close(); //cerrar flujo
 
-      //LEER DE LA URL � stream de entrada
+      //LEER DE LA URL - stream de entrada
       BufferedReader reader = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
       String linea;
       while ((linea = reader.readLine()) != null)

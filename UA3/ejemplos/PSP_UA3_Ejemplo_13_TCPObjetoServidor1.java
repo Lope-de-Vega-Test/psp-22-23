@@ -1,5 +1,5 @@
 // Nota: ejecutarlo desde Eclipse, se pueden corromper los streams si
-// mezclamos Eclipse y CMD. Tambi�n la clase Persona puede ser que no
+// mezclamos Eclipse y CMD. También la clase Persona puede ser que no
 // se referencie bien.
 
 import java.io.*;
@@ -16,7 +16,7 @@ public class PSP_UA3_Ejemplo_13_TCPObjetoServidor1 {
    // Se prepara un flujo de salida para objetos
    ObjectOutputStream outObjeto = new ObjectOutputStream(
 				cliente.getOutputStream());
-   // Se prepara un objeto y se env�a
+   // Se prepara un objeto y se envía
    Persona per = new Persona("Juan", 20);
    outObjeto.writeObject(per); //enviando objeto
    System.out.println("Envio: " + per.getNombre() +"*"+ per.getEdad());

@@ -11,15 +11,15 @@ public class Ejemplo4 {
 		ProcessBuilder pb = new ProcessBuilder("java", "com.ceslopedevega.procesos.EjemploLectura");
 		pb.directory(directorio);
 
-		
+
 
 		// se ejecuta el proceso
 		Process p = pb.start();
 
-		// escritura -- envia entrada 
+		// escritura -- envia entrada
 		OutputStream os = p.getOutputStream();
 		os.write("Hola Manuel\n".getBytes());
-		os.flush(); // vac�a el buffer de salida
+		os.flush(); // vacía el buffer de salida
 
 		// lectura -- obtiene la salida
 		InputStream is = p.getInputStream();

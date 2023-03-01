@@ -34,11 +34,11 @@ public class PSP_UA3_Ejemplo_11_UDPclienteEjemplo2 {
 		System.out.println("Esperando datagrama....");
 		clientSocket.receive(recibo);
 
-		// Obtener el n�mero e caracteres
+		// Obtener el número e caracteres
 		byte[] hh = recibo.getData();
 		int numero = hh[0];
 
-		System.out.println("Recibo N� de caracteres que son a=> " + numero);
+		System.out.println("Recibo Nº de caracteres que son a=> " + numero);
 
 		clientSocket.close();// cerrar socket
 

@@ -22,7 +22,7 @@ public class PSP_UA3_Ejemplo_11_UDPservidorEjemplo2 {
 		System.out.println("Servidor Recibe:" + mensaje);
 
 
-		//cuento el n�mero de letras a
+		//cuento el número de letras a
 		int contador=0;
 		for(int i=0; i < mensaje.length(); i++ )
 			if(mensaje.charAt(i)=='a')
@@ -33,7 +33,7 @@ public class PSP_UA3_Ejemplo_11_UDPservidorEjemplo2 {
 		int puerto = recibo.getPort();
 
 		// ENVIANDO DATAGRAMA AL CLIENTE
-		System.out.println("Enviando n�mero de apariciones de la letra a=> " + contador);
+		System.out.println("Enviando número de apariciones de la letra a=> " + contador);
 		byte b = (byte) contador; // paso entero a byte
 		byte[] enviados = new byte[2];
 		enviados[0] = b;
@@ -42,7 +42,7 @@ public class PSP_UA3_Ejemplo_11_UDPservidorEjemplo2 {
 		socket.send(envio);
 
 		// CERRAR STREAMS Y SOCKETS
-		System.out.println("Cerrando conexi�n...");
+		System.out.println("Cerrando conexión...");
 		socket.close();
 
 	}

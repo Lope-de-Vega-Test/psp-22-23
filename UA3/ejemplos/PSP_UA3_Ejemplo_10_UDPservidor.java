@@ -2,7 +2,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-// Ejecuci�n: java PSP_UA3_Ejemplo_10_UDPservidor.java
+// Ejecución: java PSP_UA3_Ejemplo_10_UDPservidor.java
 
 public class PSP_UA3_Ejemplo_10_UDPservidor {
   public static void main(String[] argv) throws Exception {
@@ -32,11 +32,11 @@ public class PSP_UA3_Ejemplo_10_UDPservidor {
           InetAddress IPAddress = receivePacket.getAddress();
           int port = receivePacket.getPort();
 
-          // Se modifica la cadena recibida (para convertirlo a may�sculas)
+          // Se modifica la cadena recibida (para convertirlo a mayúsculas)
           String capitalizedSentence = sentence.toUpperCase();
           sendData = capitalizedSentence.getBytes();
 
-          // Se env�a el mensaje modificado de vuelta al emisor
+          // Se envía el mensaje modificado de vuelta al emisor
           DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
           serverSocket.send(sendPacket);
        }

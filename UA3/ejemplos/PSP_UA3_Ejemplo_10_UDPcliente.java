@@ -4,29 +4,29 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-//Ejecuci�n: java PSP_UA3_Ejemplo_10_UDPcliente.java
+//Ejecución: java PSP_UA3_Ejemplo_10_UDPcliente.java
 
 public class PSP_UA3_Ejemplo_10_UDPcliente {
   public static void main(String[] argv) throws Exception {
-	  // Se crea un b�ffer para leer la entrada escrita del usuario
+	  // Se crea un búffer para leer la entrada escrita del usuario
       BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
 
       // Se crea un datagram socket
       DatagramSocket clientSocket = new DatagramSocket();
 
-      // Se obtiene la direcci�n localhost (donde est� el servidor)
+      // Se obtiene la dirección localhost (donde está el servidor)
       InetAddress IPAddress = InetAddress.getByName("localhost");
 
       // Arrays para recibir y enviar datos
       byte[] sendData = new byte[1024];
       byte[] receiveData = new byte[1024];
 
-      // Se lee informaci�n del usuario
+      // Se lee información del usuario
       System.out.print("Escribe un mensaje: ");
       String sentence = inFromUser.readLine();
       sendData = sentence.getBytes();
 
-      // Se env�a el paquete al servidor
+      // Se envía el paquete al servidor
       DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
       clientSocket.send(sendPacket);
 

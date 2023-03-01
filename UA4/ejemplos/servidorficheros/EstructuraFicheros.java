@@ -12,17 +12,17 @@ public class EstructuraFicheros implements Serializable {
 	private EstructuraFicheros[] lista; // lista de ficheros y carpetas
 	private int numeFich; // numero de fich de la carpeta
 
-	
+
     //constructores
 	public EstructuraFicheros(String name) throws FileNotFoundException {
 		// Construtor por defecto que se usa en el servidor
 		// name: Nombre completo (directorio+nombre) del fichero/directorio
 		// en el servidor local
-		File file = new File(name);		
+		File file = new File(name);
 		this.name = file.getName();
 		this.path = file.getPath();
 		this.isDir = file.isDirectory();
-		
+
 		this.lista = getListaFiles();
 		if (file.isDirectory()) {
 			File[] ficheros = file.listFiles();
@@ -31,14 +31,14 @@ public class EstructuraFicheros implements Serializable {
 				this.numeFich = ficheros.length;
 		}
 	}
-	public EstructuraFicheros(String name, String path, boolean isDir, 
+	public EstructuraFicheros(String name, String path, boolean isDir,
 			int numF) {
 		// Este constructor se usa en las operaciones
 		// de actualizacion del arbol presentado en el cliente
 		// No es obligatorio implementar este metodo
 		this.name = name;
 		this.path = path;
-		this.isDir = isDir;		
+		this.isDir = isDir;
 		this.numeFich = numF; // num ficheros si es directorio
 	}
 
@@ -53,7 +53,7 @@ public class EstructuraFicheros implements Serializable {
 		if (this.isDir)
 			nom = "(DIR) " + name;
 		return nom;
-	}	
+	}
 
 	public boolean isDir() {	return isDir;	}
 
@@ -65,7 +65,7 @@ public class EstructuraFicheros implements Serializable {
 			// En el caso de un directorio getName() devuelve el nombre completo
 			// es decir el path absoluto y solo se necesita el nombre de la
 			// carpeta
-			// ya que el atributo path almacena dicha informaci�n.
+			// ya que el atributo path almacena dicha informacón.
 			int l = path.lastIndexOf(File.separator);
 			name_dir = path.substring(l + 1, path.length());
 		}
@@ -76,9 +76,9 @@ public class EstructuraFicheros implements Serializable {
 
 	//public String getParent() {	return parent;	}
 
-	
+
 	EstructuraFicheros[] getListaFiles() {
-		EstructuraFicheros[] lista = null;		
+		EstructuraFicheros[] lista = null;
 		String sDirectorio = this.path;
 		File f = new File(sDirectorio);
 		File[] ficheros = f.listFiles();
@@ -93,9 +93,9 @@ public class EstructuraFicheros implements Serializable {
 				boolean isDir = ficheros[x].isDirectory();
 				int num = 0;
 				//String parent = ficheros[x].getParent();
-                //si alguno de los ficheros del directorio seleccionado es 
+                //si alguno de los ficheros del directorio seleccionado es
 				//a su vez un directorio calculo el numero de ficheros
-				if (isDir) {					
+				if (isDir) {
 					File[] fic = ficheros[x].listFiles();
 					if (!(fic == null))
 						num = fic.length;

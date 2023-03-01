@@ -9,7 +9,7 @@ import java.awt.event.*;
 
 
 public class clienteFicheros extends JFrame implements Runnable {
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 	static Socket socket;
 	EstructuraFicheros nodo = null;
 	ObjectInputStream inObjeto;
@@ -29,14 +29,14 @@ public class clienteFicheros extends JFrame implements Runnable {
 	JButton botonCargar = new JButton("Subir fichero");
 	JButton botonDescargar = new JButton("Descargar fichero");
 	JButton botonSalir = new JButton("Salir");
-	
+
 	// lista para los datos del directorio
 	@SuppressWarnings("rawtypes")
 	static JList listaDirec = new JList();
-	
+
 	// contenedor
-	private final Container c = getContentPane();	
-	
+	private final Container c = getContentPane();
+
 	// para saber directorio y fichero seleccionado
 	static String direcSelec = "";
 	static String ficheroSelec = "";
@@ -44,7 +44,7 @@ public class clienteFicheros extends JFrame implements Runnable {
 
 	// constructor
 	public clienteFicheros(Socket s) throws IOException {
-		super("SERVIDOR DE FICHEROS B�SICO");
+		super("SERVIDOR DE FICHEROS BÁSICO");
 		socket = s;
 		try {
 			// flujo de salida -envio objeto
@@ -80,7 +80,7 @@ public class clienteFicheros extends JFrame implements Runnable {
 		botonCargar.setBounds(new Rectangle(350, 100, 140, 30));
 		botonDescargar.setBounds(new Rectangle(350, 150, 140, 30));
 		botonSalir.setBounds(new Rectangle(350, 200, 140, 30));
-	
+
 		listaDirec.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// SINGLE_INTERVAL_SELECTION);
 		JScrollPane barraDesplazamiento = new JScrollPane(listaDirec);
 		barraDesplazamiento.setPreferredSize(new Dimension(335, 300));
@@ -114,10 +114,10 @@ public class clienteFicheros extends JFrame implements Runnable {
 				if (lse.getValueIsAdjusting()) {
 					ficheroSelec = "";
 					ficherocompleto = "";
-				    nodo = (EstructuraFicheros) listaDirec.getSelectedValue();					
+				    nodo = (EstructuraFicheros) listaDirec.getSelectedValue();
 					if (nodo.isDir()) {
 						// es un directorio
-                       campo.setText("FUNCI�N NO IMPLEMENTADA..... " );
+                       campo.setText("FUNCIÓN NO IMPLEMENTADA..... " );
 					} else {
 						// SE TRATA DE UN FICHERO
 						ficheroSelec = nodo.getName();
@@ -128,11 +128,11 @@ public class clienteFicheros extends JFrame implements Runnable {
 			}
 		});// fin lista
 
-		// --al hacer clic en el bot�n Salir
+		// --al hacer clic en el botón Salir
 		botonSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					socket.close();					
+					socket.close();
 					System.exit(0);
 				} catch (IOException ex) {
 					ex.printStackTrace();
@@ -140,12 +140,12 @@ public class clienteFicheros extends JFrame implements Runnable {
 			}
 		});
 
-		// --al hacer clic en el bot�n Actualizar
-		
-		
-		// --al hacer clic en el bot�n Descargar
+		// --al hacer clic en el botón Actualizar
+
+
+		// --al hacer clic en el botón Descargar
 		botonDescargar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
 				if (ficherocompleto.equals(""))
 					return;
 				System.out.println("PIDO ESTE FICHERO " + ficherocompleto);
@@ -155,32 +155,32 @@ public class clienteFicheros extends JFrame implements Runnable {
 					outObjeto.writeObject(pido);
 					// pido el fichero
 					// Se abre un fichero para empezar a copiar lo que se
-					// reciba. 
+					// reciba.
 					FileOutputStream fos = new FileOutputStream(ficheroSelec);
 					// Se crea un ObjectInputStream del socket para leer los
 					// bytes del fichero
 					// obtengo los bytes
 					Object obtengo = inObjeto.readObject();
 					if (obtengo instanceof ObtieneFichero) {
-				          ObtieneFichero fic = (ObtieneFichero)obtengo;						
+				          ObtieneFichero fic = (ObtieneFichero)obtengo;
 						fos.write(fic.getContenidoFichero());
 						fos.close();
 						JOptionPane.showMessageDialog(null,	"FICHERO DESCARGADO");
 					}
 
-				} catch (IOException e1) {e1.printStackTrace();} 
+				} catch (IOException e1) {e1.printStackTrace();}
 				  catch (ClassNotFoundException e1) {e1.printStackTrace();}
 			}
 		});// Fin boton descargar
 
-		// --al hacer clic en el bot�n cargar
+		// --al hacer clic en el botón cargar
 		botonCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser f = new JFileChooser();
 				f.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				f.setDialogTitle("Selecciona el Fichero a SUBIR AL SERVIDOR DE FICHEROS");
 				int returnVal = f.showDialog(f, "Cargar");
-				
+
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = f.getSelectedFile();
 					String archivo = file.getAbsolutePath();
@@ -189,12 +189,12 @@ public class clienteFicheros extends JFrame implements Runnable {
 					try {
 						in = new BufferedInputStream(new FileInputStream(
 								archivo));
-						long bytes = file.length();// fichero.length();		
-						System.out.println("tama�o:"+file.length());
+						long bytes = file.length();// fichero.length();
+						System.out.println("tamaño:"+file.length());
 						byte[] buff = new byte[(int) bytes];
 						int i, j = 0;
 
-						while ((i = in.read()) != -1) {							
+						while ((i = in.read()) != -1) {
 							buff[j] = (byte) i; //carga los datos en el array
 							j++;
 						}
@@ -202,16 +202,16 @@ public class clienteFicheros extends JFrame implements Runnable {
 						Object ff = new EnviaFichero(buff, nombreArchivo,direcSelec);
 						outObjeto.writeObject(ff);
                                                 JOptionPane.showMessageDialog(null,"FICHERO CARGADO");
-						
+
 						//obtengo de nuevo la lista de ficheros
 						nodo = (EstructuraFicheros) inObjeto.readObject();
 						EstructuraFicheros[] lista = nodo.getLista();
 						direcSelec = nodo.getPath();
 						llenarLista(lista, nodo.getNumeFich());
-						campo2.setText("N�mero de ficheros en el directorio: " + lista.length);
+						campo2.setText("Número de ficheros en el directorio: " + lista.length);
 
-					} catch (FileNotFoundException e1) {e1.printStackTrace();} 
-					  catch (IOException ee) {ee.printStackTrace();	}					
+					} catch (FileNotFoundException e1) {e1.printStackTrace();}
+					  catch (IOException ee) {ee.printStackTrace();	}
 					  catch (ClassNotFoundException e2) {e2.printStackTrace();}
 
 				}
@@ -223,28 +223,28 @@ public class clienteFicheros extends JFrame implements Runnable {
 		// -----------------------------------------------------------------------------
 
 	// REPETITIVO-------------------------------------------------------------
-	public void run() {				
+	public void run() {
 		try {
 			cab.setText("Conectando con el servidor ........");
              // OBTENER DIRECTORIO RAIZ
-			Raiz = (EstructuraFicheros) inObjeto.readObject();			
-			EstructuraFicheros[] nodos = Raiz.getLista();//	 		
+			Raiz = (EstructuraFicheros) inObjeto.readObject();
+			EstructuraFicheros[] nodos = Raiz.getLista();//
 			// Directorio seleccionadoara saber directorio y fichero seleccionado
-			direcSelec = Raiz.getPath();  
+			direcSelec = Raiz.getPath();
 			//if(Raiz.getNumeFich()> 0)
 			llenarLista(nodos,  Raiz.getNumeFich());
 			cab3.setText("RAIZ: " + direcSelec);
-			cab.setText("CONECTADO AL SERVIDOR DE FICHEROS");			
-            campo2.setText("N�mero de ficheros en el directorio: " + Raiz.getNumeFich());
-			
+			cab.setText("CONECTADO AL SERVIDOR DE FICHEROS");
+            campo2.setText("Número de ficheros en el directorio: " + Raiz.getNumeFich());
+
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			System.exit(1);
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 			System.exit(1);
-		}      
-		
+		}
+
 	}// fin run
 		// -----------------------------------------------------------------
 
@@ -255,24 +255,24 @@ public class clienteFicheros extends JFrame implements Runnable {
 		listaDirec.setForeground(Color.blue);
 		Font fuente = new Font("Courier", Font.PLAIN, 12);
 		listaDirec.setFont(fuente);
-		listaDirec.removeAll();		
-		
+		listaDirec.removeAll();
+
 		for (int i = 0; i < files.length; i++)
 			modeloLista.addElement(files[i]);
-		
+
 		try {
 			listaDirec.setModel(modeloLista);
 		} catch (NullPointerException n) {	}
 
 	}// Fin llenarLista
 
-	
+
 
 	// main---------------------------------------------------------------------
 	public static void main(String[] args) throws IOException {
 		int puerto = 44441;
 		//"192.168.0.195" localhost
-		Socket s = new Socket("127.0.0.1", puerto);		
+		Socket s = new Socket("127.0.0.1", puerto);
 		clienteFicheros hiloC = new clienteFicheros(s);
 		hiloC.setBounds(0, 0, 540, 500);
 		hiloC.setVisible(true);
