@@ -1,0 +1,13 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "c:\\Users\\lucia\\Downloads\\jackson-core-2.14.2.jar",
+            "c:\\Users\\lucia\\Downloads\\com.fasterxml.jackson.databind.jar\\com.fasterxml.jackson.databind.jar",
+            "api/java-json.jar"
+        ],
+        "exclude": [
+            "c:\\Users\\lucia\\Downloads\\java-json.jar\\java-json.jar"
+        ]
+    }
+}

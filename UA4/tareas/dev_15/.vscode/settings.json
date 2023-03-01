@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\lucia\\Downloads\\java-json.jar\\java-json.jar",
+        "c:\\Users\\lucia\\Downloads\\jackson-all-1.9.0.jar\\jackson-all-1.9.0.jar"
+    ]
+}
