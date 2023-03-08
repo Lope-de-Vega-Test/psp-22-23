@@ -13,9 +13,9 @@ public class api {
     public static String byebyeMessage = "BYE! from our framework-less REST API";
 
     public static void main(String[] args) throws IOException {
-        DataStore store = new DataStore();
+        DataBase dataBase = new DataBase();
 
-        HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress("10.2.0.51", 8080), 0);
 
         server.createContext("/api/greeting", (exchange -> {
 
@@ -45,7 +45,7 @@ public class api {
             exchange.close();
         }));
 
-        server.createContext("/api/person", new PersonHandler(store));
+        server.createContext("/api/person", new PersonHandler(dataBase));
 
         // All contexts has been created
         server.setExecutor(null); // creates a default executor

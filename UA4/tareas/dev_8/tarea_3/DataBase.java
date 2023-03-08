@@ -1,18 +1,18 @@
-package UA4.tareas.dev_8.tarea_2;
+package UA4.tareas.dev_8.tarea_3;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Example DataStore class that provides access to user data.
+ * Example DataBase class that provides access to user data.
  * Pretend this class accesses a database.
  */
-public class DataStore {
+public class DataBase {
 
 	// Map of names to Person instances.
 	private Map<Integer, Person> personMap = new HashMap<>();
 
-	public DataStore() {
+	public DataBase() {
 		// dummy data
 		personMap.put(1, new Person("Ada", "Ada Lovelace was the first programmer.", 1815));
 		personMap.put(2, new Person("Kevin", "Kevin is the author of HappyCoding.io.", 1986));

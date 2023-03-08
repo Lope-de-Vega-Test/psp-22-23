@@ -1,4 +1,4 @@
-package UA4.tareas.dev_8.tarea_2;
+package UA4.tareas.dev_8.tarea_3;
 
 public class Person {
 
