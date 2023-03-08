@@ -1,6 +1,10 @@
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Date;
 import com.sun.net.httpserver.HttpExchange;
@@ -18,16 +22,31 @@ class PersonHandler extends BasicHandler {
 
         if ("GET".equals(exchange.getRequestMethod())) {
           
-            handleGet(exchange);
+            try {
+                handleGet(exchange);
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         else if ("POST".equals(exchange.getRequestMethod())) {
             handlePost(exchange);
         }
         else if("DELETE".equals(exchange.getRequestMethod())) {
-            handleDelete(exchange);
+            try {
+                handleDelete(exchange);
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         else if("PUT".equals(exchange.getRequestMethod())) {
-            handlePut(exchange);
+            try {
+                handlePut(exchange);
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         else {
             exchange.sendResponseHeaders(405, -1); // 405 Method Not Allowed
@@ -35,10 +54,8 @@ class PersonHandler extends BasicHandler {
         exchange.close();
     }
 
-    private void handleGet(HttpExchange exchange) throws IOException {
-        try{
-        System.out.println("Hola");
-       
+    private void handleGet(HttpExchange exchange) throws IOException, JSONException {
+        try{       
         Map<String,String> params = queryToMap(exchange.getRequestURI().getQuery());
         String personName = params.get("name"); 
         Person person = store.getPerson(personName);
@@ -48,16 +65,10 @@ class PersonHandler extends BasicHandler {
             exchange.close();
             return;
         }
-
         
-            String responseString = "{\"name\": \"" + person.getName() + "\",";
-        responseString += "\"about\": \"" + person.getAbout() + "\",";
-        responseString += "\"birthYear\": " + person.getBirthYear() + "}";
+        SendResposeToClient(200, personName, exchange, person);   
         
-        exchange.sendResponseHeaders(200, responseString.getBytes().length);            
-        OutputStream output = exchange.getResponseBody();
-        output.write(responseString.getBytes());
-        output.flush();
+        
 
         } catch (Exception e) {
             System.out.println("Error");
@@ -81,32 +92,30 @@ class PersonHandler extends BasicHandler {
         }
 
         try {
+           
+
             int birthYear = Integer.parseInt(personBirthYear);
             Person person = new Person(personName, personAbout, birthYear);
             store.putPerson(person);
-
-            String responseString = "{\"name\": \"" + person.getName() + "\",";
-            responseString += "\"about\": \"" + person.getAbout() + "\",";
-            responseString += "\"birthYear\": " + person.getBirthYear() + "}";
-            
-            exchange.sendResponseHeaders(200, responseString.getBytes().length);            
-            OutputStream output = exchange.getResponseBody();
-            output.write(responseString.getBytes());
-            output.flush();
+            SendResposeToClient(200, personBirthYear, exchange, person);
+           
         } 
         catch (NumberFormatException ex) {
             exchange.sendResponseHeaders(400, -1); // 400 Bad Request
             exchange.close();
             return;
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
-    private void handleDelete(HttpExchange exchange) throws IOException {
+    private void handleDelete(HttpExchange exchange) throws IOException, JSONException {
         Map<String,String> params = queryToMap(exchange.getRequestURI().getQuery());
         String personName = params.get("name");
     
         if (store.getPerson(personName) == null) {
-            String responseString = "No se pudo eliminar " + personName + " no existe";
+            String responseString = messageToJsonString("No se pudo eliminar " + personName + " no existe");
             exchange.sendResponseHeaders(400, responseString.getBytes().length);
             OutputStream output = exchange.getResponseBody();
             output.write(responseString.getBytes());
@@ -114,14 +123,16 @@ class PersonHandler extends BasicHandler {
         }
         else {
             store.deletePerson(personName);
-            String responseString = "La persona con nombre '" + personName + "' ha sido eliminada exitosamente.";
+            
+            String responseString=messageToJsonString( "Si se pudo eliminar " + personName);
             exchange.sendResponseHeaders(200, responseString.getBytes().length);
             OutputStream output = exchange.getResponseBody();
             output.write(responseString.getBytes());
             output.flush();
         }
+
     }
-    private void handlePut(HttpExchange exchange) throws IOException {
+    private void handlePut(HttpExchange exchange) throws IOException, JSONException {
         Map<String,String> params = queryToMap(exchange.getRequestURI().getQuery());
         String personName = params.get("name");
         String personAbout = params.get("about");
@@ -134,10 +145,12 @@ class PersonHandler extends BasicHandler {
         }
     
         Person person = store.getPerson(personName);
+        SendResposeToClient(0, personBirthYear, exchange, person);
         if (person == null) {
             exchange.sendResponseHeaders(404, -1); // 404 Not Found
             exchange.close();
             return;
+            
         }
     
         try {
@@ -146,9 +159,8 @@ class PersonHandler extends BasicHandler {
             person.setBirthYear(birthYear);
             store.putPerson(person);
     
-            String responseString = "{\"name\": \"" + person.getName() + "\",";
-            responseString += "\"about\": \"" + person.getAbout() + "\",";
-            responseString += "\"birthYear\": " + person.getBirthYear() + "}";
+            String responseString = personToJsonString(person);
+           
     
             exchange.sendResponseHeaders(200, responseString.getBytes().length);            
             OutputStream output = exchange.getResponseBody();
@@ -161,6 +173,7 @@ class PersonHandler extends BasicHandler {
             return;
         }
     }
+    
     
     
 }

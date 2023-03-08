@@ -22,47 +22,17 @@ import java.util.Map;
 
 
 public class api {
-
-private static final String WELCOME_MESSAGE = "Hello World! from our framework-less REST API";
-private static final String BYEBYE_MESSAGE = "BYE! from our framework-less REST API";
-
 public static void main(String[] args) throws IOException {
     DataStorage store = new DataStorage();
     HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
 
-    server.createContext("/api/greeting", exchange -> handleGreeting(exchange));
-    server.createContext("/api/bye", exchange -> handleBye(exchange));
+    server.createContext("/api/greeting", new GreetingHandler(store));
+    server.createContext("/api/bye", new ByeHandler(store));
     server.createContext("/api/person", new PersonHandler(store));
 
     // All contexts have been created
     server.setExecutor(null); // creates a default executor
     server.start();
     System.out.println("The framework-less REST API server is listening on " + server.getAddress().getAddress() + ":" + server.getAddress().getPort());
-}
-
-private static void handleGreeting(HttpExchange exchange) throws IOException {
-    if ("GET".equals(exchange.getRequestMethod())) {
-        String responseText = WELCOME_MESSAGE;
-        exchange.sendResponseHeaders(200, responseText.getBytes().length);
-        OutputStream output = exchange.getResponseBody();
-        output.write(responseText.getBytes());
-        output.flush();
-    } else {
-        exchange.sendResponseHeaders(405, -1); // 405 Method Not Allowed
-    }
-    exchange.close();
-}
-
-private static void handleBye(HttpExchange exchange) throws IOException {
-    if ("GET".equals(exchange.getRequestMethod())) {
-        String responseText = BYEBYE_MESSAGE;
-        exchange.sendResponseHeaders(200, responseText.getBytes().length);
-        OutputStream output = exchange.getResponseBody();
-        output.write(responseText.getBytes());
-        output.flush();
-    } else {
-        exchange.sendResponseHeaders(405, -1); // 405 Method Not Allowed
-    }
-    exchange.close();
 }
 }

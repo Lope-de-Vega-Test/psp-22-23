@@ -1,7 +1,4 @@
-
-
-
-
+import org.json.JSONObject;
 
 /**
  * Esta clase representa a una persona con su nombre, descripción y año de nacimiento.
@@ -49,5 +46,7 @@ public class Person {
     public void setBirthYear(int birthYear) {
         this.birthYear = birthYear;
     }
+    
+    JSONObject jsonObject= new JSONObject();
     
 }
