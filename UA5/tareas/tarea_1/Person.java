@@ -1,5 +1,5 @@
 
-package com.victoraljama;
+//package com.victoraljama;
 
 public class Person {
 	private String name;
