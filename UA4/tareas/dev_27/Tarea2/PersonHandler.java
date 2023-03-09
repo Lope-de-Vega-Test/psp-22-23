@@ -26,17 +26,18 @@ class PersonHandler extends BasicHandler
             String personName = params.get("name");        
             Person person = store.getPerson(personName);
         
-            /* In the real world this part should be implemented this way:
+            /* 
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name", person.getName());
             jsonObject.put("about", person.getAbout());
             jsonObject.put("birthYear", person.getBirthYear());
             responseString = jsonObject.toString();
-            */
+           */  
             responseString += "\"name\": \"" + person.getName() + "\",";
             responseString += "\"about\": \"" + person.getAbout() + "\",";
             responseString += "\"birthYear\": " + person.getBirthYear() + "";
-            responseString += "}";                       
+            responseString += "}";
+                                 
             exchange.sendResponseHeaders(200, responseString.getBytes().length);            
             OutputStream output = exchange.getResponseBody();
             output.write(responseString.getBytes());

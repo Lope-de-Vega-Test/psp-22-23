@@ -20,4 +20,17 @@ public class Person {
 	public int getBirthYear() {
 		return birthYear;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
+	public void setBirthYear(int birthYear) {
+		this.birthYear = birthYear;
+	}
+	
 }

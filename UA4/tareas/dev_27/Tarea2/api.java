@@ -13,8 +13,10 @@ public class api {
     public static void main(String[] args) throws IOException {
         DataStore store = new DataStore();
 
-        InetAddress address = InetAddress.getLocalHost();
-        String IP = address.getHostAddress();
+        //InetAddress address = InetAddress.getLocalHost();
+        //String IP = address.getHostAddress();
+        String IP = "10.2.1.253";
+        System.out.println("La IP seleccionada es: "+IP);
         HttpServer server = HttpServer.create(new InetSocketAddress(IP, 8080), 0);
         
         server.createContext("/api/greeting", (exchange -> {
