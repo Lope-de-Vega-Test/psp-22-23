@@ -1,0 +1,39 @@
+commons-cli
+
+	<dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
+org.apache.commons
+
+	<dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-configuration2</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+javax.json
+
+	<dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>1.1.4</version>
+        </dependency>
+
+org.glassfish
+
+	<dependency>
+          <groupId>org.glassfish</groupId>
+          <artifactId>javax.json</artifactId>
+          <version>1.1.4</version>
+        </dependency>
+
+commons-codec
+	<dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+            <type>jar</type>
+        </dependency>
