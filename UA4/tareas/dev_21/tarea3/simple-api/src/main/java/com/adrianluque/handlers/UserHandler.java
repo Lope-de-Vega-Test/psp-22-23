@@ -149,7 +149,8 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                     Object $_param;
                     if (($_param = params.get("creationDateBefore")) != null) {
                         users = new ArrayList<User>(
-                                gateway.storage.getUsersCreatedBetween(String.valueOf($param), String.valueOf($_param)));
+                                gateway.storage.getUsersCreatedBetween(String.valueOf($param),
+                                        String.valueOf($_param)));
                     }
                 }
             }
@@ -225,7 +226,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                     .add("http_response_message", "not found")
                                     .add("response_time", (System.currentTimeMillis() - timeStart))
                                     .build())
-                            .add("body", Json.createObjectBuilder())
+                            .add("body", Json.createObjectBuilder()
+                                    .add("response", "user not found")
+                                    .build())
                             .build();
                 }
             } else { // user not found or bad request
@@ -244,7 +247,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                     .add("http_response_message", "bad request")
                                     .add("response_time", (System.currentTimeMillis() - timeStart))
                                     .build())
-                            .add("body", Json.createObjectBuilder())
+                            .add("body", Json.createObjectBuilder()
+                                    .add("response", "bad user input")
+                                    .build())
                             .build();
                 } else {
                     rCode = 404;
@@ -261,7 +266,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                     .add("http_response_message", "not found")
                                     .add("response_time", (System.currentTimeMillis() - timeStart))
                                     .build())
-                            .add("body", Json.createObjectBuilder())
+                            .add("body", Json.createObjectBuilder()
+                                    .add("response", "user not found")
+                                    .build())
                             .build();
                 }
 
@@ -282,6 +289,7 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                             .add("response_time", (System.currentTimeMillis() - timeStart))
                             .build())
                     .add("body", Json.createObjectBuilder()
+                            .add("response", "bad user input")
                             .build())
                     .build();
         } finally {
@@ -327,7 +335,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                     .add("http_response_message", "created")
                                     .add("response_time", (System.currentTimeMillis() - timeStart))
                                     .build())
-                            .add("body", Json.createObjectBuilder())
+                            .add("body", Json.createObjectBuilder()
+                                    .add("response", "user has been created")
+                                    .build())
                             .build();
                 } else {
                     rCode = 400;
@@ -344,7 +354,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                     .add("http_response_message", "bad request")
                                     .add("response_time", (System.currentTimeMillis() - timeStart))
                                     .build())
-                            .add("body", Json.createObjectBuilder().build())
+                            .add("body", Json.createObjectBuilder()
+                                    .add("response", "bad request")
+                                    .build())
                             .build();
                 }
             } else {
@@ -362,7 +374,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                 .add("http_response_message", "bad request")
                                 .add("response_time", (System.currentTimeMillis() - timeStart))
                                 .build())
-                        .add("body", JsonValue.NULL)
+                        .add("body", Json.createObjectBuilder()
+                                .add("response", "bad request")
+                                .build())
                         .build();
             }
 
@@ -381,6 +395,7 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                             .add("response_time", (System.currentTimeMillis() - timeStart))
                             .build())
                     .add("body", Json.createObjectBuilder()
+                            .add("response", "bad user input")
                             .build())
                     .build();
         } finally {
@@ -434,7 +449,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                             .add("http_response_message", "created")
                                             .add("response_time", (System.currentTimeMillis() - timeStart))
                                             .build())
-                                    .add("body", Json.createObjectBuilder())
+                                    .add("body", Json.createObjectBuilder()
+                                            .add("response", "user has been updated")
+                                            .build())
                                     .build();
                         } else {
                             rCode = 404;
@@ -451,7 +468,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                             .add("http_response_message", "not found")
                                             .add("response_time", (System.currentTimeMillis() - timeStart))
                                             .build())
-                                    .add("body", Json.createObjectBuilder())
+                                    .add("body", Json.createObjectBuilder()
+                                            .add("response", "user not found")
+                                            .build())
                                     .build();
                         }
                     }
@@ -472,6 +491,7 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                     .add("response_time", (System.currentTimeMillis() - timeStart))
                                     .build())
                             .add("body", Json.createObjectBuilder()
+                                    .add("response", "bad request")
                                     .build())
                             .build();
                 }
@@ -491,6 +511,7 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                 .add("response_time", (System.currentTimeMillis() - timeStart))
                                 .build())
                         .add("body", Json.createObjectBuilder()
+                                .add("response", "bad request")
                                 .build())
                         .build();
             }
@@ -510,6 +531,7 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                             .add("response_time", (System.currentTimeMillis() - timeStart))
                             .build())
                     .add("body", Json.createObjectBuilder()
+                            .add("response", "bad user input")
                             .build())
                     .build();
         } finally {
@@ -556,7 +578,9 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                         .add("http_response_message", "created")
                                         .add("response_time", (System.currentTimeMillis() - timeStart))
                                         .build())
-                                .add("body", Json.createObjectBuilder())
+                                .add("body", Json.createObjectBuilder()
+                                        .add("response", "user has been deleted")
+                                        .build())
                                 .build();
                     }
                 } else {
@@ -575,6 +599,7 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                                     .add("response_time", (System.currentTimeMillis() - timeStart))
                                     .build())
                             .add("body", Json.createObjectBuilder()
+                                    .add("response", "bad request")
                                     .build())
                             .build();
                 }
@@ -612,6 +637,7 @@ public class UserHandler extends BasicHandler implements HttpHandler {
                             .add("response_time", (System.currentTimeMillis() - timeStart))
                             .build())
                     .add("body", Json.createObjectBuilder()
+                            .add("response", "bad user input")
                             .build())
                     .build();
         } finally {

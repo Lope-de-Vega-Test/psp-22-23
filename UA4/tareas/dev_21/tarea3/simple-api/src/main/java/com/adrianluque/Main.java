@@ -1,5 +1,6 @@
 package com.adrianluque;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.ini4j.Ini;
 
 public class Main {
     private static String version = "0.1-BETA";
@@ -19,7 +21,8 @@ public class Main {
             .append("-p, --port\tSets the port.\n")
             .append("-c, --conf\tSets the configuration.\n\n")
             .append("Example:\n\n")
-            .append("java api [-h|--hostname]=192.168.1.25 [-p|--port]=45722\n\n")
+            .append("java api [-h|--hostname] 192.168.1.25 [-p|--port]=45722\n\n")
+            .append("java api [-c|--config] confFile1.ini]")
             .toString();
 
     public static void main(String[] args) throws Exception {
@@ -47,7 +50,6 @@ public class Main {
                 .hasArg(true)
                 .required(false)
                 .desc("uses config for setting up the API")
-                .valueSeparator('=')
                 .build();
 
         Option hostname = Option.builder("h")
@@ -56,7 +58,6 @@ public class Main {
                 .hasArg(true)
                 .required(false)
                 .desc("sets the hostname")
-                .valueSeparator('=')
                 .build();
 
         Option port = Option.builder("p")
@@ -103,19 +104,29 @@ public class Main {
 
             // Constructing the Api
             Api api = new Api();
-            
-            if (arguments.containsKey("hostname") || arguments.containsKey("h")) {
+
+            if (arguments.containsKey("hostname")) {
                 api.setHostname(String.valueOf(arguments.get("hostname")));
+            } else if (arguments.containsKey("h")) {
+                api.setHostname(String.valueOf(arguments.get("h")));
             }
 
-            if (arguments.containsKey("port") || arguments.containsKey("p")) {
+            if (arguments.containsKey("port")) {
                 api.setPort(Integer.parseInt(String.valueOf(arguments.get("port"))));
+            } else if (arguments.containsKey("p")) {
+                api.setPort(Integer.parseInt(String.valueOf(arguments.get("p"))));
             }
 
-            if (arguments.containsKey("config") || arguments.containsKey("c")) {
-                api.setConfigFilePath(String.valueOf(arguments.get("config")));
+            if (arguments.containsKey("config")) {
+                Ini iniFile = new Ini(new File(String.valueOf(arguments.get("config"))));
+                api.setHostname(iniFile.get("api", "hostname"));
+                api.setPort(Integer.parseInt(iniFile.get("api", "port")));
+            } else if (arguments.containsKey("c")) {
+                Ini iniFile = new Ini(new File(String.valueOf(arguments.get("c"))));
+                api.setHostname(iniFile.get("api", "hostname"));
+                api.setPort(Integer.parseInt(iniFile.get("api", "port")));
             }
-            
+
             api.start();
 
         } catch (Exception e) {

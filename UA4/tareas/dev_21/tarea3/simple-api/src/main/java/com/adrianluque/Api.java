@@ -16,13 +16,11 @@ public class Api extends Thread {
     // Attributes
     private String hostname;
     private int port;
-    private String configFilePath;
 
     // Constructors
     public Api() {
         this.hostname = "localhost";
         this.port = 8000;
-        configFilePath = null;
     }
 
     // Getters
@@ -34,10 +32,6 @@ public class Api extends Thread {
         return this.port;
     }
 
-    public String getConfigFilePath() {
-        return this.configFilePath;
-    }
-
     // Setters
     public void setHostname(String hostname) {
         this.hostname = hostname;
@@ -47,9 +41,6 @@ public class Api extends Thread {
         this.port = port;
     }
 
-    public void setConfigFilePath(String configFilePath) {
-        this.configFilePath = configFilePath;
-    }
 
     // Runnable method
     @Override
